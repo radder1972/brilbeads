@@ -1622,12 +1622,24 @@ section {
 }
 
 .contact-card {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 4rem;
+    display: block;
     padding: 4rem;
     background: #ffffff;
+}
+
+.contact-body-grid {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 2.5rem;
+}
+
+.contact-sidebar {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 2rem;
 }
 
 .contact-visual {
@@ -1713,9 +1725,11 @@ section {
 /* responsive contact */
 @media (max-width: 900px) {
     .contact-card {
+        padding: 2.5rem;
+    }
+    .contact-body-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
-        padding: 2.5rem;
     }
     .retro-phone-circle {
         width: 150px;
