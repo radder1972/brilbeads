@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -117,7 +117,7 @@
                         <span class="nav-label">Home</span>
                     </a>
                     
-                    <a href="index.html#customizer" class="playful-nav-item" title="Ontwerp je eigen bril!">
+                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
                         <div class="nav-icon-img-wrapper">
                             <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
                         </div>
@@ -289,7 +289,7 @@
             <div class="footer-links">
                 <h4>Navigatie</h4>
                 <ul>
-                    <li><a href="index.html#customizer">Customizer</a></li>
+                    <li><a href="ontwerpen.html">Customizer</a></li>
                     <li><a href="index.html#collecties">Collecties</a></li>
                     <li><a href="index.html#hoe-het-werkt">Hoe het werkt</a></li>
                 </ul>
@@ -297,7 +297,7 @@
             <div class="footer-links">
                 <h4>Collectie</h4>
                 <ul>
-                    <li><a href="index.html#customizer">Kids Playful Beads</a></li>
+                    <li><a href="ontwerpen.html">Kids Playful Beads</a></li>
                 </ul>
             </div>
         </div>
@@ -352,9 +352,9 @@
             const shipping = subtotal >= 20 ? 0 : 2.95;
             const total = subtotal + shipping;
 
-            document.getElementById('checkout-subtotal').textContent = `€ ${subtotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'GRATIS' : `€ ${shipping.toFixed(2).replace('.', ',')}`;
-            document.getElementById('checkout-total').textContent = `€ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('checkout-subtotal').textContent = `â‚¬ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'GRATIS' : `â‚¬ ${shipping.toFixed(2).replace('.', ',')}`;
+            document.getElementById('checkout-total').textContent = `â‚¬ ${total.toFixed(2).replace('.', ',')}`;
         }
 
         function renderEmptyCheckout(container) {
@@ -367,7 +367,7 @@
                     <p style="margin-bottom: 2.5rem; color: var(--text-muted); max-width: 500px; margin-left: auto; margin-right: auto;">
                         Je hebt nog geen ontwerpen in je winkelwagen staan. Ontwerp eerst een bril met beads in onze customizer!
                     </p>
-                    <a href="index.html#customizer" class="btn btn-primary btn-lg btn-bounce">Start Nu Met Ontwerpen</a>
+                    <a href="ontwerpen.html" class="btn btn-primary btn-lg btn-bounce">Start Nu Met Ontwerpen</a>
                 </div>
             `;
         }
