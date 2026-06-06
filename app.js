@@ -672,12 +672,22 @@ function saveDesign() {
     
     playSound('save');
     
+    // Save to list of designs in localStorage
+    const savedDesigns = JSON.parse(localStorage.getItem('bril_beads_saved_designs') || '[]');
+    const newDesign = {
+        id: 'design_' + Date.now(),
+        date: new Date().toLocaleDateString('nl-NL'),
+        state: JSON.parse(JSON.stringify(customizerState))
+    };
+    savedDesigns.push(newDesign);
+    localStorage.setItem('bril_beads_saved_designs', JSON.stringify(savedDesigns));
+    
     const count = customizerState.placedBeads.length;
     const beadsStr = customizerState.placedBeads.map(b => b.name).join(', ');
     const system = customizerState.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Zachte Klik Clip';
     const color = customizerState.frameColor;
     
-    alert(`🎉 Concept Opgeslagen!\n\nJe hebt een ontwerp gemaakt met:\n- Aantal beads: ${count}\n- Beads: ${beadsStr}\n- Bevestiging: ${system}\n- Montuur: ${color}\n\nBedankt voor het uitproberen van de Bril Beads Concept-Demonstratie!`);
+    alert(`🎉 Concept Opgeslagen!\n\nJe hebt een ontwerp gemaakt met:\n- Aantal beads: ${count}\n- Beads: ${beadsStr}\n- Bevestiging: ${system}\n- Montuur: ${color}\n\nJe kunt dit ontwerp nu bekijken en laden op de Account-pagina!`);
 }
 
 // --- Dynamic Template Loading (Inspiratie Stijlen) ---
