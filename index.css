@@ -321,7 +321,7 @@ p {
     object-fit: contain;
     filter: drop-shadow(4px 4px 0px rgba(58, 38, 28, 0.1));
     transition: var(--transition);
-    margin-bottom: -3.2rem; /* overlaps the menu border line */
+    margin-bottom: -1.6rem; /* overlaps the menu border line */
 }
 
 .app-header .logo-img:hover {
@@ -398,9 +398,22 @@ p {
 .playful-nav {
     width: 100%;
     margin-top: 0.5rem;
-    border-top: var(--thin-border);
     padding-top: 1rem;
     margin-bottom: 2rem;
+    position: relative;
+}
+
+.playful-nav::before {
+    content: '';
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    aspect-ratio: 1014 / 124;
+    margin: 0.5rem auto 1.5rem auto;
+    background-image: url('assets/menu_divider.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .playful-nav-container {
@@ -1815,7 +1828,7 @@ section {
 
     .app-header .logo-img {
         height: 220px; /* Scaled down logo on mobile */
-        margin-bottom: -2.2rem; /* overlaps the menu border line */
+        margin-bottom: -1.0rem; /* overlaps the menu border line */
     }
 
     .nav-icon-img-wrapper {
