@@ -344,7 +344,7 @@ function updateAttachmentUI() {
     if (customizerState.attachmentMethod === 'slide') {
         guideline.style.opacity = '0.8';
         snapTargetsLayer.style.opacity = '0';
-        systemLabel.textContent = 'Siliconen Schuif-Systeem';
+        systemLabel.textContent = 'Siliconen Ring';
         systemLabel.style.background = 'var(--teal-glow)';
         systemLabel.style.color = 'var(--teal)';
         systemLabel.style.borderColor = 'rgba(0, 180, 216, 0.3)';
