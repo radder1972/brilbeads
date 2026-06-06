@@ -187,12 +187,12 @@
                     <!-- Profile Card -->
                     <div class="profile-card">
                         <div class="avatar-circle"><i class="fa-solid fa-face-laugh-wink"></i></div>
-                        <h2 style="font-family: var(--font-heading); font-size: 1.5rem;">Bead Designer ÃƒÂ°Ã…Â¸Ã…â€™Ã…Â¸</h2>
+                        <h2 style="font-family: var(--font-heading); font-size: 1.5rem;">Bead Designer 🌟</h2>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Lid sinds juni 2026</p>
                         
                         <div class="points-box">
                             <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.2rem;">SALDO BEAD POINTS</span>
-                            <span style="font-size: 2rem; color: var(--pink-dark); display: block; margin-bottom: 0.2rem;">150 ÃƒÂ°Ã…Â¸Ã…â€™Ã…Â¸</span>
+                            <span style="font-size: 2rem; color: var(--pink-dark); display: block; margin-bottom: 0.2rem;">150 🌟</span>
                             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal; line-height: 1.2; display: block;">Spaar voor gratis beads bij elke aankoop en share op social media!</span>
                         </div>
                     </div>
@@ -201,7 +201,9 @@
                     <div>
                         <!-- Saved Designs -->
                         <div>
-                            <h2 style="font-family: var(--font-heading); font-size: 1.6rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-wand-magic-sparkles text-pink"></i> Mijn Opgeslagen Ontwerpen</h2>
+                            <h2 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.6rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                                <img src="assets/icon_ontwerpen.png" alt="Mijn Ontwerpen" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> Mijn Opgeslagen Ontwerpen
+                            </h2>
                             
                             <div class="designs-list" id="saved-designs-container">
                                 <!-- Loaded dynamically via JS -->
@@ -213,7 +215,9 @@
 
                         <!-- Mock Orders -->
                         <div style="margin-top: 3rem;">
-                            <h2 style="font-family: var(--font-heading); font-size: 1.6rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-box-open text-teal"></i> Bestelgeschiedenis</h2>
+                            <h2 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.6rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                                <img src="assets/icon_winkelwagen.png" alt="Bestelgeschiedenis" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> Bestelgeschiedenis
+                            </h2>
                             
                             <div class="orders-list">
                                 <div class="order-item-card">
@@ -221,7 +225,7 @@
                                         <span class="design-title">Bestelling #BB-1084</span>
                                         <span class="design-desc">Geplaatst op 06-06-2026 &bull; Totaal: &euro;12,45</span>
                                     </div>
-                                    <span class="badge badge-accent" style="margin-bottom: 0; box-shadow: none; font-size: 0.75rem; padding: 0.3rem 0.8rem;">Verzonden ÃƒÂ°Ã…Â¸Ã…Â¡Ã…Â¡</span>
+                                    <span class="badge badge-accent" style="margin-bottom: 0; box-shadow: none; font-size: 0.75rem; padding: 0.3rem 0.8rem;">Verzonden 🚚</span>
                                 </div>
                             </div>
                         </div>
@@ -265,7 +269,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.42</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.43</span></p>
         </div>
     </footer>
     
@@ -320,7 +324,7 @@
             localStorage.setItem('bril_beads_customizer_state', JSON.stringify(design.state));
             playSound('save');
             
-            alert('ÃƒÂ°Ã…Â¸Ã…Â½Ã¢â‚¬Â° Ontwerp ingeladen! Je wordt nu doorgestuurd naar de ontwerper.');
+            alert('🎉 Ontwerp ingeladen! Je wordt nu doorgestuurd naar de ontwerper.');
             window.location.href = 'ontwerpen.html';
         }
 
