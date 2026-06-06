@@ -1,0 +1,485 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bril Beads | Personaliseer je Bril | DIY Modieuze Accessoires</title>
+    <meta name="description" content="Personaliseer je bril met Bril Beads! Unieke, modulaire en kleurrijke bedeltjes, clips en kralen om je bril een eigen karakter te geven. Ontdek de collecties voor kids en volwassenen.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-container">
+            <a href="#" class="brand-logo" id="header-logo-link">
+                <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
+                <span class="brand-text">BRIL <span class="accent-text">BEADS</span></span>
+            </a>
+            <nav class="main-nav" id="main-navigation">
+                <ul>
+                    <li><a href="#customizer" class="nav-link">Customizer</a></li>
+                    <li><a href="#collecties" class="nav-link">Kids Collectie</a></li>
+                    <li><a href="#hoe-het-werkt" class="nav-link">Hoe het werkt</a></li>
+                    <li><a href="#concept-briefing" class="nav-link">Ontwerpvisie</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#customizer" class="btn btn-primary btn-sm btn-bounce">Ontwerp Nu</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="polka-dot-bg"></div>
+            <div class="container hero-centered-container">
+                <div class="hero-centered-content">
+                    <span class="badge badge-playful">DIY Accessoire Concept</span>
+                    
+                    <!-- Large Center Logo -->
+                    <div class="hero-logo-wrapper">
+                        <img src="assets/logo.png" alt="Bril Beads Logo" class="hero-logo-large">
+                        
+                        <!-- Floating playful beads decoration -->
+                        <div class="floating-bead-playful f-bead-1"><i class="fa-solid fa-star"></i></div>
+                        <div class="floating-bead-playful f-bead-2"><i class="fa-solid fa-heart"></i></div>
+                        <div class="floating-bead-playful f-bead-3"><i class="fa-solid fa-face-smile"></i></div>
+                        <div class="floating-bead-playful f-bead-4"><i class="fa-solid fa-gem"></i></div>
+                    </div>
+                    
+                    <h1 class="hero-tagline-main">Maak van je bril een persoonlijk statement!</h1>
+                    <p class="hero-tagline-sub">
+                        Bril Beads zijn vrolijke, kleurrijke en chique bedeltjes die je eenvoudig op je bril klikt of schuift. Stel je eigen unieke combinaties samen!
+                    </p>
+                    
+                    <div class="hero-centered-ctas">
+                        <a href="#customizer" class="btn btn-playful-primary btn-lg btn-bounce">Start de Customizer <i class="fa-solid fa-wand-magic-sparkles"></i></a>
+                        <a href="#hoe-het-werkt" class="btn btn-playful-secondary btn-lg">Hoe werkt het?</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Customizer Section -->
+        <section class="customizer-section" id="customizer">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Ontwerp je eigen Bril</h2>
+                    <p class="section-subtitle">Pas het montuur aan en schuif of klik je favoriete Beads op het pootje!</p>
+                </div>
+
+                <div class="customizer-grid">
+                    <!-- Configurator Panel -->
+                    <div class="config-panel glass">
+                        <h3 class="panel-title"><i class="fa-solid fa-sliders"></i> Opties</h3>
+
+                        <!-- Control: Attachment System -->
+                        <div class="config-group">
+                            <label class="group-label">Bevestigingsmethode</label>
+                            <div class="toggle-buttons">
+                                <button type="button" class="toggle-btn active" id="btn-attach-slide" onclick="setAttachmentMethod('slide')">
+                                    <i class="fa-solid fa-circle-notch"></i> Siliconen Ring
+                                </button>
+                                <button type="button" class="toggle-btn" id="btn-attach-clip" onclick="setAttachmentMethod('clip')">
+                                    <i class="fa-solid fa-paperclip"></i> Zachte Clip
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Control: Frame Color -->
+                        <div class="config-group">
+                            <label class="group-label">Montuur Kleur</label>
+                            <div class="color-selector">
+                                <button type="button" class="color-dot active" style="background-color: #1a1a1a;" data-color="dark" onclick="setFrameColor('dark')" title="Mat Zwart"></button>
+                                <button type="button" class="color-dot" style="background-color: #8ecae6;" data-color="teal" onclick="setFrameColor('teal')" title="Transparant Teal"></button>
+                                <button type="button" class="color-dot" style="background-color: #ffb703;" data-color="yellow" onclick="setFrameColor('yellow')" title="Vrolijk Geel"></button>
+                                <button type="button" class="color-dot" style="background-color: #ffb5a7;" data-color="pink" onclick="setFrameColor('pink')" title="Poeder Roze"></button>
+                                <button type="button" class="color-dot" style="background-color: #e5e5e5; border: 1px solid #ccc;" data-color="crystal" onclick="setFrameColor('crystal')" title="Kristal Helder"></button>
+                            </div>
+                        </div>
+
+                        <!-- Control: Bead Tray -->
+                        <div class="config-group">
+                            <label class="group-label">Kies je Beads (klik om toe te voegen)</label>
+                            <div class="beads-tray-container">
+                                <div class="beads-tray" id="beads-tray-grid">
+                                    <!-- Dynamic elements from app.js -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canvas/Preview Panel -->
+                    <div class="preview-panel glass">
+                        <!-- Canvas Header -->
+                        <div class="preview-header">
+                            <div class="preview-title-group">
+                                <h3 class="panel-title"><i class="fa-solid fa-glasses"></i> Preview</h3>
+                                <span class="attachment-badge" id="preview-system-label">Siliconen Schuif-Systeem</span>
+                            </div>
+                            <div class="preview-controls">
+                                <button type="button" class="btn btn-icon" id="btn-randomize" onclick="randomizeBeads()" title="Willekeurige Beads"><i class="fa-solid fa-shuffle"></i></button>
+                                <button type="button" class="btn btn-icon btn-danger" id="btn-clear" onclick="clearBeads()" title="Leegmaken"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Visualizer Area -->
+                        <div class="visualizer-canvas" id="canvas-area">
+                            <!-- SVG Workspace -->
+                            <svg id="interactive-glasses-svg" viewBox="0 0 600 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <!-- Drop Shadow for Beads -->
+                                    <filter id="bead-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity="0.25" flood-color="#000000" />
+                                    </filter>
+                                    <!-- Inner Glow/Bevel for Beads -->
+                                    <linearGradient id="gold-metal" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#ffe875" />
+                                        <stop offset="50%" stop-color="#d4af37" />
+                                        <stop offset="100%" stop-color="#aa7c11" />
+                                    </linearGradient>
+                                    <!-- Pearl Texture -->
+                                    <radialGradient id="pearl-texture" cx="35%" cy="35%" r="65%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="50%" stop-color="#fff5f0" />
+                                        <stop offset="85%" stop-color="#e3d6cc" />
+                                        <stop offset="100%" stop-color="#c2b2a6" />
+                                    </radialGradient>
+                                    <!-- Neon Teal Glow -->
+                                    <linearGradient id="neon-teal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#00f5ff" />
+                                        <stop offset="100%" stop-color="#00b4d8" />
+                                    </linearGradient>
+                                    <!-- Glass Frame Gradients -->
+                                    <linearGradient id="frame-dark" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#2a2a2a" />
+                                        <stop offset="100%" stop-color="#121212" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-teal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#b5e2fa" />
+                                        <stop offset="100%" stop-color="#4ea8de" opacity="0.8" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-yellow" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ffe169" />
+                                        <stop offset="100%" stop-color="#fad643" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-pink" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ffccd5" />
+                                        <stop offset="100%" stop-color="#ffb3c1" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-crystal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
+                                        <stop offset="100%" stop-color="rgba(230,235,240,0.4)" />
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Grid Background Pattern for Tech Look -->
+                                <g opacity="0.07">
+                                    <line x1="0" y1="50" x2="600" y2="50" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="100" x2="600" y2="100" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="150" x2="600" y2="150" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="200" x2="600" y2="200" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="250" x2="600" y2="250" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="300" x2="600" y2="300" stroke="#fff" stroke-width="1" />
+                                    
+                                    <line x1="100" y1="0" x2="100" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="200" y1="0" x2="200" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="300" y1="0" x2="300" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="400" y1="0" x2="400" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="500" y1="0" x2="500" y2="350" stroke="#fff" stroke-width="1" />
+                                </g>
+
+                                <!-- Interactive Glasses Element -->
+                                <g id="preview-glasses-group" transform="translate(0, 40)">
+                                    <!-- Backdrop glow -->
+                                    <path d="M 220 120 L 510 120 C 510 120, 560 120, 550 170" stroke="var(--primary-glow)" stroke-width="26" stroke-linecap="round" opacity="0.08" />
+
+                                    <!-- Front Frame (partial side perspective) -->
+                                    <g id="frame-front" stroke-linejoin="round" stroke-linecap="round">
+                                        <!-- Lens glass backdrop -->
+                                        <path d="M 150 125 C 150 75, 220 75, 220 125 C 220 165, 150 165, 150 125 Z" fill="rgba(255,255,255,0.15)" stroke="none" />
+                                        <!-- Outer front plastic rim -->
+                                        <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="url(#frame-dark)" stroke-width="14" id="main-frame-rim" />
+                                        <!-- Bridge connecting lenses -->
+                                        <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="url(#frame-dark)" stroke-width="10" id="main-frame-bridge" />
+                                        <!-- Hinge anchor block -->
+                                        <rect x="220" y="112" width="12" height="16" rx="2" fill="#555" stroke="none" />
+                                    </g>
+
+                                    <!-- Glasses Temple (The Arm - primary anchor for beads) -->
+                                    <g id="frame-temple">
+                                        <!-- Temple Core Arm -->
+                                        <!-- We define path segments so beads are placed along the horizontal slide area -->
+                                        <path id="temple-path-under" d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#666" stroke-width="4" stroke-linecap="round" />
+                                        <!-- Temple Outer Plastic Cover -->
+                                        <path id="temple-path-main" d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="url(#frame-dark)" stroke-width="12" stroke-linecap="round" />
+                                        
+                                        <!-- Slider guide indicator (Only visible in Slide mode) -->
+                                        <line id="slide-guideline" x1="260" y1="120" x2="480" y2="120" stroke="var(--teal)" stroke-width="2" stroke-dasharray="4,4" opacity="0.8" />
+                                    </g>
+
+                                    <!-- Snap locations for Zachte Clips (Visible in Clip Mode) -->
+                                    <g id="clip-snap-targets" opacity="0">
+                                        <circle cx="280" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="340" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="400" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="460" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="185" cy="70" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target-front" />
+                                    </g>
+
+                                    <!-- Active Bead Placement Group (Dynamic beads populated here by JS) -->
+                                    <g id="placed-beads-layer" filter="url(#bead-shadow)">
+                                        <!-- Rendered dynamically -->
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <!-- Tooltip/Instruction Layer overlay -->
+                            <div class="canvas-instruction-overlay" id="canvas-overlay">
+                                <span><i class="fa-solid fa-hand-pointer"></i> Klik op een Bead links om deze op de bril te plaatsen</span>
+                            </div>
+                        </div>
+
+                        <!-- Active Bead List & Actions -->
+                        <div class="active-beads-list-wrapper">
+                            <span class="list-label">Beads op jouw Bril:</span>
+                            <div class="active-beads-list" id="active-beads-container">
+                                <span class="empty-list-text">Geen beads toegevoegd. Klik op beads in het menu om te starten!</span>
+                            </div>
+                        </div>
+
+                        <!-- Customizer Summary Card -->
+                        <div class="customizer-summary-card">
+                            <div class="summary-details">
+                                <span class="summary-count" id="summary-count-beads">0 Beads</span>
+                                <span class="summary-price" id="summary-price-total">Ã¢â€šÂ¬ 0,00</span>
+                            </div>
+                            <button type="button" class="btn btn-accent btn-md btn-bounce" id="btn-save-design" onclick="saveDesign()">
+                                Concept Opslaan <i class="fa-solid fa-floppy-disk"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product & Customizer Walkthrough/Showcase -->
+        <section class="how-it-works-section" id="hoe-het-werkt">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Hoe het werkt</h2>
+                    <p class="section-subtitle">Twee unieke bevestigingssystemen ontworpen voor comfort en maximale creativiteit.</p>
+                </div>
+
+                <div class="systems-grid">
+                    <!-- System 1: Silicone Slide -->
+                    <div class="system-card glass">
+                        <div class="system-visual">
+                            <svg class="system-explain-svg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Temple -->
+                                <path d="M 20 60 H 180" stroke="#333" stroke-width="12" stroke-linecap="round" />
+                                <path d="M 20 60 H 180" stroke="#555" stroke-width="4" stroke-linecap="round" />
+                                
+                                <!-- Silicone Ring (Backing) -->
+                                <rect x="90" y="45" width="20" height="30" rx="6" fill="rgba(255,255,255,0.7)" stroke="var(--teal)" stroke-width="2" class="anim-slide-ring" />
+                                
+                                <!-- Bead Charm -->
+                                <g transform="translate(100, 60)" class="anim-slide-bead">
+                                    <circle cx="0" cy="0" r="14" fill="url(#pearl-texture)" stroke="var(--gold)" stroke-width="1" />
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="system-title"><i class="fa-solid fa-circle-notch text-teal"></i> Siliconen Schuif-Systeem</h3>
+                        <p class="system-desc">
+                            Perfect voor losse kralen en hangende bedeltjes. Een universeel, flexibel siliconen ringetje schuif je eenvoudig om het pootje van je bril. De wrijving zorgt dat de beads comfortabel en stevig op hun plek blijven zitten.
+                        </p>
+                        <span class="system-spec"><i class="fa-solid fa-circle-check"></i> Universeel voor 95% van alle brillen</span>
+                        <span class="system-spec"><i class="fa-solid fa-circle-check"></i> Ideaal voor minimalistische parels & geometrie</span>
+                    </div>
+
+                    <!-- System 2: Soft Clips -->
+                    <div class="system-card glass">
+                        <div class="system-visual">
+                            <svg class="system-explain-svg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Glasses Frame part -->
+                                <path d="M 40 40 C 40 40, 70 80, 100 80 C 130 80, 160 40, 160 40" stroke="#333" stroke-width="10" stroke-linecap="round" />
+                                
+                                <!-- Clip Target -->
+                                <g transform="translate(100, 75)" class="anim-clip-bead">
+                                    <!-- Clip outline / Snap connection -->
+                                    <path d="M -12 -12 H 12 V 12 H -12 Z" fill="none" stroke="var(--pink)" stroke-width="2" stroke-dasharray="3,3" />
+                                    <!-- Clip Icon (Star) -->
+                                    <path d="M0 -14 L4 -4 L14 -4 L6 2 L9 12 L0 6 L-9 12 L-6 2 L-14 -4 L-4 -4 Z" fill="var(--pink)" />
+                                </g>
+                            </svg>
+                        </div>
+                        <h3 class="system-title"><i class="fa-solid fa-paperclip text-pink"></i> Zachte Klik Clips</h3>
+                        <p class="system-desc">
+                            Speciaal ontworpen voor grotere, speelse figuurtjes (zoals superhelden, diertjes en bloemen). Deze clips zijn gemaakt van flexibel zacht plastic en klikken direct stevig vast op de dikkere gedeeltes van het montuur of het pootje.
+                        </p>
+                        <span class="system-spec"><i class="fa-solid fa-circle-check"></i> Snel vastklikken en verwisselen</span>
+                        <span class="system-spec"><i class="fa-solid fa-circle-check"></i> Perfect voor grotere kids-figuurtjes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collecties & Gallery -->
+        <section class="collecties-section" id="collecties">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Onze Kids Collectie</h2>
+                    <p class="section-subtitle">Maak brildragen leuk en vrolijk met kleurrijke figuurtjes, diertjes en superhelden!</p>
+                </div>
+
+                <div class="collectie-showcase-single">
+                    <!-- Collectie: Kids -->
+                    <div class="collectie-card card-kids">
+                        <div class="collectie-bg-image"></div>
+                        <div class="collectie-overlay">
+                            <span class="collectie-tag bg-pink">Kids Collectie</span>
+                            <h3 class="collectie-card-title">Vrolijk & Speels</h3>
+                            <p class="collectie-card-desc">Maak brildragen leuk met kleurrijke figuurtjes, dieren, sterren en superhelden! Speciaal ontworpen om stevig te blijven zitten en tegen een stootje te kunnen.</p>
+                            <div class="collectie-items-preview">
+                                <span class="mini-item bg-teal"><i class="fa-solid fa-dog"></i> Hondje</span>
+                                <span class="mini-item bg-purple"><i class="fa-solid fa-cat"></i> Poes</span>
+                                <span class="mini-item bg-pink"><i class="fa-solid fa-mask"></i> Held</span>
+                                <span class="mini-item bg-gold"><i class="fa-solid fa-star"></i> Ster</span>
+                            </div>
+                            <a href="#customizer" class="btn btn-secondary btn-sm">Ontwerp Nu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Vision / Concept Briefing Section -->
+        <section class="briefing-section" id="concept-briefing">
+            <div class="container briefing-container">
+                <div class="briefing-content glass">
+                    <span class="badge badge-accent">De Visie</span>
+                    <h2 class="section-title text-left">Over Bril Beads</h2>
+                    <p class="briefing-text">
+                        Bril Beads is geboren uit de visie om een alledaags, medisch hulpmiddel (de bril) te transformeren tot een platform voor <strong>creativiteit en personalisatie</strong>. Net zoals Jibbitz Crocs hebben veroverd, geloven wij dat brillen het volgende canvas zijn voor zelfexpressie.
+                    </p>
+                    
+                    <div class="briefing-points">
+                        <div class="point-item">
+                            <div class="point-icon"><i class="fa-solid fa-cubes"></i></div>
+                            <div class="point-details">
+                                <h4 class="point-title">Volledig Modulair & DIY</h4>
+                                <p class="point-desc">Klanten stellen zelf hun combinaties samen en kunnen dagelijks wisselen van beads, passend bij hun outfit of stemming.</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon"><i class="fa-solid fa-sparkles"></i></div>
+                            <div class="point-details">
+                                <h4 class="point-title">Puur Modieus Accessoire</h4>
+                                <p class="point-desc">Het is geen praktisch hulpmiddel, maar een speels en uniek sieraad dat extra karakter geeft aan je montuur.</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon"><i class="fa-solid fa-palette"></i></div>
+                            <div class="point-details">
+                                <h4 class="point-title">Speels Branding Palet</h4>
+                                <p class="point-desc">Ons kleurenpalet straalt vrolijkheid uit met een mix van roze, paars, teal, goud en zacht parelmoer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="branding-palette-card glass">
+                    <h3 class="panel-title">Branding Huisstijl</h3>
+                    <p class="palette-desc">De officiÃƒÂ«le kleuren en logo-elementen gebaseerd op het concept:</p>
+                    
+                    <div class="palette-swatch-list">
+                        <div class="swatch-item">
+                            <div class="swatch-color" style="background-color: var(--pink);"></div>
+                            <div class="swatch-info">
+                                <span class="swatch-name">Bril Beads Pink</span>
+                                <span class="swatch-hex">#ff5c8a</span>
+                            </div>
+                        </div>
+                        <div class="swatch-item">
+                            <div class="swatch-color" style="background-color: var(--purple);"></div>
+                            <div class="swatch-info">
+                                <span class="swatch-name">Bril Beads Purple</span>
+                                <span class="swatch-hex">#7209b7</span>
+                            </div>
+                        </div>
+                        <div class="swatch-item">
+                            <div class="swatch-color" style="background-color: var(--teal);"></div>
+                            <div class="swatch-info">
+                                <span class="swatch-name">Bril Beads Teal</span>
+                                <span class="swatch-hex">#00b4d8</span>
+                            </div>
+                        </div>
+                        <div class="swatch-item">
+                            <div class="swatch-color" style="background-color: var(--gold); background-image: linear-gradient(135deg, #ffe875, #d4af37);"></div>
+                            <div class="swatch-info">
+                                <span class="swatch-name">Parelmoer & Goud</span>
+                                <span class="swatch-hex">Accent</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="logo-explanation">
+                        <h4>Logo & Typografie Concept</h4>
+                        <p>Het logo integreert een brilpootje met beads, gecombineerd met een vriendelijk en rond lettertype om de DIY-speelsheid te weerspiegelen.</p>
+                        <img src="assets/logo.png" alt="Bril Beads Logo Concept" class="branding-logo-preview">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="brand-logo">
+                    <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
+                    <span class="brand-text">BRIL <span class="accent-text">BEADS</span></span>
+                </a>
+                <p class="footer-desc">
+                    Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigatie</h4>
+                <ul>
+                    <li><a href="#customizer">Customizer</a></li>
+                    <li><a href="#collecties">Collecties</a></li>
+                    <li><a href="#hoe-het-werkt">Hoe het werkt</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Collectie</h4>
+                <ul>
+                    <li><a href="#customizer">Kids Playful Beads</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. OfficiÃ«le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v1.0.55</span></p>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
