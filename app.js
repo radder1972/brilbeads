@@ -692,13 +692,104 @@ function saveDesign() {
 
 // --- Dynamic Template Loading (Inspiratie Stijlen) ---
 function loadTemplate(templateName) {
+    const onCustomizerPage = document.getElementById('placed-beads-layer') !== null;
+    
+    if (!onCustomizerPage) {
+        // We are on index.html, load template state into memory and redirect
+        customizerState.placedBeads = [];
+        
+        if (templateName === 'hero') {
+            customizerState.frameColor = 'teal';
+            customizerState.attachmentMethod = 'clip';
+            beadUniqueIdCounter = 1;
+            customizerState.placedBeads.push({
+                id: 'k-hero',
+                uniqueId: beadUniqueIdCounter,
+                price: 2.95,
+                name: 'Hero Masker',
+                x: 185,
+                y: 70
+            });
+        } else if (templateName === 'kitty') {
+            customizerState.frameColor = 'pink';
+            customizerState.attachmentMethod = 'slide';
+            
+            const b1 = BEADS_DATABASE.kids.find(b => b.id === 'k-kitty');
+            const b2 = BEADS_DATABASE.kids.find(b => b.id === 'k-flower');
+            const b3 = BEADS_DATABASE.kids.find(b => b.id === 'k-smile');
+            
+            customizerState.placedBeads.push({
+                id: 'k-kitty',
+                uniqueId: 1,
+                price: b1.price,
+                name: b1.name,
+                x: 280,
+                y: 120
+            });
+            customizerState.placedBeads.push({
+                id: 'k-flower',
+                uniqueId: 2,
+                price: b2.price,
+                name: b2.name,
+                x: 308,
+                y: 120
+            });
+            customizerState.placedBeads.push({
+                id: 'k-smile',
+                uniqueId: 3,
+                price: b3.price,
+                name: b3.name,
+                x: 336,
+                y: 120
+            });
+            beadUniqueIdCounter = 3;
+        } else if (templateName === 'rainbow') {
+            customizerState.frameColor = 'pink';
+            customizerState.attachmentMethod = 'slide';
+            
+            const b1 = BEADS_DATABASE.kids.find(b => b.id === 'k-kitty');
+            const b2 = BEADS_DATABASE.kids.find(b => b.id === 'k-star');
+            const b3 = BEADS_DATABASE.kids.find(b => b.id === 'k-panda');
+            
+            customizerState.placedBeads.push({
+                id: 'k-kitty',
+                uniqueId: 1,
+                price: b1.price,
+                name: b1.name,
+                x: 280,
+                y: 120
+            });
+            customizerState.placedBeads.push({
+                id: 'k-star',
+                uniqueId: 2,
+                price: b2.price,
+                name: b2.name,
+                x: 308,
+                y: 120
+            });
+            customizerState.placedBeads.push({
+                id: 'k-panda',
+                uniqueId: 3,
+                price: b3.price,
+                name: b3.name,
+                x: 336,
+                y: 120
+            });
+            beadUniqueIdCounter = 3;
+        }
+        
+        saveStateToLocalStorage();
+        window.location.href = 'ontwerpen.html';
+        return;
+    }
+
+    // Standard flow (on customizer page)
     clearBeads();
     
     if (templateName === 'hero') {
         setFrameColor('teal');
         setAttachmentMethod('clip');
         
-        // Add Hero mask at Front target (x: 185, y: 70)
         beadUniqueIdCounter++;
         customizerState.placedBeads.push({
             id: 'k-hero',
@@ -712,7 +803,6 @@ function loadTemplate(templateName) {
         setFrameColor('pink');
         setAttachmentMethod('slide');
         
-        // Add Hello Kitty, Pearl, and Smile to temple
         addBeadToGlasses('k-kitty');
         addBeadToGlasses('k-flower');
         addBeadToGlasses('k-smile');
@@ -720,7 +810,6 @@ function loadTemplate(templateName) {
         setFrameColor('pink');
         setAttachmentMethod('slide');
         
-        // Add Hello Kitty, Star, and Panda to temple
         addBeadToGlasses('k-kitty');
         addBeadToGlasses('k-star');
         addBeadToGlasses('k-panda');
@@ -730,13 +819,9 @@ function loadTemplate(templateName) {
     updateActiveBeadsListUI();
     saveStateToLocalStorage();
     
-    // Smooth scroll to customizer if on customizer page
     const customizerEl = document.getElementById('customizer');
     if (customizerEl) {
         customizerEl.scrollIntoView({ behavior: 'smooth' });
-    } else {
-        // Redirect to ontwerpen page
-        window.location.href = 'ontwerpen.html';
     }
 }
 
