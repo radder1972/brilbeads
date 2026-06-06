@@ -730,13 +730,13 @@ function loadTemplate(templateName) {
     updateActiveBeadsListUI();
     saveStateToLocalStorage();
     
-    // Smooth scroll to customizer if on index page
+    // Smooth scroll to customizer if on customizer page
     const customizerEl = document.getElementById('customizer');
     if (customizerEl) {
         customizerEl.scrollIntoView({ behavior: 'smooth' });
     } else {
-        // Redirect to index page with hash
-        window.location.href = 'index.html#customizer';
+        // Redirect to ontwerpen page
+        window.location.href = 'ontwerpen.html';
     }
 }
 
