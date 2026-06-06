@@ -341,6 +341,12 @@ p {
     z-index: 100;
 }
 
+@media (min-width: 1200px) {
+    .header-utilities {
+        right: calc(50% - 600px + 2rem);
+    }
+}
+
 .utility-nav-item {
     text-decoration: none;
     cursor: pointer;
