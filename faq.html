@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veelgestelde Vragen | Bril Beads</title>
+    <meta name="description" content="Veelgestelde vragen over Bril Beads. Leer alles over de materialen, de bevestigingssystemen, veiligheid en levertijden van onze kralen.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .faq-item {
+            border: var(--thin-border);
+            border-radius: var(--radius-md);
+            background: #ffffff;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--comic-shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item[open] {
+            box-shadow: var(--comic-shadow);
+            transform: translate(-2px, -2px);
+        }
+        .faq-item summary {
+            padding: 1.2rem;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.2rem;
+            cursor: pointer;
+            list-style: none;
+            outline: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary::after {
+            content: '\f0fe'; /* FontAwesome Plus */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--teal);
+            transition: var(--transition);
+        }
+        .faq-item[open] summary::after {
+            content: '\f146'; /* FontAwesome Minus */
+            color: var(--pink);
+        }
+        .faq-content {
+            padding: 0 1.2rem 1.5rem 1.2rem;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-dark);
+            padding-top: 1rem;
+            background: var(--bg-cream);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo" id="header-logo-link">
+                <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
+            </a>
+            
+            <nav class="playful-nav" id="main-navigation">
+                <div class="playful-nav-container">
+                    <a href="bestellen.html" class="playful-nav-item" title="Bestel je ontworpen bril">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Bestellen</span>
+                    </a>
+                    
+                    <a href="winkelwagen.html" class="playful-nav-item" title="Bekijk je winkelwagen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_winkelwagen.png" alt="Winkelwagen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Winkelwagen</span>
+                    </a>
+                    
+                    <a href="contact.html" class="playful-nav-item" title="Neem contact met ons op">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_contact.png" alt="Contact" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Contact</span>
+                    </a>
+                    
+                    <a href="account.html" class="playful-nav-item" title="Mijn Account">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_account.png" alt="Account" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Account</span>
+                    </a>
+                    
+                    <a href="faq.html" class="playful-nav-item active" title="Veelgestelde Vragen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_faq.png" alt="Veelgestelde Vragen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Veelgestelde Vragen</span>
+                    </a>
+                    
+                    <a href="verzending.html" class="playful-nav-item" title="Gratis verzending vanaf &euro;20">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_verzending.png" alt="Verzending" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Verzending</span>
+                    </a>
+                    
+                    <a href="garantie.html" class="playful-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_garantie.png" alt="Garantie" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Garantie</span>
+                    </a>
+                    
+                    <a href="index.html#customizer" class="playful-nav-item" title="Ontwerp je eigen bril!">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Ontwerpen</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0;">
+        <div class="container" style="max-width: 800px;">
+            <div class="glass" style="padding: 3rem; margin-bottom: 2rem;">
+                <span class="badge badge-accent">Helpcenter</span>
+                <h1 class="section-title text-left" style="font-size: 2.5rem; margin-bottom: 1.5rem;">Veelgestelde Vragen</h1>
+                <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem;">
+                    Heb je een vraag over Bril Beads? Hier vind je alle antwoorden over de werking, materialen, pasvorm en levertijden. Staat je vraag er niet tussen? Neem gerust contact met ons op!
+                </p>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>Wat zijn Bril Beads precies?</summary>
+                        <div class="faq-content">
+                            Bril Beads zijn modulaire en vrolijke accessoires die speciaal zijn ontworpen om je bril te personaliseren. Het is een speels en uniek sieraad om extra karakter te geven aan je montuur. Net als Jibbitz voor Crocs, zijn Bril Beads het ideale platform voor creativiteit en expressie op je bril!
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Passen Bril Beads op elke bril?</summary>
+                        <div class="faq-content">
+                            Ja! We hebben twee systemen ontworpen. Ons <strong>Siliconen Schuif-Systeem</strong> past op 95% van alle gangbare brilpootjes door het elastische materiaal. Onze <strong>Zachte Klik Clips</strong> zijn speciaal ontworpen voor bredere kunststof monturen en kunnen direct op de rims of de bredere delen van de pootjes worden geklikt.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Van welke materialen zijn Bril Beads gemaakt?</summary>
+                        <div class="faq-content">
+                            Veiligheid en comfort staan voorop. Bril Beads zijn gemaakt van hoogwaardig, hypoallergeen, en zacht siliconen of flexibel plastic (TPE). De materialen zijn gifvrij en irritatievrij voor de huid. Onze parelmoer beads maken gebruik van zacht glanzende synthetische parels van topkwaliteit.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Hoeveel beads kan ik tegelijk dragen?</summary>
+                        <div class="faq-content">
+                            Onze customizer ondersteunt tot 6 beads tegelijkertijd om het montuur comfortabel en gebalanceerd te houden. In het echt kun je er natuurlijk zoveel op schuiven als je pootje lang is! Dankzij het lichtgewicht materiaal voel je ze nauwelijks zitten.
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Zijn Bril Beads veilig voor jonge kinderen?</summary>
+                        <div class="faq-content">
+                            Bril Beads zijn erg leuk voor kinderen, maar bevatten kleine onderdelen. Vanwege verstikkingsgevaar raden we het gebruik van Bril Beads af voor kinderen jonger dan 3 jaar. Laat kinderen altijd onder toezicht spelen en de beads op- en afdoen.
+                        </div>
+                    </details>
+                </div>
+                
+                <div style="margin-top: 3rem; text-align: center; border-top: var(--thin-border); padding-top: 2rem;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.8rem;">Staat je vraag er niet bij?</h3>
+                    <p style="margin-bottom: 1.5rem;">Geen zorgen! Ons support team helpt je graag verder.</p>
+                    <a href="contact.html" class="btn btn-primary btn-bounce">Stuur ons een bericht</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="brand-logo">
+                    <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
+                    <span class="brand-text"><span class="bril-text">BRIL</span> <span class="accent-text">BEADS</span></span>
+                </a>
+                <p class="footer-desc">
+                    Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigatie</h4>
+                <ul>
+                    <li><a href="index.html#customizer">Customizer</a></li>
+                    <li><a href="index.html#collecties">Collecties</a></li>
+                    <li><a href="index.html#hoe-het-werkt">Hoe het werkt</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Collectie</h4>
+                <ul>
+                    <li><a href="index.html#customizer">Kids Playful Beads</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.5</span></p>
+        </div>
+    </footer>
+    
+    <script src="app.js"></script>
+</body>
+</html>
