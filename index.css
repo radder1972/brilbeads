@@ -900,6 +900,7 @@ section {
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
+    min-width: 0;
 }
 
 .preview-header {
@@ -999,13 +1000,20 @@ section {
     background: var(--bg-cream);
     border: var(--thin-border);
     border-radius: var(--radius-sm);
-    height: 72px;
+    height: 108px;
     padding: 0.6rem;
     display: flex;
-    gap: 0.8rem;
-    overflow-x: auto;
-    overflow-y: hidden;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-content: flex-start;
     align-items: center;
+    min-width: 0;
+}
+
+.active-beads-list:has(.empty-list-text) {
+    align-content: center;
 }
 
 .empty-list-text {
