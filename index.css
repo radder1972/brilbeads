@@ -526,6 +526,7 @@ section {
     margin-bottom: 1rem;
     position: relative;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .section-subtitle {
