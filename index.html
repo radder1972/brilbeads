@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
@@ -20,19 +20,67 @@
         <div class="container header-container">
             <a href="#" class="brand-logo" id="header-logo-link">
                 <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
-                <span class="brand-text">BRIL <span class="accent-text">BEADS</span></span>
             </a>
-            <nav class="main-nav" id="main-navigation">
-                <ul>
-                    <li><a href="#customizer" class="nav-link">Customizer</a></li>
-                    <li><a href="#collecties" class="nav-link">Kids Collectie</a></li>
-                    <li><a href="#hoe-het-werkt" class="nav-link">Hoe het werkt</a></li>
-                    <li><a href="#concept-briefing" class="nav-link">Ontwerpvisie</a></li>
-                </ul>
+            
+            <nav class="playful-nav" id="main-navigation">
+                <div class="playful-nav-container">
+                    <a href="#customizer" class="playful-nav-item" title="Bestel je ontworpen bril" onclick="triggerOrder(event)">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Bestellen</span>
+                    </a>
+                    
+                    <a href="#customizer" class="playful-nav-item" title="Bekijk je winkelwagen" onclick="openCart(event)">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_winkelwagen.png" alt="Winkelwagen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Winkelwagen</span>
+                    </a>
+                    
+                    <a href="#contact-section" class="playful-nav-item" title="Neem contact met ons op">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_contact.png" alt="Contact" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Contact</span>
+                    </a>
+                    
+                    <a href="#concept-briefing" class="playful-nav-item" title="Mijn Account">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_account.png" alt="Account" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Account</span>
+                    </a>
+                    
+                    <a href="#concept-briefing" class="playful-nav-item" title="Veelgestelde Vragen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_faq.png" alt="Veelgestelde Vragen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Veelgestelde Vragen</span>
+                    </a>
+                    
+                    <a href="#hoe-het-werkt" class="playful-nav-item" title="Gratis verzending vanaf €20">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_verzending.png" alt="Verzending" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Verzending</span>
+                    </a>
+                    
+                    <a href="#concept-briefing" class="playful-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_garantie.png" alt="Garantie" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Garantie</span>
+                    </a>
+                    
+                    <a href="#customizer" class="playful-nav-item" title="Ontwerp je eigen bril!">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Ontwerpen</span>
+                    </a>
+                </div>
             </nav>
-            <div class="header-actions">
-                <a href="#customizer" class="btn btn-primary btn-sm btn-bounce">Ontwerp Nu</a>
-            </div>
         </div>
     </header>
 
@@ -63,6 +111,132 @@
                     <div class="hero-centered-ctas">
                         <a href="#customizer" class="btn btn-playful-primary btn-lg btn-bounce">Start de Customizer <i class="fa-solid fa-wand-magic-sparkles"></i></a>
                         <a href="#hoe-het-werkt" class="btn btn-playful-secondary btn-lg">Hoe werkt het?</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kies Jouw Stijl Section -->
+        <section class="styles-gallery-section" id="vrolijke-stijlen">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="badge badge-accent">Inspiratie</span>
+                    <h2 class="section-title">Kies jouw stijl!</h2>
+                    <p class="section-subtitle">Klik op een stijl om deze direct te laden in de ontwerper en pas hem zelf verder aan!</p>
+                </div>
+                
+                <div class="styles-grid-container">
+                    <!-- Style Card 1: Hero Blauw -->
+                    <div class="style-preview-card glass" onclick="loadTemplate('hero')">
+                        <div class="style-preview-visual bg-teal-soft">
+                            <svg class="preview-glasses-svg" viewBox="100 40 460 220" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Glasses Frame -->
+                                <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="#4ea8de" stroke-width="12" stroke-linecap="round" />
+                                <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="#4ea8de" stroke-width="9" stroke-linecap="round" />
+                                <path d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#4ea8de" stroke-width="10" stroke-linecap="round" />
+                                <!-- Hero Mask Bead on Front -->
+                                <g transform="translate(185, 70) scale(1.3)">
+                                    <path d="M -15 -8 Q -10 -15 0 -8 Q 10 -15 15 -8 Q 17 0 10 10 Q 0 14 -10 10 Q -17 0 -15 -8 Z" fill="#e63946" stroke="#b70918" stroke-width="1.5" />
+                                    <path d="M -9 -2 Q -5 -8 -1 -3 Q -4 1 -9 -2 Z" fill="#fff" />
+                                    <path d="M 9 -2 Q 5 -8 1 -3 Q 4 1 9 -2 Z" fill="#fff" />
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="style-preview-info">
+                            <h3>Superheld Blauw</h3>
+                            <p>Stoer blauw montuur met de coole Hero Masker clip aan de voorkant.</p>
+                            <span class="btn btn-secondary btn-sm">Stijl Laden <i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Style Card 2: Hello Kitty Chic -->
+                    <div class="style-preview-card glass" onclick="loadTemplate('kitty')">
+                        <div class="style-preview-visual bg-pink-soft">
+                            <svg class="preview-glasses-svg" viewBox="100 40 460 220" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="preview-pearl-texture" cx="35%" cy="35%" r="65%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="50%" stop-color="#fff5f0" />
+                                        <stop offset="85%" stop-color="#e3d6cc" />
+                                        <stop offset="100%" stop-color="#c2b2a6" />
+                                    </radialGradient>
+                                </defs>
+                                <!-- Glasses Frame -->
+                                <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="#9d8df2" stroke-width="12" stroke-linecap="round" />
+                                <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="#9d8df2" stroke-width="9" stroke-linecap="round" />
+                                <path d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#9d8df2" stroke-width="10" stroke-linecap="round" />
+                                <!-- Hello Kitty bead on temple -->
+                                <g transform="translate(300, 120) scale(1.1)">
+                                    <ellipse cx="0" cy="0" rx="13" ry="10" fill="#fff" stroke="#3a261c" stroke-width="1.5" />
+                                    <path d="M -9 -7 L -12 -15 L -3 -10 Z" fill="#fff" stroke="#3a261c" stroke-width="1.5" stroke-linejoin="round" />
+                                    <path d="M 9 -7 L 12 -15 L 3 -10 Z" fill="#fff" stroke="#3a261c" stroke-width="1.5" stroke-linejoin="round" />
+                                    <ellipse cx="-5" cy="0" rx="1.2" ry="1.8" fill="#3a261c" />
+                                    <ellipse cx="5" cy="0" rx="1.2" ry="1.8" fill="#3a261c" />
+                                    <ellipse cx="0" cy="2" rx="1.8" ry="1.2" fill="#ffd000" stroke="#3a261c" stroke-width="0.8" />
+                                    <ellipse cx="-12" cy="-10" rx="3.5" ry="2.5" fill="#e63946" stroke="#3a261c" stroke-width="1.2" transform="rotate(-30, -12, -10)" />
+                                    <ellipse cx="-5" cy="-6" rx="3.5" ry="2.5" fill="#e63946" stroke="#3a261c" stroke-width="1.2" transform="rotate(30, -5, -6)" />
+                                    <circle cx="-8" cy="-8" r="2.5" fill="#e63946" stroke="#3a261c" stroke-width="1.2" />
+                                </g>
+                                <!-- Pearl bead -->
+                                <circle cx="340" cy="120" r="10" fill="url(#preview-pearl-texture)" stroke="#3a261c" stroke-width="1.2" />
+                                <!-- Smile bead -->
+                                <g transform="translate(380, 120) scale(1.0)">
+                                    <circle cx="0" cy="0" r="11" fill="#ffd000" stroke="#3a261c" stroke-width="1.2" />
+                                    <circle cx="-3.5" cy="-2" r="1.2" fill="#3a261c" />
+                                    <circle cx="3.5" cy="-2" r="1.2" fill="#3a261c" />
+                                    <path d="M -4 2 Q 0 6 4 2" stroke="#3a261c" stroke-width="1.2" stroke-linecap="round" fill="none" />
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="style-preview-info">
+                            <h3>Lila Parelmeisje</h3>
+                            <p>Lila montuur versierd met Hello Kitty, een chique glanzende parel en een blije smiley.</p>
+                            <span class="btn btn-secondary btn-sm">Stijl Laden <i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Style Card 3: Regenboog Fun -->
+                    <div class="style-preview-card glass" onclick="loadTemplate('rainbow')">
+                        <div class="style-preview-visual bg-pink-polka">
+                            <svg class="preview-glasses-svg" viewBox="100 40 460 220" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Glasses Frame -->
+                                <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="#ffccd5" stroke-width="12" stroke-linecap="round" />
+                                <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="#ffccd5" stroke-width="9" stroke-linecap="round" />
+                                <path d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#ffccd5" stroke-width="10" stroke-linecap="round" />
+                                <!-- Hello Kitty bead on temple -->
+                                <g transform="translate(300, 120) scale(1.1)">
+                                    <ellipse cx="0" cy="0" rx="13" ry="10" fill="#fff" stroke="#3a261c" stroke-width="1.5" />
+                                    <path d="M -9 -7 L -12 -15 L -3 -10 Z" fill="#fff" stroke="#3a261c" stroke-width="1.5" stroke-linejoin="round" />
+                                    <path d="M 9 -7 L 12 -15 L 3 -10 Z" fill="#fff" stroke="#3a261c" stroke-width="1.5" stroke-linejoin="round" />
+                                    <ellipse cx="-5" cy="0" rx="1.2" ry="1.8" fill="#3a261c" />
+                                    <ellipse cx="5" cy="0" rx="1.2" ry="1.8" fill="#3a261c" />
+                                    <ellipse cx="0" cy="2" rx="1.8" ry="1.2" fill="#ffd000" stroke="#3a261c" stroke-width="0.8" />
+                                    <ellipse cx="-12" cy="-10" rx="3.5" ry="2.5" fill="#e63946" stroke="#3a261c" stroke-width="1.2" transform="rotate(-30, -12, -10)" />
+                                    <ellipse cx="-5" cy="-6" rx="3.5" ry="2.5" fill="#e63946" stroke="#3a261c" stroke-width="1.2" transform="rotate(30, -5, -6)" />
+                                    <circle cx="-8" cy="-8" r="2.5" fill="#e63946" stroke="#3a261c" stroke-width="1.2" />
+                                </g>
+                                <!-- Star bead -->
+                                <g transform="translate(340, 120) scale(0.9)">
+                                    <path d="M 0 -15 L 4.5 -4.5 L 15 -4.5 L 6.5 2.5 L 9.5 13 L 0 6.5 L -9.5 13 L -6.5 2.5 L -15 -4.5 L -4.5 -4.5 Z" fill="#4ec2b8" stroke="#3a261c" stroke-width="1.5" />
+                                </g>
+                                <!-- Panda bead -->
+                                <g transform="translate(385, 120) scale(0.85)">
+                                    <circle cx="-10" cy="-10" r="4.5" fill="#222" />
+                                    <circle cx="10" cy="-10" r="4.5" fill="#222" />
+                                    <circle cx="0" cy="0" r="13" fill="#ffffff" stroke="#222" stroke-width="1.5" />
+                                    <ellipse cx="-4.5" cy="-2" rx="3" ry="4.5" fill="#222" transform="rotate(-10, -4.5, -2)" />
+                                    <ellipse cx="4.5" cy="-2" rx="3" ry="4.5" fill="#222" transform="rotate(10, 4.5, -2)" />
+                                    <circle cx="-4" cy="-2" r="1" fill="#fff" />
+                                    <circle cx="4" cy="-2" r="1" fill="#fff" />
+                                    <ellipse cx="0" cy="4" rx="2.5" ry="1.5" fill="#222" />
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="style-preview-info">
+                            <h3>Kitty Regenboog</h3>
+                            <p>Zacht roze montuur met Hello Kitty, een vrolijke turquoise ster en de Panda Vriend bead.</p>
+                            <span class="btn btn-secondary btn-sm">Stijl Laden <i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -260,7 +434,7 @@
                         <div class="customizer-summary-card">
                             <div class="summary-details">
                                 <span class="summary-count" id="summary-count-beads">0 Beads</span>
-                                <span class="summary-price" id="summary-price-total">â‚¬ 0,00</span>
+                                <span class="summary-price" id="summary-price-total">Ã¢â€šÂ¬ 0,00</span>
                             </div>
                             <button type="button" class="btn btn-accent btn-md btn-bounce" id="btn-save-design" onclick="saveDesign()">
                                 Concept Opslaan <i class="fa-solid fa-floppy-disk"></i>
@@ -373,21 +547,77 @@
                     
                     <div class="briefing-points">
                         <div class="point-item">
-                            <div class="point-icon"><i class="fa-solid fa-cubes"></i></div>
+                            <div class="point-icon">
+                                <svg class="vision-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Temple bar -->
+                                    <path d="M 8 40 H 82" stroke="var(--border-dark)" stroke-width="6" stroke-linecap="round" fill="none" />
+                                    <path d="M 8 40 H 82" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" />
+                                    <!-- Silicone loop/stopper -->
+                                    <rect x="18" y="25" width="12" height="30" rx="4" fill="#ffffff" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <line x1="24" y1="25" x2="24" y2="55" stroke="var(--border-dark)" stroke-width="2" />
+                                    <!-- Pink round bead with shine -->
+                                    <circle cx="42" cy="40" r="12" fill="var(--pink)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <path d="M 37 35 Q 40 32 44 34" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+                                    <!-- Gold star bead with shine -->
+                                    <path d="M 70 26 L 73.5 33.5 L 81.5 34.5 L 75.5 40 L 77 48 L 70 44 L 63 48 L 64.5 40 L 58.5 34.5 L 66.5 33.5 Z" fill="var(--gold)" stroke="var(--border-dark)" stroke-width="3.5" stroke-linejoin="round" />
+                                    <path d="M 66 34 L 68 33" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+                                    <!-- Dotted slider arrow indicating DIY customization -->
+                                    <path d="M 94 40 H 85" fill="none" stroke="var(--teal)" stroke-width="3" stroke-dasharray="3,3" stroke-linecap="round" />
+                                    <path d="M 88 36 L 83 40 L 88 44" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    <!-- Teal Sparkle -->
+                                    <path d="M 45 18 Q 45 14 41 14 Q 45 14 45 10 Q 45 14 49 14 Q 45 14 45 18" fill="var(--teal)" stroke="var(--border-dark)" stroke-width="2" stroke-linejoin="round" />
+                                </svg>
+                            </div>
                             <div class="point-details">
                                 <h4 class="point-title">Volledig Modulair & DIY</h4>
                                 <p class="point-desc">Klanten stellen zelf hun combinaties samen en kunnen dagelijks wisselen van beads, passend bij hun outfit of stemming.</p>
                             </div>
                         </div>
                         <div class="point-item">
-                            <div class="point-icon"><i class="fa-solid fa-sparkles"></i></div>
+                            <div class="point-icon">
+                                <svg class="vision-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Hanger Loop -->
+                                    <circle cx="50" cy="22" r="9" fill="none" stroke="var(--border-dark)" stroke-width="4" />
+                                    <circle cx="50" cy="38" r="6" fill="none" stroke="var(--border-dark)" stroke-width="4" />
+                                    <!-- Heart Charm -->
+                                    <path d="M 50 82 C 50 82, 22 55, 22 37 C 22 21, 36 13, 50 28 C 64 13, 78 21, 78 37 C 78 55, 50 82, 50 82 Z" fill="var(--pink)" stroke="var(--border-dark)" stroke-width="4" stroke-linejoin="round" />
+                                    <!-- Shine Highlight -->
+                                    <path d="M 33 34 Q 38 23 46 26" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
+                                    <!-- Gold Sparkle Left -->
+                                    <path d="M 18 24 Q 18 20 14 20 Q 18 20 18 16 Q 18 20 22 20 Q 18 20 18 24" fill="var(--gold)" stroke="var(--border-dark)" stroke-width="2" stroke-linejoin="round" />
+                                    <!-- Teal Sparkle Right -->
+                                    <path d="M 82 66 Q 82 62 78 62 Q 82 62 82 58 Q 82 62 86 62 Q 82 62 82 66" fill="var(--teal)" stroke="var(--border-dark)" stroke-width="2" stroke-linejoin="round" />
+                                </svg>
+                            </div>
                             <div class="point-details">
                                 <h4 class="point-title">Puur Modieus Accessoire</h4>
                                 <p class="point-desc">Het is geen praktisch hulpmiddel, maar een speels en uniek sieraad dat extra karakter geeft aan je montuur.</p>
                             </div>
                         </div>
                         <div class="point-item">
-                            <div class="point-icon"><i class="fa-solid fa-palette"></i></div>
+                            <div class="point-icon">
+                                <svg class="vision-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Petals (Pink, Purple, Teal, Gold) -->
+                                    <circle cx="50" cy="22" r="14" fill="var(--pink)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="70" cy="30" r="14" fill="var(--purple)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="78" cy="50" r="14" fill="var(--teal)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="70" cy="70" r="14" fill="var(--gold)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="50" cy="78" r="14" fill="var(--pink)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="30" cy="70" r="14" fill="var(--purple)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="22" cy="50" r="14" fill="var(--teal)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <circle cx="30" cy="30" r="14" fill="var(--gold)" stroke="var(--border-dark)" stroke-width="3.5" />
+                                    <!-- Center Core -->
+                                    <circle cx="50" cy="50" r="19" fill="#ffffff" stroke="var(--border-dark)" stroke-width="4" />
+                                    <!-- Eyes -->
+                                    <ellipse cx="44" cy="46" rx="2.5" ry="3.5" fill="var(--border-dark)" />
+                                    <ellipse cx="56" cy="46" rx="2.5" ry="3.5" fill="var(--border-dark)" />
+                                    <!-- Blushing cheeks -->
+                                    <circle cx="38" cy="51" r="2.5" fill="var(--pink)" opacity="0.8" />
+                                    <circle cx="62" cy="51" r="2.5" fill="var(--pink)" opacity="0.8" />
+                                    <!-- Smile -->
+                                    <path d="M 44 52 Q 50 57 56 52" stroke="var(--border-dark)" stroke-width="3" stroke-linecap="round" fill="none" />
+                                </svg>
+                            </div>
                             <div class="point-details">
                                 <h4 class="point-title">Speels Branding Palet</h4>
                                 <p class="point-desc">Ons kleurenpalet straalt vrolijkheid uit met een mix van roze, paars, teal, goud en zacht parelmoer.</p>
@@ -398,7 +628,7 @@
                 
                 <div class="branding-palette-card glass">
                     <h3 class="panel-title">Branding Huisstijl</h3>
-                    <p class="palette-desc">De officiÃ«le kleuren en logo-elementen gebaseerd op het concept:</p>
+                    <p class="palette-desc">De officiÃƒÂ«le kleuren en logo-elementen gebaseerd op het concept:</p>
                     
                     <div class="palette-swatch-list">
                         <div class="swatch-item">
@@ -439,6 +669,43 @@
                 </div>
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact-section">
+            <div class="container contact-container">
+                <div class="contact-card glass">
+                    <div class="contact-visual">
+                        <div class="retro-phone-circle bg-contact">
+                            <i class="fa-solid fa-phone-volume"></i>
+                        </div>
+                    </div>
+                    <div class="contact-form-side">
+                        <span class="badge badge-accent">Vragen?</span>
+                        <h2 class="section-title text-left">Contact met Bril Beads</h2>
+                        <p class="contact-intro-text">
+                            Heb je een vraag over onze beads of wil je een eigen ontwerp insturen? Stuur ons een vrolijk berichtje!
+                        </p>
+                        <form class="playful-form" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="contact-name">Jouw Naam</label>
+                                <input type="text" id="contact-name" placeholder="Type je naam..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">E-mailadres</label>
+                                <input type="email" id="contact-email" placeholder="naam@voorbeeld.nl" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Jouw Bericht</label>
+                                <textarea id="contact-message" placeholder="Wat wil je ons vertellen?..." rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-bounce">
+                                Bericht Verzenden <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -447,7 +714,7 @@
             <div class="footer-brand">
                 <a href="#" class="brand-logo">
                     <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
-                    <span class="brand-text">BRIL <span class="accent-text">BEADS</span></span>
+                    <span class="brand-text"><span class="bril-text">BRIL</span> <span class="accent-text">BEADS</span></span>
                 </a>
                 <p class="footer-desc">
                     Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
@@ -474,7 +741,8 @@
             </div>
         </div>
         <div class="footer-bottom text-center">
-            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. OfficiÃ«le concept-demonstratie. <span class="version-label" id="site-version">v1.0.3</span></p>
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. OfficiÃ«le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v.0.68</span></p>
         </div>
     </footer>
 
