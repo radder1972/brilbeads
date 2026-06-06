@@ -37,6 +37,16 @@
             color: var(--teal);
             margin-bottom: 1rem;
         }
+        .shipping-icon-img {
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        .shipping-option:hover .shipping-icon-img {
+            transform: scale(1.08) rotate(-2deg);
+        }
         .timeline {
             display: flex;
             justify-content: space-between;
@@ -212,7 +222,7 @@
 
                 <div class="shipping-grid">
                     <div class="shipping-option">
-                        <i class="fa-solid fa-truck-fast shipping-icon"></i>
+                        <img src="assets/icon_standard_brievenbus.png" alt="Standaard Brievenbus" class="shipping-icon-img">
                         <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;">Standaard Brievenbus</h3>
                         <p style="font-size: 1.8rem; font-family: var(--font-heading); color: var(--pink-dark); margin-bottom: 0.5rem;">&euro; 2,95</p>
                         <p style="font-size: 0.95rem; color: var(--text-muted);">Voor bestellingen onder de &euro;20.<br>Met PostNL Brievenbuspakje track & trace.</p>
@@ -293,7 +303,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.28</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.29</span></p>
         </div>
     </footer>
     
