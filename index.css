@@ -539,6 +539,23 @@ section {
     vertical-align: middle;
 }
 
+.page-title-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.page-title-group .badge {
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.page-title-group .section-title {
+    margin-bottom: 0;
+}
+
 .section-subtitle {
     max-width: 600px;
     margin: 0 auto;
