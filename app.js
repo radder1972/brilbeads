@@ -641,3 +641,73 @@ function saveDesign() {
     
     alert(`🎉 Concept Opgeslagen!\n\nJe hebt een ontwerp gemaakt met:\n- Aantal beads: ${count}\n- Beads: ${beadsStr}\n- Bevestiging: ${system}\n- Montuur: ${color}\n\nBedankt voor het uitproberen van de Bril Beads Concept-Demonstratie!`);
 }
+
+// --- Dynamic Template Loading (Inspiratie Stijlen) ---
+function loadTemplate(templateName) {
+    clearBeads();
+    
+    if (templateName === 'hero') {
+        setFrameColor('teal');
+        setAttachmentMethod('clip');
+        
+        // Add Hero mask at Front target (x: 185, y: 70)
+        beadUniqueIdCounter++;
+        customizerState.placedBeads.push({
+            id: 'k-hero',
+            uniqueId: beadUniqueIdCounter,
+            price: 2.95,
+            name: 'Hero Masker',
+            x: 185,
+            y: 70
+        });
+    } else if (templateName === 'kitty') {
+        setFrameColor('pink');
+        setAttachmentMethod('slide');
+        
+        // Add Hello Kitty, Pearl, and Smile to temple
+        addBeadToGlasses('k-kitty');
+        addBeadToGlasses('k-flower');
+        addBeadToGlasses('k-smile');
+    } else if (templateName === 'rainbow') {
+        setFrameColor('pink');
+        setAttachmentMethod('slide');
+        
+        // Add Hello Kitty, Star, and Panda to temple
+        addBeadToGlasses('k-kitty');
+        addBeadToGlasses('k-star');
+        addBeadToGlasses('k-panda');
+    }
+    
+    renderPlacedBeads();
+    updateActiveBeadsListUI();
+    
+    // Smooth scroll to customizer
+    document.getElementById('customizer').scrollIntoView({ behavior: 'smooth' });
+}
+
+// --- Contact Form Submission Handler ---
+function handleContactSubmit(e) {
+    e.preventDefault();
+    playSound('save');
+    const name = document.getElementById('contact-name').value;
+    alert(`🎉 Bedankt voor je bericht, ${name}!\n\nWe hebben je bericht ontvangen en nemen zo snel mogelijk contact met je op!`);
+    e.target.reset();
+}
+
+// --- Header Navigation Click Handlers ---
+function openCart(e) {
+    e.preventDefault();
+    playSound('click');
+    if (customizerState.placedBeads.length === 0) {
+        alert('Je winkelwagen is nog leeg! Voeg eerst wat Beads toe aan je bril.');
+        return;
+    }
+    const count = customizerState.placedBeads.length;
+    const price = customizerState.placedBeads.reduce((acc, curr) => acc + curr.price, 0).toFixed(2);
+    alert(`🛒 Winkelwagen Inhoud:\n\nJe hebt momenteel ${count} Bead(s) op je bril.\nTotaalbedrag: € ${price.replace('.', ',')}\n\nGa naar 'Bestellen' om je ontwerp af te ronden!`);
+}
+
+function triggerOrder(e) {
+    e.preventDefault();
+    saveDesign();
+}
