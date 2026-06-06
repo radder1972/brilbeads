@@ -124,6 +124,7 @@ p {
 /* Playful Badge */
 .badge {
     display: inline-block;
+    vertical-align: middle;
     padding: 0.5rem 1.2rem;
     font-family: var(--font-heading);
     font-weight: 800;
@@ -135,7 +136,8 @@ p {
     color: var(--pink-dark);
     border: var(--thin-border);
     box-shadow: var(--comic-shadow-sm);
-    margin-bottom: 1.5rem;
+    margin-right: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .badge-accent {
