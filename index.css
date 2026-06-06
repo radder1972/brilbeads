@@ -1580,6 +1580,13 @@ section {
     animation: gentleWobble 5s ease-in-out infinite alternate;
 }
 
+.retro-phone-circle img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    filter: drop-shadow(3px 3px 0px rgba(58, 38, 28, 0.15));
+}
+
 .contact-form-side {
     display: flex;
     flex-direction: column;
