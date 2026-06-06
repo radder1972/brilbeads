@@ -745,7 +745,7 @@ section {
 
 .config-panel {
     padding: 2.5rem;
-    background: #ffffff;
+    background-color: #ffffff;
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
@@ -900,7 +900,7 @@ section {
 /* Preview Canvas Panel */
 .preview-panel {
     padding: 2.5rem;
-    background: #ffffff;
+    background-color: #ffffff;
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
@@ -1100,7 +1100,7 @@ section {
 
 .system-card {
     padding: 3rem 2.5rem;
-    background: #ffffff;
+    background-color: #ffffff;
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
@@ -1310,7 +1310,7 @@ section {
 
 .briefing-content {
     padding: 3rem;
-    background: #ffffff;
+    background-color: #ffffff;
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
@@ -1377,7 +1377,7 @@ section {
 
 .branding-palette-card {
     padding: 3rem;
-    background: #ffffff;
+    background-color: #ffffff;
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
@@ -1575,7 +1575,7 @@ section {
 }
 
 .style-preview-card {
-    background: var(--bg-card);
+    background-color: var(--bg-card);
     border: var(--thick-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--comic-shadow);
@@ -1667,7 +1667,7 @@ section {
 .contact-card {
     display: block;
     padding: 4rem;
-    background: #ffffff;
+    background-color: #ffffff;
 }
 
 .contact-body-grid {
