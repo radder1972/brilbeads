@@ -1463,20 +1463,35 @@ section {
 
 .footer-container {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 4rem;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 
-.footer-brand {
+.footer-logo-col {
     display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.footer-text-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-desc {
-    max-width: 320px;
-    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: center;
+    max-width: 450px;
+}
+
+.footer-social-col {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .social-links {
@@ -1828,6 +1843,12 @@ section {
     .footer-container {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+    }
+    
+    .footer-logo-col,
+    .footer-text-col,
+    .footer-social-col {
+        justify-content: center;
     }
     
     .collectie-card {
