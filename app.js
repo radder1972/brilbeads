@@ -223,29 +223,61 @@ let customizerState = {
 // Unique key counter for placed beads
 let beadUniqueIdCounter = 0;
 
+// Local Storage Helper Functions
+function saveStateToLocalStorage() {
+    localStorage.setItem('bril_beads_customizer_state', JSON.stringify(customizerState));
+}
+
+function loadStateFromLocalStorage() {
+    const saved = localStorage.getItem('bril_beads_customizer_state');
+    if (saved) {
+        try {
+            customizerState = JSON.parse(saved);
+            // Sync counter to prevent ID conflicts
+            if (customizerState.placedBeads.length > 0) {
+                const maxId = Math.max(...customizerState.placedBeads.map(b => b.uniqueId || 0));
+                beadUniqueIdCounter = maxId;
+            }
+        } catch (e) {
+            console.error("Failed to load state", e);
+        }
+    }
+}
+
 // --- Initialize Page & Event Handlers ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Populate Initial Beads Tray
-    renderBeadsTray();
+    // Load state from local storage first (common to all pages)
+    loadStateFromLocalStorage();
     
-    // Set frame color initial state
-    updateFrameColorInSVG();
+    const isCustomizerPage = document.getElementById('interactive-glasses-svg') !== null;
     
-    // Force preview elements visibility based on method
-    updateAttachmentUI();
+    if (isCustomizerPage) {
+        // Populate Initial Beads Tray
+        renderBeadsTray();
+        
+        // Set frame color initial state
+        updateFrameColorInSVG();
+        
+        // Force preview elements visibility based on method
+        updateAttachmentUI();
+        
+        // Render placed beads
+        renderPlacedBeads();
+        updateActiveBeadsListUI();
 
-    // Attach drag & drop handler elements
-    const svgCanvas = document.getElementById('interactive-glasses-svg');
-    
-    // Support mouse drag
-    svgCanvas.addEventListener('mousedown', handleDragStart);
-    svgCanvas.addEventListener('mousemove', handleDragMove);
-    window.addEventListener('mouseup', handleDragEnd);
+        // Attach drag & drop handler elements
+        const svgCanvas = document.getElementById('interactive-glasses-svg');
+        
+        // Support mouse drag
+        svgCanvas.addEventListener('mousedown', handleDragStart);
+        svgCanvas.addEventListener('mousemove', handleDragMove);
+        window.addEventListener('mouseup', handleDragEnd);
 
-    // Support touch drag
-    svgCanvas.addEventListener('touchstart', handleDragStart, { passive: false });
-    svgCanvas.addEventListener('touchmove', handleDragMove, { passive: false });
-    window.addEventListener('touchend', handleDragEnd);
+        // Support touch drag
+        svgCanvas.addEventListener('touchstart', handleDragStart, { passive: false });
+        svgCanvas.addEventListener('touchmove', handleDragMove, { passive: false });
+        window.addEventListener('touchend', handleDragEnd);
+    }
 });
 
 // --- UI Toggle Controls ---
@@ -265,6 +297,7 @@ function setAttachmentMethod(method) {
     // Reset placed beads to suit the new system mapping
     clearBeads();
     
+    saveStateToLocalStorage();
     playSound('click');
 }
 
@@ -278,6 +311,7 @@ function setFrameColor(color) {
     });
     
     updateFrameColorInSVG();
+    saveStateToLocalStorage();
     playSound('click');
 }
 
@@ -407,6 +441,7 @@ function addBeadToGlasses(beadId) {
     customizerState.placedBeads.push(newBead);
     
     // Sound & Render
+    saveStateToLocalStorage();
     playSound(customizerState.attachmentMethod === 'clip' ? 'click' : 'pop');
     renderPlacedBeads();
     updateActiveBeadsListUI();
@@ -414,6 +449,7 @@ function addBeadToGlasses(beadId) {
 
 function removeBead(uniqueId) {
     customizerState.placedBeads = customizerState.placedBeads.filter(b => b.uniqueId !== uniqueId);
+    saveStateToLocalStorage();
     playSound('delete');
     renderPlacedBeads();
     updateActiveBeadsListUI();
@@ -422,6 +458,7 @@ function removeBead(uniqueId) {
 function clearBeads() {
     if (customizerState.placedBeads.length > 0) {
         customizerState.placedBeads = [];
+        saveStateToLocalStorage();
         playSound('delete');
         renderPlacedBeads();
         updateActiveBeadsListUI();
@@ -584,6 +621,7 @@ function handleDragMove(e) {
     dragBeadStateRef.x = targetX;
     dragBeadStateRef.y = targetY;
     dragElement.setAttribute('transform', `translate(${targetX}, ${targetY})`);
+    saveStateToLocalStorage();
 }
 
 function handleDragEnd(e) {
@@ -680,9 +718,16 @@ function loadTemplate(templateName) {
     
     renderPlacedBeads();
     updateActiveBeadsListUI();
+    saveStateToLocalStorage();
     
-    // Smooth scroll to customizer
-    document.getElementById('customizer').scrollIntoView({ behavior: 'smooth' });
+    // Smooth scroll to customizer if on index page
+    const customizerEl = document.getElementById('customizer');
+    if (customizerEl) {
+        customizerEl.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        // Redirect to index page with hash
+        window.location.href = 'index.html#customizer';
+    }
 }
 
 // --- Contact Form Submission Handler ---
