@@ -328,6 +328,60 @@ p {
     object-fit: contain;
 }
 
+/* Header Utilities (Winkelwagen & Account) */
+.header-utilities {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    display: flex;
+    gap: 1.2rem;
+    z-index: 100;
+}
+
+.utility-nav-item {
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.utility-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: #ffffff;
+    border: var(--thin-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--comic-shadow-sm);
+    transition: var(--transition);
+}
+
+.utility-icon-img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));
+    transition: var(--transition);
+}
+
+.utility-nav-item:hover .utility-icon-wrapper {
+    transform: translateY(-4px) scale(1.05);
+    border-color: var(--border-dark);
+    box-shadow: var(--comic-shadow);
+}
+
+.utility-nav-item:active .utility-icon-wrapper {
+    transform: translate(2px, 2px) scale(0.95);
+    box-shadow: var(--comic-shadow-active);
+}
+
+.utility-nav-item.active .utility-icon-wrapper {
+    background: var(--bg-pastel-pink);
+    border-color: var(--pink);
+    box-shadow: var(--comic-shadow-active);
+}
+
 /* Playful Navigation Circular Icons */
 .playful-nav {
     width: 100%;
@@ -1651,6 +1705,15 @@ section {
         width: 150px;
         height: 150px;
         font-size: 4rem;
+    }
+    .header-utilities {
+        top: 1rem;
+        right: 1rem;
+        gap: 0.8rem;
+    }
+    .utility-icon-wrapper {
+        width: 48px;
+        height: 48px;
     }
 }
 
