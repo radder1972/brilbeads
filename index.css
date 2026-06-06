@@ -580,6 +580,9 @@ section {
     max-width: 1200px;
     height: auto;
     display: block;
+    border: var(--thick-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--comic-shadow);
     transform: rotate(-1deg);
     animation: gentleWobble 4s ease-in-out infinite alternate;
 }
