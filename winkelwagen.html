@@ -105,6 +105,11 @@
                     <img src="assets/icon_account.png" alt="Account" class="utility-icon-img">
                 </div>
             </a>
+                        <a href="garantie.html" class="utility-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_garantie.png" alt="Garantie" class="utility-icon-img">
+                </div>
+            </a>
         </div>
 
         <div class="container header-container">
@@ -156,12 +161,7 @@
                         <span class="nav-label">Verzending</span>
                     </a>
                     
-                    <a href="garantie.html" class="playful-nav-item" title="1 jaar 100% tevredenheidsgarantie">
-                        <div class="nav-icon-img-wrapper">
-                            <img src="assets/icon_garantie.png" alt="Garantie" class="nav-icon-img">
-                        </div>
-                        <span class="nav-label">Garantie</span>
-                    </a>
+
                 </div>
             </nav>
         </div>
@@ -298,7 +298,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.34</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.35</span></p>
         </div>
     </footer>
     
@@ -410,8 +410,8 @@
             document.getElementById('summary-frame-type').textContent = `Kids (${state.frameColor})`;
             document.getElementById('summary-system-type').textContent = state.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Klik Clip';
             document.getElementById('summary-bead-count').textContent = countVal;
-            document.getElementById('summary-shipping-price').textContent = shippingVal === 0 ? 'GRATIS' : `â‚¬ ${shippingVal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('summary-total-price').textContent = `â‚¬ ${finalTotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('summary-shipping-price').textContent = shippingVal === 0 ? 'GRATIS' : `Ã¢â€šÂ¬ ${shippingVal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('summary-total-price').textContent = `Ã¢â€šÂ¬ ${finalTotal.toFixed(2).replace('.', ',')}`;
         }
 
         function renderEmptyCart(container) {
