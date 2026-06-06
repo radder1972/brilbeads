@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontwerp je eigen Bril Beads | DIY Modieuze Accessoires</title>
+    <meta name="description" content="Ontwerp je eigen Bril Beads! Kies je montuurkleur en schuif of klik je favoriete cartoon bedeltjes op je brilpootjes met onze online customizer.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <!-- Top-Right Utilities (Winkelwagen & Account) -->
+        <div class="header-utilities">
+            <a href="winkelwagen.html" class="utility-nav-item" title="Bekijk je winkelwagen">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_winkelwagen.png" alt="Winkelwagen" class="utility-icon-img">
+                </div>
+            </a>
+            <a href="account.html" class="utility-nav-item" title="Mijn Account">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_account.png" alt="Account" class="utility-icon-img">
+                </div>
+            </a>
+        </div>
+
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo" id="header-logo-link">
+                <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
+            </a>
+            
+            <nav class="playful-nav" id="main-navigation">
+                <div class="playful-nav-container">
+                    <a href="index.html" class="playful-nav-item" title="Terug naar Home">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_home.png" alt="Home" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    
+                    <a href="ontwerpen.html" class="playful-nav-item active" title="Ontwerp je eigen bril!">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Ontwerpen</span>
+                    </a>
+                    
+                    <a href="bestellen.html" class="playful-nav-item" title="Bestel je ontworpen bril">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Bestellen</span>
+                    </a>
+                    
+                    <a href="faq.html" class="playful-nav-item" title="Veelgestelde Vragen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_faq.png" alt="Veelgestelde Vragen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Veelgestelde Vragen</span>
+                    </a>
+                    
+                    <a href="contact.html" class="playful-nav-item" title="Neem contact met ons op">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_contact.png" alt="Contact" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Contact</span>
+                    </a>
+                    
+                    <a href="verzending.html" class="playful-nav-item" title="Gratis verzending vanaf &euro;20">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_verzending.png" alt="Verzending" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Verzending</span>
+                    </a>
+                    
+                    <a href="garantie.html" class="playful-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_garantie.png" alt="Garantie" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Garantie</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Interactive Customizer Section -->
+        <section class="customizer-section" id="customizer">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Ontwerp je eigen Bril</h2>
+                    <p class="section-subtitle">Pas het montuur aan en schuif of klik je favoriete Beads op het pootje!</p>
+                </div>
+
+                <div class="customizer-grid">
+                    <!-- Configurator Panel -->
+                    <div class="config-panel glass">
+                        <h3 class="panel-title"><i class="fa-solid fa-sliders"></i> Opties</h3>
+
+                        <!-- Control: Attachment System -->
+                        <div class="config-group">
+                            <label class="group-label">Bevestigingsmethode</label>
+                            <div class="toggle-buttons">
+                                <button type="button" class="toggle-btn active" id="btn-attach-slide" onclick="setAttachmentMethod('slide')">
+                                    <i class="fa-solid fa-circle-notch"></i> Siliconen Ring
+                                </button>
+                                <button type="button" class="toggle-btn" id="btn-attach-clip" onclick="setAttachmentMethod('clip')">
+                                    <i class="fa-solid fa-paperclip"></i> Zachte Clip
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Control: Frame Color -->
+                        <div class="config-group">
+                            <label class="group-label">Montuur Kleur</label>
+                            <div class="color-selector">
+                                <button type="button" class="color-dot active" style="background-color: #1a1a1a;" data-color="dark" onclick="setFrameColor('dark')" title="Mat Zwart"></button>
+                                <button type="button" class="color-dot" style="background-color: #8ecae6;" data-color="teal" onclick="setFrameColor('teal')" title="Transparant Teal"></button>
+                                <button type="button" class="color-dot" style="background-color: #ffb703;" data-color="yellow" onclick="setFrameColor('yellow')" title="Vrolijk Geel"></button>
+                                <button type="button" class="color-dot" style="background-color: #ffb5a7;" data-color="pink" onclick="setFrameColor('pink')" title="Poeder Roze"></button>
+                                <button type="button" class="color-dot" style="background-color: #e5e5e5; border: 1px solid #ccc;" data-color="crystal" onclick="setFrameColor('crystal')" title="Kristal Helder"></button>
+                            </div>
+                        </div>
+
+                        <!-- Control: Bead Tray -->
+                        <div class="config-group">
+                            <label class="group-label">Kies je Beads (klik om toe te voegen)</label>
+                            <div class="beads-tray-container">
+                                <div class="beads-tray" id="beads-tray-grid">
+                                    <!-- Dynamic elements from app.js -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canvas/Preview Panel -->
+                    <div class="preview-panel glass">
+                        <!-- Canvas Header -->
+                        <div class="preview-header">
+                            <div class="preview-title-group">
+                                <h3 class="panel-title"><i class="fa-solid fa-glasses"></i> Preview</h3>
+                                <span class="attachment-badge" id="preview-system-label">Siliconen Schuif-Systeem</span>
+                            </div>
+                            <div class="preview-controls">
+                                <button type="button" class="btn btn-icon" id="btn-randomize" onclick="randomizeBeads()" title="Willekeurige Beads"><i class="fa-solid fa-shuffle"></i></button>
+                                <button type="button" class="btn btn-icon btn-danger" id="btn-clear" onclick="clearBeads()" title="Leegmaken"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Visualizer Area -->
+                        <div class="visualizer-canvas" id="canvas-area">
+                            <!-- SVG Workspace -->
+                            <svg id="interactive-glasses-svg" viewBox="0 0 600 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <!-- Drop Shadow for Beads -->
+                                    <filter id="bead-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity="0.25" flood-color="#000000" />
+                                    </filter>
+                                    <!-- Inner Glow/Bevel for Beads -->
+                                    <linearGradient id="gold-metal" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#ffe875" />
+                                        <stop offset="50%" stop-color="#d4af37" />
+                                        <stop offset="100%" stop-color="#aa7c11" />
+                                    </linearGradient>
+                                    <!-- Pearl Texture -->
+                                    <radialGradient id="pearl-texture" cx="35%" cy="35%" r="65%">
+                                        <stop offset="0%" stop-color="#ffffff" />
+                                        <stop offset="50%" stop-color="#fff5f0" />
+                                        <stop offset="85%" stop-color="#e3d6cc" />
+                                        <stop offset="100%" stop-color="#c2b2a6" />
+                                    </radialGradient>
+                                    <!-- Neon Teal Glow -->
+                                    <linearGradient id="neon-teal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#00f5ff" />
+                                        <stop offset="100%" stop-color="#00b4d8" />
+                                    </linearGradient>
+                                    <!-- Glass Frame Gradients -->
+                                    <linearGradient id="frame-dark" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#2a2a2a" />
+                                        <stop offset="100%" stop-color="#121212" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-teal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#b5e2fa" />
+                                        <stop offset="100%" stop-color="#4ea8de" opacity="0.8" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-yellow" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ffe169" />
+                                        <stop offset="100%" stop-color="#fad643" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-pink" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ffccd5" />
+                                        <stop offset="100%" stop-color="#ffb3c1" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-crystal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
+                                        <stop offset="100%" stop-color="rgba(230,235,240,0.4)" />
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Grid Background Pattern for Tech Look -->
+                                <g opacity="0.07">
+                                    <line x1="0" y1="50" x2="600" y2="50" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="100" x2="600" y2="100" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="150" x2="600" y2="150" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="200" x2="600" y2="200" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="250" x2="600" y2="250" stroke="#fff" stroke-width="1" />
+                                    <line x1="0" y1="300" x2="600" y2="300" stroke="#fff" stroke-width="1" />
+                                    
+                                    <line x1="100" y1="0" x2="100" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="200" y1="0" x2="200" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="300" y1="0" x2="300" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="400" y1="0" x2="400" y2="350" stroke="#fff" stroke-width="1" />
+                                    <line x1="500" y1="0" x2="500" y2="350" stroke="#fff" stroke-width="1" />
+                                </g>
+
+                                <!-- Interactive Glasses Element -->
+                                <g id="preview-glasses-group" transform="translate(0, 40)">
+                                    <!-- Backdrop glow -->
+                                    <path d="M 220 120 L 510 120 C 510 120, 560 120, 550 170" stroke="var(--primary-glow)" stroke-width="26" stroke-linecap="round" opacity="0.08" />
+
+                                    <!-- Front Frame (partial side perspective) -->
+                                    <g id="frame-front" stroke-linejoin="round" stroke-linecap="round">
+                                        <!-- Lens glass backdrop -->
+                                        <path d="M 150 125 C 150 75, 220 75, 220 125 C 220 165, 150 165, 150 125 Z" fill="rgba(255,255,255,0.15)" stroke="none" />
+                                        <!-- Outer front plastic rim -->
+                                        <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="url(#frame-dark)" stroke-width="14" id="main-frame-rim" />
+                                        <!-- Bridge connecting lenses -->
+                                        <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="url(#frame-dark)" stroke-width="10" id="main-frame-bridge" />
+                                        <!-- Hinge anchor block -->
+                                        <rect x="220" y="112" width="12" height="16" rx="2" fill="#555" stroke="none" />
+                                    </g>
+
+                                    <!-- Glasses Temple (The Arm - primary anchor for beads) -->
+                                    <g id="frame-temple">
+                                        <!-- Temple Core Arm -->
+                                        <!-- We define path segments so beads are placed along the horizontal slide area -->
+                                        <path id="temple-path-under" d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#666" stroke-width="4" stroke-linecap="round" />
+                                        <!-- Temple Outer Plastic Cover -->
+                                        <path id="temple-path-main" d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="url(#frame-dark)" stroke-width="12" stroke-linecap="round" />
+                                        
+                                        <!-- Slider guide indicator (Only visible in Slide mode) -->
+                                        <line id="slide-guideline" x1="260" y1="120" x2="480" y2="120" stroke="var(--teal)" stroke-width="2" stroke-dasharray="4,4" opacity="0.8" />
+                                    </g>
+
+                                    <!-- Snap locations for Zachte Clips (Visible in Clip Mode) -->
+                                    <g id="clip-snap-targets" opacity="0">
+                                        <circle cx="280" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="340" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="400" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="460" cy="120" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target" />
+                                        <circle cx="185" cy="70" r="8" fill="var(--pink)" opacity="0.3" stroke="var(--pink)" stroke-width="2" stroke-dasharray="2,2" class="snap-target-front" />
+                                    </g>
+
+                                    <!-- Active Bead Placement Group (Dynamic beads populated here by JS) -->
+                                    <g id="placed-beads-layer" filter="url(#bead-shadow)">
+                                        <!-- Rendered dynamically -->
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <!-- Tooltip/Instruction Layer overlay -->
+                            <div class="canvas-instruction-overlay" id="canvas-overlay">
+                                <span><i class="fa-solid fa-hand-pointer"></i> Klik op een Bead links om deze op de bril te plaatsen</span>
+                            </div>
+                        </div>
+
+                        <!-- Active Bead List & Actions -->
+                        <div class="active-beads-list-wrapper">
+                            <span class="list-label">Beads op jouw Bril:</span>
+                            <div class="active-beads-list" id="active-beads-container">
+                                <span class="empty-list-text">Geen beads toegevoegd. Klik op beads in het menu om te starten!</span>
+                            </div>
+                        </div>
+
+                        <!-- Customizer Summary Card -->
+                        <div class="customizer-summary-card">
+                            <div class="summary-details">
+                                <span class="summary-count" id="summary-count-beads">0 Beads</span>
+                                <span class="summary-price" id="summary-price-total">&euro; 0,00</span>
+                            </div>
+                            <button type="button" class="btn btn-accent btn-md btn-bounce" id="btn-save-design" onclick="saveDesign()">
+                                Concept Opslaan <i class="fa-solid fa-floppy-disk"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="brand-logo">
+                    <img src="assets/logo.png" alt="Bril Beads Logo" class="logo-img">
+                    <span class="brand-text"><span class="bril-text">BRIL</span> <span class="accent-text">BEADS</span></span>
+                </a>
+                <p class="footer-desc">
+                    Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigatie</h4>
+                <ul>
+                    <li><a href="ontwerpen.html">Customizer</a></li>
+                    <li><a href="index.html#collecties">Collecties</a></li>
+                    <li><a href="index.html#hoe-het-werkt">Hoe het werkt</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Collectie</h4>
+                <ul>
+                    <li><a href="ontwerpen.html">Kids Playful Beads</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.15</span></p>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
