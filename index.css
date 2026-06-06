@@ -1458,7 +1458,7 @@ section {
 .app-footer {
     background: #fff8f2;
     border-top: var(--thick-border);
-    padding: 5rem 0 2rem 0;
+    padding: 5rem 0 4rem 0;
 }
 
 .footer-container {
@@ -1551,6 +1551,19 @@ section {
 .footer-bottom {
     border-top: var(--thin-border);
     padding-top: 2rem;
+}
+
+.footer-bottom::after {
+    content: '';
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    aspect-ratio: 1014 / 124;
+    margin: 2rem auto 0 auto;
+    background-image: url('assets/menu_divider.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .footer-bottom p {
