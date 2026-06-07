@@ -923,10 +923,23 @@ async function syncBeadsCatalogWithShopify() {
         
         ['kids', 'adults'].forEach(category => {
             BEADS_DATABASE[category].forEach(localBead => {
-                // Zoek match op basis van titel (case-insensitive & trimmed)
-                const matchedShopifyBead = shopifyBeads.find(sb => 
-                    sb.title.trim().toLowerCase() === localBead.name.trim().toLowerCase()
-                );
+                // Zoek match op basis van flexibele vergelijking (bijv. "Bril Bead KITTY" matcht "Hello Kitty")
+                const matchedShopifyBead = shopifyBeads.find(sb => {
+                    const sbTitle = sb.title.toLowerCase();
+                    const localId = localBead.id;
+                    const localName = localBead.name.toLowerCase();
+                    
+                    // 1. Directe match
+                    if (sbTitle === localName) return true;
+                    
+                    // 2. Specifieke ID/naam mapping
+                    if (localId === 'k-kitty' && (sbTitle.includes('kitty') || sbTitle.includes('hello'))) return true;
+                    if (localId === 'k-superman' && sbTitle.includes('superman')) return true;
+                    if (localId === 'k-bart' && (sbTitle.includes('bart') || sbTitle.includes('simpson'))) return true;
+                    
+                    // 3. Fallback: bevat de een de ander?
+                    return sbTitle.includes(localName) || localName.includes(sbTitle);
+                });
                 
                 if (matchedShopifyBead) {
                     localBead.price = matchedShopifyBead.price;
@@ -934,8 +947,10 @@ async function syncBeadsCatalogWithShopify() {
                     localBead.available = matchedShopifyBead.available;
                     console.log(`Synced bead: ${localBead.name} -> Prijs: €${localBead.price}, Beschikbaar: ${localBead.available}`);
                 } else {
-                    // Als de bead niet is gevonden in de actieve Shopify-lijst, markeren we hem als niet beschikbaar
-                    localBead.available = false;
+                    // Als de bead niet is gevonden in de actieve Shopify-lijst, houden we hem beschikbaar voor demo/simulatie
+                    localBead.available = true;
+                    localBead.variantId = null;
+                    console.log(`Bead ${localBead.name} niet gevonden op Shopify. Fallback naar demo-beschikbaarheid.`);
                 }
             });
         });
