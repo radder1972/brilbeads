@@ -291,3 +291,190 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
         }
     }
 }
+
+/**
+ * Haalt alle Shopify producten op ten behoeve van een catalogus/overzichtspagina.
+ * Inclusief afbeeldingen en omschrijvingen.
+ */
+async function fetchShopifyProductsForGallery() {
+    if (!isShopifyConfigured) {
+        console.warn("⚠️ Shopify is niet geconfigureerd. Producten laden gesimuleerd.");
+        return getMockProducts();
+    }
+
+    const query = `
+        query getProductsForGallery {
+          products(first: 50) {
+            edges {
+              node {
+                id
+                title
+                description
+                availableForSale
+                images(first: 1) {
+                  edges {
+                    node {
+                      url
+                      altText
+                    }
+                  }
+                }
+                variants(first: 1) {
+                  edges {
+                    node {
+                      id
+                      price {
+                        amount
+                        currencyCode
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    `;
+
+    try {
+        console.log("Fetching gallery products from Shopify Storefront API...");
+        const data = await executeGraphQL(query);
+        const products = data.products.edges.map(edge => {
+            const node = edge.node;
+            const variantNode = node.variants.edges[0]?.node;
+            const imageNode = node.images.edges[0]?.node;
+            
+            // Fallback beschrijvingen voor betere uitstraling
+            let description = node.description;
+            if (!description || description.trim() === '') {
+                if (node.title.toLowerCase().includes('kitty')) {
+                    description = "De vrolijke Hello Kitty bead voor je bril. Gemaakt van zacht en duurzaam materiaal.";
+                } else if (node.title.toLowerCase().includes('superman')) {
+                    description = "De coole 3D Superman bead. Geef je bril superkrachten met dit coole logo bedeltje.";
+                } else if (node.title.toLowerCase().includes('bart')) {
+                    description = "De grappige spikkel-bedel van Bart Simpson. Perfect voor een speelse en opvallende look.";
+                } else {
+                    description = "Een vrolijke en unieke Bril Bead om je bril helemaal zelf mee op te pimpen!";
+                }
+            }
+
+            return {
+                id: node.id,
+                title: node.title,
+                description: description,
+                available: node.availableForSale,
+                imageUrl: imageNode ? imageNode.url : 'assets/logo.png',
+                imageAlt: imageNode && imageNode.altText ? imageNode.altText : node.title,
+                variantId: variantNode ? variantNode.id : null,
+                price: variantNode ? parseFloat(variantNode.price.amount) : 0,
+                currency: variantNode ? variantNode.price.currencyCode : 'EUR'
+            };
+        });
+        console.log("Successfully fetched products for gallery:", products);
+        return products;
+    } catch (e) {
+        console.error("❌ Fout bij het ophalen van producten uit Shopify voor de gallerij:", e);
+        return getMockProducts(); // Fallback naar mock bij API-fouten
+    }
+}
+
+function getMockProducts() {
+    return [
+        {
+            id: 'mock-kitty',
+            title: 'Bril Bead KITTY',
+            description: 'De vrolijke Hello Kitty bead voor je bril. Gemaakt van zacht en duurzaam materiaal.',
+            available: true,
+            imageUrl: 'assets/hero_photo_pink_kitty.png',
+            imageAlt: 'Bril Bead Kitty',
+            variantId: 'gid://shopify/ProductVariant/53980035481937',
+            price: 5.00,
+            currency: 'EUR'
+        },
+        {
+            id: 'mock-superman',
+            title: 'Bril Bead SUPERMAN 3D',
+            description: 'De stoere 3D Superman bead. Geef je bril superkrachten met dit coole logo bedeltje.',
+            available: true,
+            imageUrl: 'assets/hero_photo_boy_superman_close.png',
+            imageAlt: 'Bril Bead Superman 3D',
+            variantId: 'gid://shopify/ProductVariant/53980223504721',
+            price: 5.00,
+            currency: 'EUR'
+        },
+        {
+            id: 'mock-bart',
+            title: 'Bril Bead BART',
+            description: 'De grappige spikkel-bedel van Bart Simpson. Perfect voor een speelse en opvallende look.',
+            available: true,
+            imageUrl: 'assets/hero_photo_green_bart.png',
+            imageAlt: 'Bril Bead Bart',
+            variantId: 'gid://shopify/ProductVariant/53981153231185',
+            price: 5.00,
+            currency: 'EUR'
+        }
+    ];
+}
+
+/**
+ * Direct checkout voor een specifiek product (bead) via de Cart API.
+ * @param {string} variantId De Shopify Product Variant ID
+ * @param {string} title De titel van het product
+ */
+async function orderProductDirect(variantId, title) {
+    if (!variantId) {
+        alert("Dit product kan momenteel niet direct besteld worden (geen Shopify Variant ID).");
+        return;
+    }
+
+    if (isShopifyConfigured) {
+        try {
+            console.log(`Direct checkout gestart voor ${title} (${variantId})`);
+            const cartInput = {
+                lines: [
+                    {
+                        quantity: 1,
+                        merchandiseId: variantId
+                    }
+                ]
+            };
+            const mutation = `
+                mutation cartCreate($input: CartInput!) {
+                  cartCreate(input: $input) {
+                    cart {
+                      id
+                      checkoutUrl
+                    }
+                    userErrors {
+                      field
+                      message
+                    }
+                  }
+                }
+            `;
+            const data = await executeGraphQL(mutation, { input: cartInput });
+            if (data.cartCreate.userErrors && data.cartCreate.userErrors.length > 0) {
+                const errors = data.cartCreate.userErrors.map(e => `${e.field}: ${e.message}`).join(', ');
+                throw new Error(`Shopify UserErrors: ${errors}`);
+            }
+            const checkoutUrl = data.cartCreate.cart.checkoutUrl;
+            console.log("Direct checkout URL verkregen via Cart API. Omleiden naar: ", checkoutUrl);
+            window.location.href = checkoutUrl;
+        } catch (error) {
+            console.error("Fout tijdens direct checkout:", error);
+            alert("Er is een fout opgetreden bij het verbinden met Shopify voor direct bestellen.");
+        }
+    } else {
+        console.log("=== SHOPIFY SIMULATION DIRECT BUY ===");
+        console.log("Product:", title);
+        console.log("Variant ID:", variantId);
+        console.log("=====================================");
+        alert(
+            `🎉 [Simulatie Mode] Shopify Direct Bestellen Gestart!\n\n` +
+            `Product: ${title}\n` +
+            `Variant ID: ${variantId}\n\n` +
+            `Vul echte credentials in shopify.js in om verbinding te maken met je Shopify-winkel.`
+        );
+    }
+}
+
