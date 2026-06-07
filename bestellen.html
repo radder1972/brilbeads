@@ -301,7 +301,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.65</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.66</span></p>
         </div>
     </footer>
     
@@ -418,12 +418,28 @@
             playSound('save');
 
             const firstName = document.getElementById('checkout-firstname').value;
+            const lastName = document.getElementById('checkout-lastname').value;
             const emailAddress = document.getElementById('checkout-email').value;
+            const street = document.getElementById('checkout-street').value;
+            const number = document.getElementById('checkout-number').value;
+            const city = document.getElementById('checkout-city').value;
+            const zip = document.getElementById('checkout-zip').value;
+
+            const shippingDetails = {
+                firstName: firstName,
+                lastName: lastName,
+                email: emailAddress,
+                street: street,
+                number: number,
+                city: city,
+                zip: zip
+            };
+
             const subtotal = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
             const shipping = subtotal >= 20 ? 0 : 2.95;
             const total = subtotal + shipping;
 
-            // Roep de Shopify checkout-logica aan
+            // Roep de Shopify checkout-logica aan met adresgegevens (Route B)
             checkoutCart(state, () => {
                 // Succes-callback bij simulatiemodus: sla lokaal ordergeschiedenis op en toon succes-view
                 const orderId = 'BB-' + Math.floor(Math.random() * 9000 + 1000);
@@ -461,7 +477,7 @@
                         </div>
                     </div>
                 `;
-            });
+            }, shippingDetails);
         }
     </script>
 </body>
