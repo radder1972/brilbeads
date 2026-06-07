@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="only light">
+    <title>Winkelwagen | Bril Beads</title>
+    <meta name="description" content="Bekijk de beads in je winkelwagen, zie de prijzen en ga door naar bestellen.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .cart-preview-card {
+            background: #ffffff;
+            border: var(--thin-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--comic-shadow-sm);
+        }
+        .cart-preview-visual {
+            height: 240px;
+            background: var(--bg-cream);
+            border: var(--thin-border);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 3px 3px 0 rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+        #cart-glasses-svg {
+            width: 95%;
+            height: 95%;
+        }
+        .cart-item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--border-dark);
+            padding-bottom: 0.8rem;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-summary-box {
+            background: var(--bg-cream);
+            border: var(--thin-border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--comic-shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+        .summary-total {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--pink-dark);
+            border-top: var(--thin-border);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <!-- Top-Right Utilities (Winkelwagen & Account) -->
+        <div class="header-utilities">
+            <a href="winkelwagen.html" class="utility-nav-item active" title="Bekijk je winkelwagen">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_winkelwagen.png" alt="Winkelwagen" class="utility-icon-img">
+                </div>
+            </a>
+            <a href="account.html" class="utility-nav-item" title="Mijn Account">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_account.png" alt="Account" class="utility-icon-img">
+                </div>
+            </a>
+                        <a href="garantie.html" class="utility-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_garantie.png" alt="Garantie" class="utility-icon-img">
+                </div>
+            </a>
+        </div>
+
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo" id="header-logo-link">
+                <img src="assets/logo.png?v=1" alt="Bril Beads Logo" class="logo-img">
+            </a>
+            
+            <nav class="playful-nav" id="main-navigation">
+                <div class="playful-nav-container">
+                    <a href="index.html" class="playful-nav-item" title="Terug naar Home">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_home.png" alt="Home" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    
+                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Ontwerpen</span>
+                    </a>
+
+                    <a href="producten.html" class="playful-nav-item" title="Bekijk alle producten">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Bestellen</span>
+                    </a>
+                    
+                    <a href="faq.html" class="playful-nav-item" title="Veelgestelde Vragen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_faq.png" alt="Veelgestelde Vragen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Veelgestelde Vragen</span>
+                    </a>
+                    
+                    <a href="contact.html" class="playful-nav-item" title="Neem contact met ons op">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_contact.png" alt="Contact" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Contact</span>
+                    </a>
+                    
+                    <a href="verzending.html" class="playful-nav-item" title="Gratis verzending vanaf &euro;20">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_verzending.png" alt="Verzending" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Verzending</span>
+                    </a>
+                    
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0;">
+        <div class="container">
+            <div class="glass" style="padding: 3.5rem;" id="cart-container-main">
+                <div class="page-title-group" style="margin-bottom: 2.5rem;">
+                    <span class="badge badge-accent">Overzicht</span>
+                    <h1 class="section-title text-left" style="font-size: 2.5rem;">Jouw Winkelwagen</h1>
+                </div>
+                
+                <div class="cart-layout" id="cart-layout-root">
+                    <!-- Cart Left: Preview & Itemized list -->
+                    <div class="cart-preview-card">
+                        <!-- Glasses SVG Preview -->
+                        <div class="cart-preview-visual">
+                            <svg id="cart-glasses-svg" viewBox="100 40 460 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <!-- Drop Shadow for Beads -->
+                                    <filter id="bead-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                                        <feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity="0.25" flood-color="#000000" />
+                                    </filter>
+                                    <!-- Glass Frame Gradients -->
+                                    <linearGradient id="frame-dark" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#2a2a2a" />
+                                        <stop offset="100%" stop-color="#121212" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-teal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#b5e2fa" />
+                                        <stop offset="100%" stop-color="#4ea8de" opacity="0.8" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-yellow" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ffe169" />
+                                        <stop offset="100%" stop-color="#fad643" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-pink" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ffccd5" />
+                                        <stop offset="100%" stop-color="#ffb3c1" />
+                                    </linearGradient>
+                                    <linearGradient id="frame-crystal" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
+                                        <stop offset="100%" stop-color="rgba(230,235,240,0.4)" />
+                                    </linearGradient>
+                                    <!-- Blue Polka Dot Frame Pattern -->
+                                    <pattern id="frame-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                                        <rect width="16" height="16" fill="#0077b6" />
+                                        <circle cx="4" cy="4" r="1.5" fill="#ffffff" />
+                                        <circle cx="12" cy="12" r="1.5" fill="#ffffff" />
+                                    </pattern>
+                                </defs>
+
+                                <!-- Guides -->
+                                <path id="cart-slide-guideline" d="M 225 120 H 480" stroke="var(--teal)" stroke-width="2" stroke-dasharray="4,4" opacity="0" />
+
+                                <!-- Main Frame Rim (Only Right eye showing for 3/4 perspective style) -->
+                                <path id="cart-frame-rim" d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke-width="12" stroke-linecap="round" />
+                                <path id="cart-frame-bridge" d="M 230 115 Q 240 108 245 115" fill="none" stroke-width="9" stroke-linecap="round" />
+                                
+                                <!-- Temple (Stengels) where beads slide on -->
+                                <path id="cart-temple-path" d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke-width="10" stroke-linecap="round" />
+
+                                <!-- Placed Beads Layer -->
+                                <g id="cart-placed-beads-layer" filter="url(#bead-shadow)"></g>
+                            </svg>
+                        </div>
+
+                        <!-- Itemized list -->
+                        <div class="cart-item-list" id="cart-items-container">
+                            <!-- Items populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Cart Right: Summary Card -->
+                    <div class="cart-summary-box">
+                        <h3 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.5rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1.5rem;">
+                            <img src="assets/icon_winkelwagen.png" alt="Besteloverzicht" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> Besteloverzicht
+                        </h3>
+                        
+                        <div class="summary-row">
+                            <span>Montuur basis</span>
+                            <span id="summary-frame-type">Kids (Pink)</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Systeem</span>
+                            <span id="summary-system-type">Siliconen Ring</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Aantal Beads</span>
+                            <span id="summary-bead-count">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Verzending</span>
+                            <span id="summary-shipping-price">&euro; 2,95</span>
+                        </div>
+                        
+                        <div class="summary-row summary-total">
+                            <span>Totaal</span>
+                            <span id="summary-total-price">&euro; 0,00</span>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                            <a href="bestellen.html" class="btn btn-primary btn-lg btn-bounce">Doorgaan naar bestellen <i class="fa-solid fa-arrow-right-long"></i></a>
+                            <a href="ontwerpen.html" class="btn btn-secondary btn-md">Ontwerp bewerken</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <div class="footer-logo-col">
+                <a href="index.html" class="brand-logo">
+                    <img src="assets/logo.png?v=1" alt="Bril Beads Logo" class="logo-img">
+                    <span class="brand-text"><span class="bril-text">BRIL</span> <span class="accent-text">BEADS</span></span>
+                </a>
+            </div>
+            <div class="footer-text-col">
+                <p class="footer-desc">
+                    Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
+                </p>
+            </div>
+            <div class="footer-social-col">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.79</span></p>
+        </div>
+    </footer>
+    
+    <script src="app.js?v=v0.68.79"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartPage();
+        });
+
+        function renderCartPage() {
+            const savedState = localStorage.getItem('bril_beads_customizer_state');
+            const container = document.getElementById('cart-container-main');
+            
+            if (!savedState) {
+                renderEmptyCart(container);
+                return;
+            }
+
+            const state = JSON.parse(savedState);
+            if (state.placedBeads.length === 0) {
+                renderEmptyCart(container);
+                return;
+            }
+
+            // --- 1. Update Preview Glass Color in SVG ---
+            const rim = document.getElementById('cart-frame-rim');
+            const bridge = document.getElementById('cart-frame-bridge');
+            const temple = document.getElementById('cart-temple-path');
+            
+            let fillStr = 'url(#frame-dark)';
+            switch (state.frameColor) {
+                case 'dark': fillStr = 'url(#frame-dark)'; break;
+                case 'teal': fillStr = 'url(#frame-teal)'; break;
+                case 'yellow': fillStr = 'url(#frame-yellow)'; break;
+                case 'pink': fillStr = 'url(#frame-pink)'; break;
+                case 'crystal': fillStr = 'url(#frame-crystal)'; break;
+                case 'dots': fillStr = 'url(#frame-dots)'; break;
+            }
+            rim.setAttribute('stroke', fillStr);
+            bridge.setAttribute('stroke', fillStr);
+            temple.setAttribute('stroke', fillStr);
+
+            // Show line guideline if slide mode
+            const guideline = document.getElementById('cart-slide-guideline');
+            if (state.attachmentMethod === 'slide') {
+                guideline.style.opacity = '0.6';
+            }
+
+            // --- 2. Render Placed Beads onto SVG ---
+            const layer = document.getElementById('cart-placed-beads-layer');
+            layer.innerHTML = '';
+            
+            // Fetch database list from BEADS_DATABASE (exposed from app.js)
+            const dbList = BEADS_DATABASE[state.targetAudience];
+
+            state.placedBeads.forEach(bead => {
+                const beadDef = dbList.find(b => b.id === bead.id);
+                if (!beadDef) return;
+
+                const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                // Adjust coordinates from 600x350 space to 460x220 subview space
+                // (Original customizer starts x around 280, cart preview starts at 100)
+                group.setAttribute('transform', `translate(${bead.x}, ${bead.y})`);
+
+                let rawSvg = beadDef.svgContent;
+                if (state.attachmentMethod === 'clip') {
+                    const clipBacking = `
+                        <rect x="-3" y="-8" width="6" height="16" fill="rgba(0,0,0,0.6)" rx="1" />
+                        <path d="M -6 -6 L -3 -6 M -6 6 L -3 6" stroke="#222" stroke-width="2" />
+                    `;
+                    rawSvg = rawSvg.replace(/<ellipse.*class="silicone-backing-ring".*?\/>/g, clipBacking);
+                }
+                group.innerHTML = rawSvg;
+                layer.appendChild(group);
+            });
+
+            // --- 3. Render Itemized List of Beads ---
+            const itemsContainer = document.getElementById('cart-items-container');
+            itemsContainer.innerHTML = '';
+            
+            state.placedBeads.forEach(bead => {
+                const item = document.createElement('div');
+                item.className = 'cart-item';
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:1rem;">
+                        <div style="width:36px; height:36px; border:var(--thin-border); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-cream); box-shadow:2px 2px 0 var(--border-dark);">
+                            <svg viewBox="-16 -16 32 32" fill="none" style="width:24px; height:24px;">
+                                ${cleanSvgForCatalog(dbList.find(b => b.id === bead.id).svgContent)}
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 style="font-family:var(--font-heading); font-size:1.05rem;">${bead.name}</h4>
+                            <p style="font-size:0.8rem; color:var(--text-muted);">Bevestiging: ${state.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Klik Clip'}</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:1.2rem;">
+                        <span style="font-family:var(--font-heading); font-weight:800;">&euro; ${bead.price.toFixed(2).replace('.', ',')}</span>
+                        <button type="button" class="btn-remove-bead" onclick="removeFromCartPage(${bead.uniqueId})" title="Verwijderen" style="font-size:1.2rem;"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </div>
+                `;
+                itemsContainer.appendChild(item);
+            });
+
+            // --- 4. Render Summary calculations ---
+            const countVal = state.placedBeads.length;
+            const itemsTotal = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
+            const shippingVal = itemsTotal >= 20 ? 0 : 2.95;
+            const finalTotal = itemsTotal + shippingVal;
+
+            document.getElementById('summary-frame-type').textContent = `Kids (${state.frameColor})`;
+            document.getElementById('summary-system-type').textContent = state.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Klik Clip';
+            document.getElementById('summary-bead-count').textContent = countVal;
+            document.getElementById('summary-shipping-price').textContent = shippingVal === 0 ? 'GRATIS' : `€ ${shippingVal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('summary-total-price').textContent = `€ ${finalTotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function renderEmptyCart(container) {
+            container.innerHTML = `
+                <div class="page-title-group" style="margin-bottom: 1.5rem;">
+                    <span class="badge badge-accent">Leeg</span>
+                    <h1 class="section-title text-left" style="font-size: 2.5rem;">Jouw Winkelwagen</h1>
+                </div>
+                <div style="text-align: center; padding: 4rem 2rem;">
+                    <img src="assets/icon_bestellen.png" alt="Bestellen" style="height: 5.5rem; width: auto; opacity: 0.8; margin-bottom: 2rem; display: inline-block; filter: drop-shadow(3px 3px 0px rgba(58, 38, 28, 0.15));">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem;">Oeps! Je winkelwagen is nog leeg...</h2>
+                    <p style="margin-bottom: 2.5rem; color: var(--text-muted); max-width: 500px; margin-left: auto; margin-right: auto;">
+                        Je hebt op dit moment geen Beads toegevoegd aan je bril. Ga naar onze customizer om een uniek montuur met beads te ontwerpen!
+                    </p>
+                    <a href="ontwerpen.html" class="btn btn-primary btn-lg btn-bounce">Start Nu Met Ontwerpen</a>
+                </div>
+            `;
+        }
+
+        function removeFromCartPage(uniqueId) {
+            const savedState = localStorage.getItem('bril_beads_customizer_state');
+            if (!savedState) return;
+
+            const state = JSON.parse(savedState);
+            state.placedBeads = state.placedBeads.filter(b => b.uniqueId !== uniqueId);
+            localStorage.setItem('bril_beads_customizer_state', JSON.stringify(state));
+            
+            playSound('delete');
+            renderCartPage();
+        }
+    </script>
+</body>
+</html>
