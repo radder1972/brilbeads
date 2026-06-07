@@ -894,7 +894,7 @@ function loadTemplate(templateName) {
         }
         
         saveStateToLocalStorage();
-        window.location.href = 'ontwerpen.html';
+        window.location.href = 'producten.html';
         return;
     }
 
