@@ -159,11 +159,20 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
                 value: String(value)
             }));
 
-            // Bereid de CartInput voor
+            // Bepaal de hoofd-merchandise variant ID voor de customizer eigenschappen.
+            // We gebruiken de variant ID van de eerste geplaatste bead die een geldige Shopify ID heeft.
+            // Als er geen beads met een geldige ID zijn, vallen we terug op de geconfigureerde customGlassesVariantId.
+            let mainVariantId = SHOPIFY_CONFIG.customGlassesVariantId;
+            const firstBeadWithVariant = customizerState.placedBeads.find(b => b.variantId);
+            if (firstBeadWithVariant) {
+                mainVariantId = firstBeadWithVariant.variantId;
+            }
+
+            // Bereid de CartInput voor met de hoofdlijn die alle attributes bevat
             const lines = [
                 {
                     quantity: 1,
-                    merchandiseId: SHOPIFY_CONFIG.customGlassesVariantId,
+                    merchandiseId: mainVariantId,
                     attributes: customAttributes
                 }
             ];
@@ -171,18 +180,25 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
             // Gropeer geplaatste beads per Variant ID om ze als losse items toe te voegen
             const beadCounts = {};
             customizerState.placedBeads.forEach(bead => {
-                // We sturen de bead alleen als los product mee als er een Shopify Variant ID voor bekend is
                 if (bead.variantId) {
                     beadCounts[bead.variantId] = (beadCounts[bead.variantId] || 0) + 1;
                 }
             });
 
-            // Voeg elke bead variant toe aan de winkelwagen
+            // Omdat we al 1x mainVariantId hebben toegevoegd als de hoofdlijn,
+            // trekken we er hier 1 vanaf als die in de beadCounts zit.
+            if (beadCounts[mainVariantId]) {
+                beadCounts[mainVariantId]--;
+            }
+
+            // Voeg de overige beads toe aan de winkelwagen
             for (const [variantId, quantity] of Object.entries(beadCounts)) {
-                lines.push({
-                    quantity: quantity,
-                    merchandiseId: variantId
-                });
+                if (quantity > 0) {
+                    lines.push({
+                        quantity: quantity,
+                        merchandiseId: variantId
+                    });
+                }
             }
 
             const cartInput = { lines };
