@@ -365,6 +365,8 @@ async function fetchShopifyProductsForGallery() {
                     description = "De coole 3D Superman bead. Geef je bril superkrachten met dit coole logo bedeltje.";
                 } else if (node.title.toLowerCase().includes('bart')) {
                     description = "De grappige spikkel-bedel van Bart Simpson. Perfect voor een speelse en opvallende look.";
+                } else if (node.title.toLowerCase().includes('dora')) {
+                    description = "De avontuurlijke Dora Explorer bead. Ga op ontdekkingsreis met dit supervrolijke en kleurrijke bedeltje voor je bril!";
                 } else {
                     description = "Een vrolijke en unieke Bril Bead om je bril helemaal zelf mee op te pimpen!";
                 }
@@ -437,6 +439,21 @@ function getMockProducts() {
             imageUrl: 'assets/hero_photo_green_bart.png',
             imageAlt: 'Bril Bead Bart',
             variantId: 'gid://shopify/ProductVariant/53981153231185',
+            price: 5.00,
+            currency: 'EUR'
+        },
+        {
+            id: 'mock-dora',
+            title: 'Bril Bead DORA',
+            description: 'De avontuurlijke Dora Explorer bead. Ga op ontdekkingsreis met dit supervrolijke en kleurrijke bedeltje voor je bril!',
+            available: true,
+            images: [
+                { url: 'assets/hero_photo_dora.png', altText: 'Bril Bead Dora Explorer' },
+                { url: 'assets/logo.png?v=2', altText: 'Bril Beads Logo' }
+            ],
+            imageUrl: 'assets/hero_photo_dora.png',
+            imageAlt: 'Bril Bead Dora',
+            variantId: 'gid://shopify/ProductVariant/53982000000000',
             price: 5.00,
             currency: 'EUR'
         }
