@@ -482,12 +482,16 @@ p {
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 0.95rem;
-    color: var(--text-dark);
+    color: var(--teal-dark); /* Groen */
     transition: var(--transition);
 }
 
+.playful-nav-item.active .nav-label {
+    color: var(--pink); /* Actief roze */
+}
+
 .playful-nav-item:hover .nav-label {
-    color: var(--pink-dark);
+    color: var(--pink-dark); /* Hover roze */
 }
 
 .brand-text {
