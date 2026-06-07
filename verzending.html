@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="only light">
+    <title>Verzending & Levering | Bril Beads</title>
+    <meta name="description" content="Alles over de verzending en levering van Bril Beads. Bestellingen passen door de brievenbus. Gratis verzending vanaf &euro;20!">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .shipping-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        .shipping-option {
+            background: #ffffff;
+            border: var(--thin-border);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--comic-shadow-sm);
+            text-align: center;
+        }
+        .shipping-option.highlight {
+            border-color: var(--pink);
+            background: var(--bg-pastel-pink);
+        }
+        .shipping-icon {
+            font-size: 3rem;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+        .shipping-icon-img {
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        .shipping-option:hover .shipping-icon-img {
+            transform: scale(1.08) rotate(-2deg);
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 5%;
+            right: 5%;
+            height: 4px;
+            background: var(--border-dark);
+            z-index: 1;
+        }
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 25%;
+            text-align: center;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: var(--thin-border);
+            box-shadow: var(--comic-shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        .timeline-step:hover .step-number {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--gold);
+        }
+        .step-title {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        @media (max-width: 768px) {
+            .shipping-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline {
+                flex-direction: column;
+                gap: 2.5rem;
+                padding-left: 2rem;
+            }
+            .timeline::before {
+                top: 0;
+                bottom: 0;
+                left: 45px;
+                width: 4px;
+                height: 80%;
+            }
+            .timeline-step {
+                flex-direction: row;
+                width: 100%;
+                text-align: left;
+                gap: 1.5rem;
+            }
+            .step-number {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <!-- Top-Right Utilities (Winkelwagen & Account) -->
+        <div class="header-utilities">
+            <a href="winkelwagen.html" class="utility-nav-item" title="Bekijk je winkelwagen">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_winkelwagen.png" alt="Winkelwagen" class="utility-icon-img">
+                </div>
+            </a>
+            <a href="account.html" class="utility-nav-item" title="Mijn Account">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_account.png" alt="Account" class="utility-icon-img">
+                </div>
+            </a>
+                        <a href="garantie.html" class="utility-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_garantie.png" alt="Garantie" class="utility-icon-img">
+                </div>
+            </a>
+        </div>
+
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo" id="header-logo-link">
+                <img src="assets/logo.png?v=1" alt="Bril Beads Logo" class="logo-img">
+            </a>
+            
+            <nav class="playful-nav" id="main-navigation">
+                <div class="playful-nav-container">
+                    <a href="index.html" class="playful-nav-item" title="Terug naar Home">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_home.png" alt="Home" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    
+                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Ontwerpen</span>
+                    </a>
+
+                    <a href="producten.html" class="playful-nav-item" title="Bekijk alle producten">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Bestellen</span>
+                    </a>
+                    
+                    <a href="faq.html" class="playful-nav-item" title="Veelgestelde Vragen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_faq.png" alt="Veelgestelde Vragen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Veelgestelde Vragen</span>
+                    </a>
+                    
+                    <a href="contact.html" class="playful-nav-item" title="Neem contact met ons op">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_contact.png" alt="Contact" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Contact</span>
+                    </a>
+                    
+                    <a href="verzending.html" class="playful-nav-item active" title="Gratis verzending vanaf &euro;20">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_verzending.png" alt="Verzending" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Verzending</span>
+                    </a>
+                    
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0;">
+        <div class="container">
+            <div class="glass" style="padding: 3.5rem;">
+                <div class="page-title-group" style="margin-bottom: 1.5rem;">
+                    <span class="badge badge-accent">Levering</span>
+                    <h1 class="section-title text-left" style="font-size: 2.5rem;">Verzending & Bezorging</h1>
+                </div>
+                <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem;">
+                    We versturen al onze beads in stevige, vrolijke bubbel-enveloppen die <strong>gewoon door de brievenbus passen</strong>! Je hoeft dus niet thuis te blijven om je bestelling in ontvangst te nemen.
+                </p>
+
+                <div class="shipping-grid">
+                    <div class="shipping-option">
+                        <img src="assets/icon_standard_brievenbus.png" alt="Standaard Brievenbus" class="shipping-icon-img">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;">Standaard Brievenbus</h3>
+                        <p style="font-size: 1.8rem; font-family: var(--font-heading); color: var(--pink-dark); margin-bottom: 0.5rem;">&euro; 2,95</p>
+                        <p style="font-size: 0.95rem; color: var(--text-muted);">Voor bestellingen onder de &euro;20.<br>Met PostNL Brievenbuspakje track & trace.</p>
+                    </div>
+                    
+                    <div class="shipping-option highlight">
+                        <img src="assets/icon_verzending.png" alt="Gratis Verzending" class="shipping-icon-img">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem;">Gratis Verzending</h3>
+                        <p style="font-size: 1.8rem; font-family: var(--font-heading); color: var(--teal-dark); margin-bottom: 0.5rem;">GRATIS</p>
+                        <p style="font-size: 0.95rem; color: var(--text-muted);">Wordt automatisch toegepast vanaf &euro;20!<br>Geldig voor bestellingen in heel NL & BE.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 4rem;">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; text-align: center; margin-bottom: 1rem;">Hoe het reist</h2>
+                    
+                    <div class="timeline">
+                        <div class="timeline-step">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Jij Ontwerpt</div>
+                            <div class="step-desc">Stel je eigen beads samen in onze handige online customizer.</div>
+                        </div>
+                        
+                        <div class="timeline-step">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Wij Pakken In</div>
+                            <div class="step-desc">Elke bead wordt handmatig gecontroleerd en met liefde ingepakt.</div>
+                        </div>
+                        
+                        <div class="timeline-step">
+                            <div class="step-number">3</div>
+                            <div class="step-title">In de Brievenbus</div>
+                            <div class="step-desc">De PostNL bezorger glijdt de envelop geruisloos in jouw brievenbus.</div>
+                        </div>
+                        
+                        <div class="timeline-step">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Blijde Gezichten!</div>
+                            <div class="step-desc">Klik of schuif ze direct op je bril en straal met je nieuwe look!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <div class="footer-logo-col">
+                <a href="index.html" class="brand-logo">
+                    <img src="assets/logo.png?v=1" alt="Bril Beads Logo" class="logo-img">
+                    <span class="brand-text"><span class="bril-text">BRIL</span> <span class="accent-text">BEADS</span></span>
+                </a>
+            </div>
+            <div class="footer-text-col">
+                <p class="footer-desc">
+                    Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
+                </p>
+            </div>
+            <div class="footer-social-col">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.79</span></p>
+        </div>
+    </footer>
+    
+    <script src="app.js?v=v0.68.79"></script>
+</body>
+</html>
