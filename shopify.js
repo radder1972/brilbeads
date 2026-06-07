@@ -65,6 +65,30 @@ function generateLineItemProperties(state) {
  * @param {Object} customizerState De ontwerp-state uit localStorage
  * @param {Function} onSuccessCallback Optionele callback bij simulatie-succes
  */
+async function executeGraphQL(query, variables = {}) {
+    const url = `https://${SHOPIFY_CONFIG.shopDomain}/api/2024-04/graphql`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ query, variables })
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+    }
+
+    const json = await response.json();
+    if (json.errors) {
+        throw new Error(json.errors.map(e => e.message).join(', '));
+    }
+
+    return json.data;
+}
+
 async function checkoutCart(customizerState, onSuccessCallback, shippingDetails = null) {
     if (!customizerState || !customizerState.placedBeads || customizerState.placedBeads.length === 0) {
         alert("Je winkelwagen is leeg!");
@@ -73,66 +97,79 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
 
     const properties = generateLineItemProperties(customizerState);
 
-    // --- ECHTE SHOPIFY CHECKOUT ---
-    if (isShopifyConfigured && shopifyClient) {
+    // --- ECHTE SHOPIFY CHECKOUT VIA CART API ---
+    if (isShopifyConfigured) {
         try {
-            console.log("Creating Shopify Checkout...", properties);
-            
-            // 1. Maak een checkout sessie aan
-            let checkout = await shopifyClient.checkout.create();
-            
-            // 1b. Indien adresgegevens zijn meegeleverd (Route B), update de checkout
-            if (shippingDetails) {
-                try {
-                    console.log("Pre-populating checkout email...", shippingDetails.email);
-                    checkout = await shopifyClient.checkout.updateEmail(checkout.id, shippingDetails.email);
-                } catch (emailErr) {
-                    console.warn("Kon e-mailadres niet pre-populeren:", emailErr);
-                }
+            console.log("Creating Shopify Cart via Cart API...", properties);
 
-                try {
-                    console.log("Pre-populating checkout shipping address...", shippingDetails);
-                    const shippingAddress = {
-                        firstName: shippingDetails.firstName,
-                        lastName: shippingDetails.lastName,
-                        address1: `${shippingDetails.street} ${shippingDetails.number}`,
-                        city: shippingDetails.city,
-                        zip: shippingDetails.zip,
-                        country: 'Netherlands'
-                    };
-                    checkout = await shopifyClient.checkout.updateShippingAddress(checkout.id, shippingAddress);
-                } catch (addrErr) {
-                    console.warn("Kon verzendadres niet pre-populeren:", addrErr);
-                }
-            }
-            
-            // 2. Formatteer de attributen voor de Shopify API
+            // Formatteer de attributen voor de Shopify Cart Line Items
             const customAttributes = Object.entries(properties).map(([key, value]) => ({
                 key,
                 value: String(value)
             }));
 
-            const lineItemsToAdd = [
-                {
-                    variantId: SHOPIFY_CONFIG.customGlassesVariantId,
-                    quantity: 1,
-                    customAttributes: customAttributes
-                }
-            ];
+            // Bereid de CartInput voor
+            const cartInput = {
+                lines: [
+                    {
+                        quantity: 1,
+                        merchandiseId: SHOPIFY_CONFIG.customGlassesVariantId,
+                        attributes: customAttributes
+                    }
+                ]
+            };
 
-            // 3. Voeg de gepersonaliseerde bril toe aan de checkout
-            const updatedCheckout = await shopifyClient.checkout.addLineItems(checkout.id, lineItemsToAdd);
-            
-            console.log("Shopify Checkout aangemaakt. Omleiden naar: ", updatedCheckout.webUrl);
-            
-            // 4. Stuur de klant door naar de Shopify Checkout pagina
-            window.location.href = updatedCheckout.webUrl;
-            
+            // Voeg optioneel de koperinformatie toe (Route B)
+            if (shippingDetails) {
+                cartInput.buyerIdentity = {
+                    email: shippingDetails.email,
+                    countryCode: 'NL',
+                    deliveryAddressPreferences: [
+                        {
+                            deliveryAddress: {
+                                firstName: shippingDetails.firstName,
+                                lastName: shippingDetails.lastName,
+                                address1: `${shippingDetails.street} ${shippingDetails.number}`,
+                                city: shippingDetails.city,
+                                zip: shippingDetails.zip,
+                                country: 'Netherlands'
+                            }
+                        }
+                    ]
+                };
+            }
+
+            const mutation = `
+                mutation cartCreate($input: CartInput!) {
+                  cartCreate(input: $input) {
+                    cart {
+                      id
+                      checkoutUrl
+                    }
+                    userErrors {
+                      field
+                      message
+                    }
+                  }
+                }
+            `;
+
+            const data = await executeGraphQL(mutation, { input: cartInput });
+
+            if (data.cartCreate.userErrors && data.cartCreate.userErrors.length > 0) {
+                const errors = data.cartCreate.userErrors.map(e => `${e.field}: ${e.message}`).join(', ');
+                throw new Error(`Shopify UserErrors: ${errors}`);
+            }
+
+            const checkoutUrl = data.cartCreate.cart.checkoutUrl;
+            console.log("Shopify Checkout URL verkregen via Cart API. Omleiden naar: ", checkoutUrl);
+            window.location.href = checkoutUrl;
+
         } catch (error) {
-            console.error("Fout tijdens het aanmaken van Shopify Checkout:", error);
+            console.error("Fout tijdens het aanmaken van Shopify Cart/Checkout:", error);
             const useFallback = confirm(
-                "❌ Shopify Verbindingsfout (401 Unauthorized of Netwerkfout).\n\n" +
-                "Dit komt waarschijnlijk omdat de Shopify-winkel nog is beveiligd met een wachtwoord.\n\n" +
+                "❌ Shopify Verbindingsfout.\n\n" +
+                "Er is een fout opgetreden bij het verbinden met Shopify.\n\n" +
                 "Wil je de bestelling in SIMULATIE-modus afronden om de rest van de website te testen?"
             );
             if (useFallback && onSuccessCallback) {
