@@ -120,23 +120,30 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
             };
 
             // Voeg optioneel de koperinformatie toe (Route B)
-            if (shippingDetails) {
-                cartInput.buyerIdentity = {
-                    email: shippingDetails.email,
-                    countryCode: 'NL',
-                    deliveryAddressPreferences: [
-                        {
-                            deliveryAddress: {
-                                firstName: shippingDetails.firstName,
-                                lastName: shippingDetails.lastName,
-                                address1: `${shippingDetails.street} ${shippingDetails.number}`,
-                                city: shippingDetails.city,
-                                zip: shippingDetails.zip,
-                                country: 'Netherlands'
+            if (shippingDetails && shippingDetails.email) {
+                const trimmedEmail = shippingDetails.email.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (emailRegex.test(trimmedEmail)) {
+                    cartInput.buyerIdentity = {
+                        email: trimmedEmail,
+                        countryCode: 'NL',
+                        deliveryAddressPreferences: [
+                            {
+                                deliveryAddress: {
+                                    firstName: shippingDetails.firstName ? shippingDetails.firstName.trim() : '',
+                                    lastName: shippingDetails.lastName ? shippingDetails.lastName.trim() : '',
+                                    address1: `${shippingDetails.street ? shippingDetails.street.trim() : ''} ${shippingDetails.number ? shippingDetails.number.trim() : ''}`.trim(),
+                                    city: shippingDetails.city ? shippingDetails.city.trim() : '',
+                                    zip: shippingDetails.zip ? shippingDetails.zip.trim() : '',
+                                    country: 'Netherlands'
+                                }
                             }
-                        }
-                    ]
-                };
+                        ]
+                    };
+                } else {
+                    console.warn("E-mailadres is ongeldig voor Shopify validation, overslaan van pre-populatie.");
+                }
             }
 
             const mutation = `
