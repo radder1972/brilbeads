@@ -370,6 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
         svgCanvas.addEventListener('touchmove', handleDragMove, { passive: false });
         window.addEventListener('touchend', handleDragEnd);
     }
+
+    // Start catalogus-synchronisatie met Shopify Storefront API
+    if (typeof syncBeadsCatalogWithShopify === 'function') {
+        syncBeadsCatalogWithShopify();
+    }
 });
 
 // --- UI Toggle Controls ---
@@ -455,22 +460,34 @@ function updateAttachmentUI() {
 
 function renderBeadsTray() {
     const tray = document.getElementById('beads-tray-grid');
+    if (!tray) return;
     tray.innerHTML = '';
     
     const activeBeads = BEADS_DATABASE[customizerState.targetAudience];
     
     activeBeads.forEach(bead => {
         const card = document.createElement('div');
-        card.className = 'bead-item-card';
-        card.title = `${bead.name} - €${bead.price.toFixed(2)}`;
-        card.onclick = () => addBeadToGlasses(bead.id);
+        
+        // Controleer of de bead uitverkocht is in Shopify
+        const isOutOfStock = bead.available === false;
+        
+        if (isOutOfStock) {
+            card.className = 'bead-item-card out-of-stock';
+            card.title = `${bead.name} - UITVERKOCHT`;
+            card.onclick = () => alert(`De bead "${bead.name}" is tijdelijk uitverkocht in de webshop!`);
+        } else {
+            card.className = 'bead-item-card';
+            card.title = `${bead.name} - €${bead.price.toFixed(2)}`;
+            card.onclick = () => addBeadToGlasses(bead.id);
+        }
         
         card.innerHTML = `
-            <svg class="bead-item-svg" viewBox="-16 -16 32 32" fill="none">
+            <svg class="bead-item-svg" viewBox="-16 -16 32 32" fill="none" style="${isOutOfStock ? 'opacity: 0.4; filter: grayscale(1);' : ''}">
                 <!-- Clean representation without backings in catalog -->
                 ${cleanSvgForCatalog(bead.svgContent)}
             </svg>
             <span class="bead-item-name">${bead.name}</span>
+            ${isOutOfStock ? '<span class="badge badge-accent" style="font-size: 0.65rem; padding: 0.15rem 0.4rem; position: absolute; top: 5px; right: 5px; background: var(--pink-dark); color: #fff; border: none; box-shadow: none;">Op!</span>' : ''}
         `;
         
         tray.appendChild(card);
@@ -488,6 +505,11 @@ function addBeadToGlasses(beadId) {
     const beadDef = BEADS_DATABASE[customizerState.targetAudience].find(b => b.id === beadId);
     if (!beadDef) return;
     
+    if (beadDef.available === false) {
+        alert(`De bead "${beadDef.name}" is tijdelijk uitverkocht!`);
+        return;
+    }
+    
     // Max capacity check
     if (customizerState.placedBeads.length >= 6) {
         alert('Je kunt maximaal 6 Beads tegelijkertijd toevoegen!');
@@ -499,7 +521,8 @@ function addBeadToGlasses(beadId) {
         id: beadId,
         uniqueId: beadUniqueIdCounter,
         price: beadDef.price,
-        name: beadDef.name
+        name: beadDef.name,
+        variantId: beadDef.variantId || null
     };
 
     if (customizerState.attachmentMethod === 'slide') {
@@ -943,4 +966,72 @@ function openCart(e) {
 function triggerOrder(e) {
     e.preventDefault();
     saveDesign();
+}
+
+// --- Live Shopify Product & Catalog Sync ---
+function syncPlacedBeadsWithDatabase() {
+    if (!customizerState.placedBeads) return;
+    
+    customizerState.placedBeads.forEach(bead => {
+        const beadDef = BEADS_DATABASE.kids.find(b => b.id === bead.id) || 
+                        BEADS_DATABASE.adults.find(b => b.id === bead.id);
+        if (beadDef) {
+            bead.price = beadDef.price;
+            bead.variantId = beadDef.variantId || null;
+            bead.name = beadDef.name;
+        }
+    });
+    saveStateToLocalStorage();
+}
+
+async function syncBeadsCatalogWithShopify() {
+    if (typeof fetchShopifyBeads === 'undefined') {
+        console.warn("⚠️ fetchShopifyBeads is niet gedefinieerd (shopify.js niet geladen of Shopify is niet actief).");
+        return;
+    }
+    
+    try {
+        const shopifyBeads = await fetchShopifyBeads();
+        if (!shopifyBeads || shopifyBeads.length === 0) return;
+        
+        ['kids', 'adults'].forEach(category => {
+            BEADS_DATABASE[category].forEach(localBead => {
+                // Zoek match op basis van titel (case-insensitive & trimmed)
+                const matchedShopifyBead = shopifyBeads.find(sb => 
+                    sb.title.trim().toLowerCase() === localBead.name.trim().toLowerCase()
+                );
+                
+                if (matchedShopifyBead) {
+                    localBead.price = matchedShopifyBead.price;
+                    localBead.variantId = matchedShopifyBead.variantId;
+                    localBead.available = matchedShopifyBead.available;
+                    console.log(`Synced bead: ${localBead.name} -> Prijs: €${localBead.price}, Beschikbaar: ${localBead.available}`);
+                } else {
+                    // Als de bead niet is gevonden in de actieve Shopify-lijst, markeren we hem als niet beschikbaar
+                    localBead.available = false;
+                }
+            });
+        });
+        
+        // Synchroniseer ook de reeds geplaatste beads in de winkelwagen
+        syncPlacedBeadsWithDatabase();
+        
+        // UI opnieuw renderen als we in de customizer zijn
+        const isCustomizerPage = document.getElementById('interactive-glasses-svg') !== null;
+        if (isCustomizerPage) {
+            renderBeadsTray();
+            updateActiveBeadsListUI();
+        }
+        
+        // Render opnieuw op checkout/winkelwagen pagina's indien actief
+        if (typeof renderCheckoutPage === 'function') {
+            renderCheckoutPage();
+        }
+        if (typeof renderCart === 'function') {
+            renderCart();
+        }
+        
+    } catch (err) {
+        console.error("Fout bij het synchroniseren van catalogus met Shopify:", err);
+    }
 }
