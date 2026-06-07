@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -100,9 +100,10 @@
                 <div class="hero-centered-content">
                     <span class="badge badge-playful">Bril Beads Concept</span>
                     
-                    <!-- Large Center Logo -->
+                    <!-- Large Center Logo Carousel -->
                     <div class="hero-logo-wrapper">
-                        <img src="assets/hero_photo.png" alt="Bril Beads Sfeerfoto" class="hero-logo-large">
+                        <img src="assets/hero_photo_boy.png" alt="Bril Beads Sfeerfoto Jongen" class="hero-logo-large carousel-image visible" id="hero-carousel-1">
+                        <img src="assets/hero_photo_girl.png" alt="Bril Beads Sfeerfoto Meisje" class="hero-logo-large carousel-image hidden" id="hero-carousel-2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none;">
                         
                         <!-- Floating playful beads decoration -->
                         <div class="floating-bead-playful f-bead-1"><i class="fa-solid fa-star"></i></div>
@@ -113,7 +114,7 @@
                     
                     <h1 class="hero-tagline-main">Maak van je bril een persoonlijk statement!</h1>
                     <p class="hero-tagline-sub">
-                        Bril Beads zijn vrolijke, kleurrijke en chique bedeltjes die je eenvoudig op je bril klikt of schuift. Stel je eigen unieke combinaties samen!
+                        Bril Beads maken van elke bril een feestje. Klik of schuif de kleurrijke bedeltjes op je montuur en verander je dagelijkse bril in een persoonlijk mode-accessoire. Mix, match en laat je creativiteit stralen — jouw bril, jouw vibe.
                     </p>
                     
                     <div class="hero-centered-ctas">
@@ -142,17 +143,50 @@
                                 <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="#4ea8de" stroke-width="12" stroke-linecap="round" />
                                 <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="#4ea8de" stroke-width="9" stroke-linecap="round" />
                                 <path d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#4ea8de" stroke-width="10" stroke-linecap="round" />
-                                <!-- Hero Mask Bead on Front -->
-                                <g transform="translate(185, 70) scale(1.3)">
-                                    <path d="M -15 -8 Q -10 -15 0 -8 Q 10 -15 15 -8 Q 17 0 10 10 Q 0 14 -10 10 Q -17 0 -15 -8 Z" fill="#e63946" stroke="#b70918" stroke-width="1.5" />
-                                    <path d="M -9 -2 Q -5 -8 -1 -3 Q -4 1 -9 -2 Z" fill="#fff" />
-                                    <path d="M 9 -2 Q 5 -8 1 -3 Q 4 1 9 -2 Z" fill="#fff" />
+                                <!-- Superman Bead on Front -->
+                                <g transform="translate(185, 70) scale(1.2)">
+                                    <!-- Red Cape -->
+                                    <path d="M -5 -7 C -12 -4, -14 7, -14 13 C -6 15.5, 6 15.5, 12 13 C 16 10, 17 5, 15 0 C 12 -5, 6 -7, 5 -7 Z" fill="#d90429" stroke="#900c3f" stroke-width="1.2" />
+                                    <!-- Suit Torso -->
+                                    <path d="M -5 -7 L 5 -7 L 4 3 L -4 3 Z" fill="#0077b6" stroke="#005f73" stroke-width="1" />
+                                    <!-- Suit Legs -->
+                                    <path d="M -4 3 L -1.5 3 L -1.5 12 L -4 12 Z" fill="#0077b6" stroke="#005f73" stroke-width="1" />
+                                    <path d="M 1.5 3 L 4 3 L 4 12 L 1.5 12 Z" fill="#0077b6" stroke="#005f73" stroke-width="1" />
+                                    <!-- Briefs (red) -->
+                                    <path d="M -4 3 L 4 3 L 3 6 L -3 6 Z" fill="#d90429" stroke="#900c3f" stroke-width="1" />
+                                    <!-- Yellow Belt -->
+                                    <rect x="-3.5" y="2" width="7" height="1.5" fill="#ffb703" stroke="#e09f00" stroke-width="0.5" />
+                                    <rect x="-0.8" y="1.8" width="1.6" height="1.9" fill="#d90429" stroke="#900c3f" stroke-width="0.3" />
+                                    <!-- Boots (red) -->
+                                    <path d="M -4 12 L -1.5 12 L -1.5 16 L -5 16 Z" fill="#d90429" stroke="#900c3f" stroke-width="1" />
+                                    <path d="M 1.5 12 L 4 12 L 5 16 L 1.5 16 Z" fill="#d90429" stroke="#900c3f" stroke-width="1" />
+                                    <!-- Arms (hands on hips) -->
+                                    <path d="M -5 -6 Q -9 -4 -8 -1 Q -7 0 -4 3" fill="none" stroke="#0077b6" stroke-width="3" stroke-linecap="round" />
+                                    <circle cx="-4" cy="3" r="1.2" fill="#ffdbac" />
+                                    <path d="M 5 -6 Q 9 -4 8 -1 Q 7 0 4 3" fill="none" stroke="#0077b6" stroke-width="3" stroke-linecap="round" />
+                                    <circle cx="4" cy="3" r="1.2" fill="#ffdbac" />
+                                    <!-- Neck -->
+                                    <rect x="-1.5" y="-9" width="3" height="3" fill="#ffdbac" />
+                                    <!-- Face -->
+                                    <circle cx="0" cy="-11" r="4.5" fill="#ffdbac" stroke="#d4a373" stroke-width="0.8" />
+                                    <!-- Hair -->
+                                    <path d="M -4.8 -11.5 C -4.8 -15.5, 4.8 -15.5, 4.8 -11.5 C 4.8 -10.5, 3 -10.5, 3.5 -11.5 C 2 -12.5, -2 -12.5, -3.5 -11.5 C -3 -10.5, -4.8 -10.5, -4.8 -11.5 Z" fill="#111" />
+                                    <path d="M -0.5 -12 Q 1 -10.5 0 -9.5" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" />
+                                    <!-- Eyes -->
+                                    <circle cx="-1.5" cy="-11.2" r="0.6" fill="#111" />
+                                    <circle cx="1.5" cy="-11.2" r="0.6" fill="#111" />
+                                    <!-- Smile -->
+                                    <path d="M -1 -9.2 Q 0 -8.2 1 -9.2" fill="none" stroke="#111" stroke-width="0.6" stroke-linecap="round" />
+                                    <!-- Pentagon Shield -->
+                                    <polygon points="0,-5.5 2.5,-3.5 1.8,0 0,1.5 -1.8,0 -2.5,-3.5" fill="#ffb703" stroke="#d90429" stroke-width="0.5" />
+                                    <!-- S shape inside shield -->
+                                    <path d="M -1 -3 C -0.8 -3.5, 0.8 -3.5, 1 -2.8 C 0.8 -2.2, -0.8 -2.4, -1 -1.8 C -1.2 -0.8, 1 -0.8, 0.8 0.2 C 0.6 0.7, -0.8 0.7, -1 0.2" fill="none" stroke="#d90429" stroke-width="0.5" stroke-linecap="round" />
                                 </g>
                             </svg>
                         </div>
                         <div class="style-preview-info">
                             <h3>Superheld Blauw</h3>
-                            <p>Stoer blauw montuur met de coole Hero Masker clip aan de voorkant.</p>
+                            <p>Stoer blauw montuur met de coole Superman clip aan de voorkant.</p>
                             <span class="btn btn-secondary btn-sm">Stijl Laden <i class="fa-solid fa-wand-magic-sparkles"></i></span>
                         </div>
                     </div>
@@ -338,7 +372,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.61</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.62</span></p>
         </div>
     </footer>
 
