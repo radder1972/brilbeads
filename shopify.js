@@ -89,6 +89,57 @@ async function executeGraphQL(query, variables = {}) {
     return json.data;
 }
 
+async function fetchShopifyBeads() {
+    if (!isShopifyConfigured) {
+        console.warn("⚠️ Shopify is niet geconfigureerd. Dynamisch inladen van beads is overgeslagen.");
+        return [];
+    }
+
+    const query = `
+        query getBeads {
+          products(first: 50, query: "tag:bead OR product_type:Bead") {
+            edges {
+              node {
+                id
+                title
+                availableForSale
+                variants(first: 1) {
+                  edges {
+                    node {
+                      id
+                      price {
+                        amount
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    `;
+
+    try {
+        console.log("Fetching beads from Shopify Storefront API...");
+        const data = await executeGraphQL(query);
+        const products = data.products.edges.map(edge => {
+            const node = edge.node;
+            const variantNode = node.variants.edges[0]?.node;
+            return {
+                title: node.title,
+                available: node.availableForSale,
+                variantId: variantNode ? variantNode.id : null,
+                price: variantNode ? parseFloat(variantNode.price.amount) : 0
+            };
+        });
+        console.log("Successfully fetched beads from Shopify:", products);
+        return products;
+    } catch (e) {
+        console.error("❌ Fout bij het ophalen van beads uit Shopify:", e);
+        return [];
+    }
+}
+
 async function checkoutCart(customizerState, onSuccessCallback, shippingDetails = null) {
     if (!customizerState || !customizerState.placedBeads || customizerState.placedBeads.length === 0) {
         alert("Je winkelwagen is leeg!");
@@ -109,15 +160,32 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
             }));
 
             // Bereid de CartInput voor
-            const cartInput = {
-                lines: [
-                    {
-                        quantity: 1,
-                        merchandiseId: SHOPIFY_CONFIG.customGlassesVariantId,
-                        attributes: customAttributes
-                    }
-                ]
-            };
+            const lines = [
+                {
+                    quantity: 1,
+                    merchandiseId: SHOPIFY_CONFIG.customGlassesVariantId,
+                    attributes: customAttributes
+                }
+            ];
+
+            // Gropeer geplaatste beads per Variant ID om ze als losse items toe te voegen
+            const beadCounts = {};
+            customizerState.placedBeads.forEach(bead => {
+                // We sturen de bead alleen als los product mee als er een Shopify Variant ID voor bekend is
+                if (bead.variantId) {
+                    beadCounts[bead.variantId] = (beadCounts[bead.variantId] || 0) + 1;
+                }
+            });
+
+            // Voeg elke bead variant toe aan de winkelwagen
+            for (const [variantId, quantity] of Object.entries(beadCounts)) {
+                lines.push({
+                    quantity: quantity,
+                    merchandiseId: variantId
+                });
+            }
+
+            const cartInput = { lines };
 
             // Voeg optioneel de koperinformatie toe (Route B)
             if (shippingDetails && shippingDetails.email) {
@@ -133,7 +201,7 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
                                 deliveryAddress: {
                                     firstName: shippingDetails.firstName ? shippingDetails.firstName.trim() : '',
                                     lastName: shippingDetails.lastName ? shippingDetails.lastName.trim() : '',
-                                    address1: `${shippingDetails.street ? shippingDetails.street.trim() : ''} ${shippingDetails.number ? shippingDetails.number.trim() : ''}`.trim(),
+                                    address1: `${shippingDetails.street} ${shippingDetails.number}`.trim(),
                                     city: shippingDetails.city ? shippingDetails.city.trim() : '',
                                     zip: shippingDetails.zip ? shippingDetails.zip.trim() : '',
                                     country: 'Netherlands'
