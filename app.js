@@ -199,6 +199,52 @@ const BEADS_DATABASE = {
                 <!-- Center -->
                 <circle cx="0" cy="0" r="5.5" fill="#ffd166" stroke="#f4a261" stroke-width="1" />
             `
+        },
+        {
+            id: 'k-superman',
+            name: 'Superman',
+            price: 3.50,
+            color: '#0077b6',
+            svgContent: `
+                <!-- Silicone Ring Backing -->
+                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
+                <!-- Red Cape -->
+                <path d="M -5 -7 C -12 -4, -14 7, -14 13 C -6 15.5, 6 15.5, 12 13 C 16 10, 17 5, 15 0 C 12 -5, 6 -7, 5 -7 Z" fill="#d90429" stroke="#900c3f" stroke-width="1.2" />
+                <!-- Suit Torso -->
+                <path d="M -5 -7 L 5 -7 L 4 3 L -4 3 Z" fill="#0077b6" stroke="#005f73" stroke-width="1" />
+                <!-- Suit Legs -->
+                <path d="M -4 3 L -1.5 3 L -1.5 12 L -4 12 Z" fill="#0077b6" stroke="#005f73" stroke-width="1" />
+                <path d="M 1.5 3 L 4 3 L 4 12 L 1.5 12 Z" fill="#0077b6" stroke="#005f73" stroke-width="1" />
+                <!-- Briefs (red) -->
+                <path d="M -4 3 L 4 3 L 3 6 L -3 6 Z" fill="#d90429" stroke="#900c3f" stroke-width="1" />
+                <!-- Yellow Belt -->
+                <rect x="-3.5" y="2" width="7" height="1.5" fill="#ffb703" stroke="#e09f00" stroke-width="0.5" />
+                <rect x="-0.8" y="1.8" width="1.6" height="1.9" fill="#d90429" stroke="#900c3f" stroke-width="0.3" />
+                <!-- Boots (red) -->
+                <path d="M -4 12 L -1.5 12 L -1.5 16 L -5 16 Z" fill="#d90429" stroke="#900c3f" stroke-width="1" />
+                <path d="M 1.5 12 L 4 12 L 5 16 L 1.5 16 Z" fill="#d90429" stroke="#900c3f" stroke-width="1" />
+                <!-- Arms (hands on hips) -->
+                <path d="M -5 -6 Q -9 -4 -8 -1 Q -7 0 -4 3" fill="none" stroke="#0077b6" stroke-width="3" stroke-linecap="round" />
+                <circle cx="-4" cy="3" r="1.2" fill="#ffdbac" />
+                <path d="M 5 -6 Q 9 -4 8 -1 Q 7 0 4 3" fill="none" stroke="#0077b6" stroke-width="3" stroke-linecap="round" />
+                <circle cx="4" cy="3" r="1.2" fill="#ffdbac" />
+                <!-- Neck -->
+                <rect x="-1.5" y="-9" width="3" height="3" fill="#ffdbac" />
+                <!-- Face -->
+                <circle cx="0" cy="-11" r="4.5" fill="#ffdbac" stroke="#d4a373" stroke-width="0.8" />
+                <!-- Hair -->
+                <path d="M -4.8 -11.5 C -4.8 -15.5, 4.8 -15.5, 4.8 -11.5 C 4.8 -10.5, 3 -10.5, 3.5 -11.5 C 2 -12.5, -2 -12.5, -3.5 -11.5 C -3 -10.5, -4.8 -10.5, -4.8 -11.5 Z" fill="#111" />
+                <path d="M -0.5 -12 Q 1 -10.5 0 -9.5" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" />
+                <!-- Eyes -->
+                <circle cx="-1.5" cy="-11.2" r="0.6" fill="#111" />
+                <circle cx="1.5" cy="-11.2" r="0.6" fill="#111" />
+                <!-- Smile -->
+                <path d="M -1 -9.2 Q 0 -8.2 1 -9.2" fill="none" stroke="#111" stroke-width="0.6" stroke-linecap="round" />
+                <!-- Pentagon Shield -->
+                <polygon points="0,-5.5 2.5,-3.5 1.8,0 0,1.5 -1.8,0 -2.5,-3.5" fill="#ffb703" stroke="#d90429" stroke-width="0.5" />
+                <!-- S shape inside shield -->
+                <path d="M -1 -3 C -0.8 -3.5, 0.8 -3.5, 1 -2.8 C 0.8 -2.2, -0.8 -2.4, -1 -1.8 C -1.2 -0.8, 1 -0.8, 0.8 0.2 C 0.6 0.7, -0.8 0.7, -1 0.2" fill="none" stroke="#d90429" stroke-width="0.5" stroke-linecap="round" />
+            `
         }
     ]
 };
@@ -248,6 +294,25 @@ function loadStateFromLocalStorage() {
 document.addEventListener('DOMContentLoaded', () => {
     // Load state from local storage first (common to all pages)
     loadStateFromLocalStorage();
+    
+    // Carousel logic for index.html hero image
+    const img1 = document.getElementById('hero-carousel-1');
+    const img2 = document.getElementById('hero-carousel-2');
+    if (img1 && img2) {
+        setInterval(() => {
+            if (img2.classList.contains('hidden')) {
+                // Fade in girl (img2) on top of boy (img1)
+                img2.classList.remove('hidden');
+                img2.classList.add('visible');
+                img2.style.opacity = '1';
+            } else {
+                // Fade out girl (img2) to reveal boy (img1)
+                img2.classList.remove('visible');
+                img2.classList.add('hidden');
+                img2.style.opacity = '0';
+            }
+        }, 4000);
+    }
     
     const isCustomizerPage = document.getElementById('interactive-glasses-svg') !== null;
     
@@ -703,10 +768,10 @@ function loadTemplate(templateName) {
             customizerState.attachmentMethod = 'clip';
             beadUniqueIdCounter = 1;
             customizerState.placedBeads.push({
-                id: 'k-hero',
+                id: 'k-superman',
                 uniqueId: beadUniqueIdCounter,
-                price: 2.95,
-                name: 'Hero Masker',
+                price: 3.50,
+                name: 'Superman',
                 x: 185,
                 y: 70
             });
@@ -792,10 +857,10 @@ function loadTemplate(templateName) {
         
         beadUniqueIdCounter++;
         customizerState.placedBeads.push({
-            id: 'k-hero',
+            id: 'k-superman',
             uniqueId: beadUniqueIdCounter,
-            price: 2.95,
-            name: 'Hero Masker',
+            price: 3.50,
+            name: 'Superman',
             x: 185,
             y: 70
         });
