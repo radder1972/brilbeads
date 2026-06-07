@@ -213,6 +213,162 @@
             background: var(--pink);
             transform: scale(1.25);
         }
+
+        /* Lightbox Modal CSS */
+        #lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(58, 38, 28, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-box {
+            background: #fff;
+            border: var(--thick-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--comic-shadow);
+            width: 90%;
+            max-width: 600px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        #lightbox-modal.active .lightbox-box {
+            transform: scale(1);
+        }
+        .lightbox-close-btn {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--pink);
+            color: #fff;
+            border: var(--thin-border);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 3px 3px 0 var(--border-dark);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10002;
+        }
+        .lightbox-close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 4px 4px 0 var(--border-dark);
+            background: var(--pink-dark);
+        }
+        .lightbox-close-btn:active {
+            transform: scale(0.95);
+            box-shadow: 1px 1px 0 var(--border-dark);
+        }
+        .lightbox-carousel {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: var(--bg-cream);
+            border: var(--thin-border);
+            border-radius: var(--radius-md);
+            box-shadow: inset 3px 3px 0 rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .lightbox-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-slide img {
+            max-height: 90%;
+            max-width: 90%;
+            object-fit: contain;
+            filter: drop-shadow(6px 6px 0px rgba(58,38,28,0.1));
+        }
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-cream);
+            border: var(--thin-border);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            box-shadow: 3px 3px 0px var(--border-dark);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10001;
+        }
+        .lightbox-arrow:hover {
+            background: var(--teal);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 4px 4px 0px var(--border-dark);
+        }
+        .lightbox-arrow:active {
+            transform: translateY(-50%) translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--border-dark);
+        }
+        .lightbox-arrow-prev {
+            left: 15px;
+        }
+        .lightbox-arrow-next {
+            right: 15px;
+        }
+        .lightbox-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 0.5rem;
+        }
+        .lightbox-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            border: 1px solid var(--border-dark);
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .lightbox-dot.active {
+            background: var(--teal);
+            transform: scale(1.3);
+        }
     </style>
 </head>
 <body>
@@ -339,17 +495,157 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.84</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.85</span></p>
         </div>
     </footer>
     
     <!-- Shopify SDK & JS Engine -->
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.84"></script>
-    <script src="app.js?v=v0.68.84"></script>
+    <script src="shopify.js?v=v0.68.85"></script>
+    <script src="app.js?v=v0.68.85"></script>
     
     <!-- Page Logic -->
     <script>
+        let currentLightboxProductIdx = null;
+        let currentLightboxSlideIdx = 0;
+        let lightboxProductsData = [];
+
+        function openLightbox(productIdx, startSlideIdx = 0) {
+            currentLightboxProductIdx = productIdx;
+            currentLightboxSlideIdx = startSlideIdx;
+            
+            const product = lightboxProductsData[productIdx];
+            if (!product) return;
+            
+            let lightbox = document.getElementById('lightbox-modal');
+            if (!lightbox) {
+                lightbox = document.createElement('div');
+                lightbox.id = 'lightbox-modal';
+                lightbox.innerHTML = `
+                    <div class="lightbox-box">
+                        <button class="lightbox-close-btn" onclick="closeLightbox()" aria-label="Sluiten"><i class="fa-solid fa-xmark"></i></button>
+                        <h3 id="lightbox-title" style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--text-dark); margin: 0;"></h3>
+                        <div class="lightbox-carousel">
+                            <div class="lightbox-track" id="lightbox-track"></div>
+                            <button class="lightbox-arrow lightbox-arrow-prev" onclick="moveLightbox(-1)" aria-label="Vorige foto"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="lightbox-arrow lightbox-arrow-next" onclick="moveLightbox(1)" aria-label="Volgende foto"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                        <div class="lightbox-dots" id="lightbox-dots"></div>
+                    </div>
+                `;
+                document.body.appendChild(lightbox);
+                
+                // Close lightbox on click outside the box
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Populate lightbox with product images
+            document.getElementById('lightbox-title').textContent = product.title;
+            
+            const track = document.getElementById('lightbox-track');
+            const dotsContainer = document.getElementById('lightbox-dots');
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            
+            const images = product.images && product.images.length > 0 
+                ? product.images 
+                : [{ url: product.imageUrl, altText: product.imageAlt }];
+                
+            images.forEach((img, idx) => {
+                // Add slide
+                const slide = document.createElement('div');
+                slide.className = 'lightbox-slide';
+                slide.innerHTML = `<img src="${img.url}" alt="${img.altText || product.title}">`;
+                track.appendChild(slide);
+                
+                // Add dot if multiple images
+                if (images.length > 1) {
+                    const dot = document.createElement('span');
+                    dot.className = 'lightbox-dot' + (idx === startSlideIdx ? ' active' : '');
+                    dot.onclick = () => setLightboxSlide(idx);
+                    dotsContainer.appendChild(dot);
+                }
+            });
+            
+            // Hide arrows/dots if only 1 image
+            const prevArrow = lightbox.querySelector('.lightbox-arrow-prev');
+            const nextArrow = lightbox.querySelector('.lightbox-arrow-next');
+            if (images.length <= 1) {
+                prevArrow.style.display = 'none';
+                nextArrow.style.display = 'none';
+                dotsContainer.style.display = 'none';
+            } else {
+                prevArrow.style.display = 'flex';
+                nextArrow.style.display = 'flex';
+                dotsContainer.style.display = 'flex';
+            }
+            
+            // Show lightbox modal
+            lightbox.classList.add('active');
+            
+            // Initial positioning
+            setLightboxSlide(startSlideIdx);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', handleLightboxKeydown);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox-modal');
+            if (lightbox) {
+                lightbox.classList.remove('active');
+            }
+            document.removeEventListener('keydown', handleLightboxKeydown);
+        }
+
+        function setLightboxSlide(slideIdx) {
+            const product = lightboxProductsData[currentLightboxProductIdx];
+            if (!product) return;
+            
+            const images = product.images && product.images.length > 0 
+                ? product.images 
+                : [{ url: product.imageUrl, altText: product.imageAlt }];
+                
+            const total = images.length;
+            
+            if (slideIdx < 0) slideIdx = total - 1;
+            if (slideIdx >= total) slideIdx = 0;
+            
+            currentLightboxSlideIdx = slideIdx;
+            
+            const track = document.getElementById('lightbox-track');
+            if (track) {
+                track.style.transform = `translateX(-${slideIdx * 100}%)`;
+            }
+            
+            const dots = document.querySelectorAll('.lightbox-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === slideIdx) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function moveLightbox(direction) {
+            setLightboxSlide(currentLightboxSlideIdx + direction);
+        }
+
+        function handleLightboxKeydown(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                moveLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                moveLightbox(1);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             const grid = document.getElementById('producten-grid');
             const loader = document.getElementById('loader-wrapper');
@@ -370,6 +666,7 @@
                 
                 console.log("Producten overzicht: Ophalen van Shopify producten...");
                 const products = await fetchShopifyProductsForGallery();
+                lightboxProductsData = products; // Save products data for lightbox modal
                 
                 loader.style.display = 'none';
                 grid.style.display = 'grid';
@@ -409,7 +706,7 @@
                     let visualHtml = '';
                     if (hasMultipleImages) {
                         const slidesHtml = product.images.map((img, imgIdx) => `
-                            <div class="carousel-slide">
+                            <div class="carousel-slide" onclick="openLightbox(${idx}, ${imgIdx})" style="cursor: zoom-in;">
                                 <img src="${img.url}" alt="${img.altText}">
                             </div>
                         `).join('');
@@ -433,7 +730,7 @@
                         `;
                     } else {
                         visualHtml = `
-                            <div class="style-preview-visual ${bgColor}" style="position: relative;">
+                            <div class="style-preview-visual ${bgColor}" style="position: relative; cursor: zoom-in;" onclick="openLightbox(${idx}, 0)">
                                 ${soldOutBadge}
                                 <img src="${product.imageUrl}" alt="${product.imageAlt}">
                             </div>
