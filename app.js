@@ -1047,3 +1047,160 @@ async function syncBeadsCatalogWithShopify() {
         console.error("Fout bij het synchroniseren van catalogus met Shopify:", err);
     }
 }
+
+// --- Unified Shopping Cart Utilities ---
+
+function getCartItems() {
+    try {
+        const cart = localStorage.getItem('bril_beads_cart');
+        return cart ? JSON.parse(cart) : [];
+    } catch (e) {
+        console.error("Failed to load cart items:", e);
+        return [];
+    }
+}
+
+function addToCart(item) {
+    const cart = getCartItems();
+    
+    if (item.type === 'loose_bead') {
+        // Find existing loose bead in cart
+        const existing = cart.find(i => i.type === 'loose_bead' && i.id === item.id);
+        if (existing) {
+            existing.quantity = (existing.quantity || 1) + 1;
+        } else {
+            item.quantity = 1;
+            cart.push(item);
+        }
+    } else if (item.type === 'customizer') {
+        // Add custom design with a unique identifier
+        const designItem = {
+            type: 'customizer',
+            uniqueId: 'design-' + Date.now(),
+            frameColor: item.frameColor,
+            attachmentMethod: item.attachmentMethod,
+            placedBeads: [...item.placedBeads],
+            price: item.price,
+            quantity: 1
+        };
+        cart.push(designItem);
+    }
+    
+    localStorage.setItem('bril_beads_cart', JSON.stringify(cart));
+    playSound('save');
+    
+    // Show confirmation modal popup
+    showAddToCartModal(item.name, item.imageUrl, item.type === 'customizer');
+}
+
+function removeFromCart(uniqueId, type) {
+    let cart = getCartItems();
+    if (type === 'customizer') {
+        cart = cart.filter(item => item.uniqueId !== uniqueId);
+    } else {
+        cart = cart.filter(item => item.id !== uniqueId);
+    }
+    localStorage.setItem('bril_beads_cart', JSON.stringify(cart));
+    playSound('delete');
+}
+
+function updateCartItemQuantity(itemId, quantity) {
+    const cart = getCartItems();
+    const item = cart.find(i => i.id === itemId && i.type === 'loose_bead');
+    if (item) {
+        item.quantity = Math.max(1, parseInt(quantity, 10));
+        localStorage.setItem('bril_beads_cart', JSON.stringify(cart));
+    }
+}
+
+// --- Cart Notification Modal Popup UI ---
+
+function showAddToCartModal(name, imageUrl, isCustomDesign) {
+    let modal = document.getElementById('add-to-cart-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'add-to-cart-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(58, 38, 28, 0.4);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        `;
+        
+        const modalBox = document.createElement('div');
+        modalBox.style.cssText = `
+            background: #fff;
+            border: var(--thick-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--comic-shadow);
+            width: 90%;
+            max-width: 420px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        `;
+        
+        modalBox.innerHTML = `
+            <div style="font-size: 3.5rem; color: var(--teal); margin-bottom: 1rem;"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--text-dark); margin-bottom: 1rem;">Toegevoegd!</h3>
+            <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;" id="add-to-cart-message"></p>
+            <div style="width: 120px; height: 120px; margin: 0 auto 2rem; border: var(--thin-border); border-radius: var(--radius-md); background: var(--bg-cream); display: flex; align-items: center; justify-content: center; box-shadow: var(--comic-shadow-sm); overflow: hidden; position: relative;">
+                <img id="add-to-cart-img" src="" alt="" style="max-width: 80%; max-height: 80%; object-fit: contain;">
+                <div id="add-to-cart-custom-glasses" style="display: none; font-size: 3rem; color: var(--pink-dark);"><i class="fa-solid fa-glasses"></i></div>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-direction: column;">
+                <button class="btn btn-primary btn-bounce" onclick="window.location.href='winkelwagen.html'">Naar Winkelwagen <i class="fa-solid fa-shopping-cart"></i></button>
+                <button class="btn btn-secondary btn-bounce" onclick="closeAddToCartModal()">Verder Winkelen</button>
+            </div>
+        `;
+        modal.appendChild(modalBox);
+        document.body.appendChild(modal);
+    }
+    
+    const msg = isCustomDesign 
+        ? "Je gepersonaliseerde bril is toegevoegd aan je winkelwagen!" 
+        : `De bead "${name}" is toegevoegd aan je winkelwagen!`;
+    
+    document.getElementById('add-to-cart-message').textContent = msg;
+    
+    const imgEl = document.getElementById('add-to-cart-img');
+    const glassesEl = document.getElementById('add-to-cart-custom-glasses');
+    
+    if (isCustomDesign) {
+        imgEl.style.display = 'none';
+        glassesEl.style.display = 'block';
+    } else {
+        glassesEl.style.display = 'none';
+        imgEl.style.display = 'block';
+        imgEl.src = imageUrl || 'assets/logo.png?v=2';
+        imgEl.alt = name;
+    }
+    
+    // Animate open
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.style.pointerEvents = 'auto';
+        modal.children[0].style.transform = 'scale(1)';
+    }, 10);
+}
+
+function closeAddToCartModal() {
+    const modal = document.getElementById('add-to-cart-modal');
+    if (modal) {
+        modal.style.opacity = '0';
+        modal.style.pointerEvents = 'none';
+        modal.children[0].style.transform = 'scale(0.8)';
+    }
+}
