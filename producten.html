@@ -339,14 +339,14 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.83</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.84</span></p>
         </div>
     </footer>
     
     <!-- Shopify SDK & JS Engine -->
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.83"></script>
-    <script src="app.js?v=v0.68.83"></script>
+    <script src="shopify.js?v=v0.68.84"></script>
+    <script src="app.js?v=v0.68.84"></script>
     
     <!-- Page Logic -->
     <script>
@@ -396,7 +396,7 @@
                     if (isAvailable) {
                         buttonsHtml = `
                             <a href="ontwerpen.html?add=${localId || ''}" class="btn btn-primary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Ontwerp Nu</a>
-                            <button onclick="orderProductDirect('${product.variantId}', '${product.title.replace(/'/g, "\\'")}')" class="btn btn-secondary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Bestellen</button>
+                            <button onclick="orderLooseBead('${product.id}', '${product.variantId}', '${product.title.replace(/'/g, "\\'")}', ${product.price}, '${product.imageUrl}')" class="btn btn-secondary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Bestellen</button>
                         `;
                     } else {
                         buttonsHtml = `
@@ -510,6 +510,17 @@
             
             const activeSlide = parseInt(container.getAttribute('data-active-slide'), 10);
             setCarouselSlide(productIdx, activeSlide + direction);
+        }
+
+        function orderLooseBead(id, variantId, name, price, imageUrl) {
+            addToCart({
+                type: 'loose_bead',
+                id: id,
+                variantId: variantId,
+                name: name,
+                price: price,
+                imageUrl: imageUrl
+            });
         }
     </script>
 </body>
