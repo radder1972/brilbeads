@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="only light">
     <title>Producten overzicht | Bril Beads</title>
-    <meta name="description" content="Ontdek onze collectie Bril Beads. Bestel direct je favoriete kralen online of start direct met ontwerpen in onze 3D customizer.">
+    <meta name="description" content="Ontdek onze collectie Bril Beads. Bestel direct je favoriete kralen online en stel zelf je perfecte setje samen.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -407,13 +407,7 @@
                         <span class="nav-label">Home</span>
                     </a>
                     
-                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
-                        <div class="nav-icon-img-wrapper">
-                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
-                        </div>
-                        <span class="nav-label">Ontwerpen</span>
-                    </a>
-
+                    
                     <a href="producten.html" class="playful-nav-item active" title="Bekijk alle producten">
                         <div class="nav-icon-img-wrapper">
                             <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
@@ -454,7 +448,7 @@
                     <h1 class="section-title text-left" style="font-size: 2.5rem;">Onze Beads Collectie</h1>
                 </div>
                 <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
-                    Bekijk onze live collectie beads rechtstreeks uit onze webshop. Klik op <strong>Ontwerp Nu</strong> om de kraal direct in de 3D configurator te plaatsen, of kies voor <strong>Bestellen</strong> om direct af te rekenen.
+                    Bekijk onze live collectie beads rechtstreeks uit onze webshop. Voeg je favoriete beads toe aan je winkelwagen en stel zelf je perfecte setje samen!
                 </p>
 
                 <!-- Loading State -->
@@ -495,14 +489,14 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.88</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.89</span></p>
         </div>
     </footer>
     
     <!-- Shopify SDK & JS Engine -->
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.88"></script>
-    <script src="app.js?v=v0.68.88"></script>
+    <script src="shopify.js?v=v0.68.89"></script>
+    <script src="app.js?v=v0.68.89"></script>
     
     <!-- Page Logic -->
     <script>
@@ -727,8 +721,7 @@
                     let buttonsHtml = '';
                     if (isAvailable) {
                         buttonsHtml = `
-                            <a href="ontwerpen.html?add=${localId || ''}" class="btn btn-primary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Ontwerp Nu</a>
-                            <button onclick="orderLooseBead('${product.id}', '${product.variantId}', '${product.title.replace(/'/g, "\\'")}', ${product.price}, '${product.imageUrl}')" class="btn btn-secondary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Bestellen</button>
+                            <button onclick="orderLooseBead('${product.id}', '${product.variantId}', '${product.title.replace(/'/g, "\\'")}', ${product.price}, '${product.imageUrl}')" class="btn btn-primary btn-bounce" style="flex: 1; width: 100%; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; padding: 0.6rem 0.8rem; height: 44px; box-sizing: border-box;">Bestellen <i class="fa-solid fa-cart-shopping" style="margin-left: 8px;"></i></button>
                         `;
                     } else {
                         buttonsHtml = `
