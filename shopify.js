@@ -276,13 +276,16 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
         console.log("Verzamelde Line Item Properties die naar Shopify gestuurd zouden worden:", properties);
         console.log("===================================");
 
-        // Toon een duidelijke melding aan de ontwikkelaar/gebruiker
+        // Toon een duidelijke melding aan de ontwikkelaar/gebruiker met alle properties
+        let propertiesText = '';
+        for (const [key, val] of Object.entries(properties)) {
+            propertiesText += `${key}: ${val}\n`;
+        }
+
         alert(
             `🎉 [Simulatie Mode] Shopify Checkout Gestart!\n\n` +
-            `Jouw ontwerp is succesvol omgezet naar Shopify Line Item Properties:\n` +
-            `- Montuur: ${properties['Montuur Kleur']} (${properties['Montuur Type']})\n` +
-            `- Bevestiging: ${properties['Bevestiging']}\n` +
-            `- Beads: ${properties['Gekozen Beads']}\n\n` +
+            `De volgende gegevens (Line Item Properties) worden naar Shopify gestuurd:\n\n` +
+            `${propertiesText}\n` +
             `Vul echte credentials in shopify.js in om verbinding te maken met je Shopify-winkel.`
         );
 
