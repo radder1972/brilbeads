@@ -139,10 +139,17 @@
                     <div class="style-preview-card glass" onclick="loadTemplate('hero')">
                         <div class="style-preview-visual bg-teal-soft">
                             <svg class="preview-glasses-svg" viewBox="100 40 460 220" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <pattern id="preview-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                                        <rect width="16" height="16" fill="#0077b6" />
+                                        <circle cx="4" cy="4" r="1.5" fill="#ffffff" />
+                                        <circle cx="12" cy="12" r="1.5" fill="#ffffff" />
+                                    </pattern>
+                                </defs>
                                 <!-- Glasses Frame -->
-                                <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="#4ea8de" stroke-width="12" stroke-linecap="round" />
-                                <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="#4ea8de" stroke-width="9" stroke-linecap="round" />
-                                <path d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="#4ea8de" stroke-width="10" stroke-linecap="round" />
+                                <path d="M 140 125 C 140 65, 230 65, 230 125 C 230 175, 140 175, 140 125 Z" fill="none" stroke="url(#preview-dots)" stroke-width="12" stroke-linecap="round" />
+                                <path d="M 230 115 Q 240 108 245 115" fill="none" stroke="url(#preview-dots)" stroke-width="9" stroke-linecap="round" />
+                                <path d="M 225 120 L 500 120 C 515 120, 545 120, 545 165" fill="none" stroke="url(#preview-dots)" stroke-width="10" stroke-linecap="round" />
                                 <!-- Superman Bead on Front -->
                                 <g transform="translate(185, 70) scale(1.2)">
                                     <!-- Red Cape -->
@@ -186,7 +193,7 @@
                         </div>
                         <div class="style-preview-info">
                             <h3>Superheld Blauw</h3>
-                            <p>Stoer blauw montuur met de coole Superman clip aan de voorkant.</p>
+                            <p>Stoer blauw montuur met stipjes en de coole Superman clip aan de voorkant.</p>
                             <span class="btn btn-secondary btn-sm">Stijl Laden <i class="fa-solid fa-wand-magic-sparkles"></i></span>
                         </div>
                     </div>
@@ -372,7 +379,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.62</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.63</span></p>
         </div>
     </footer>
 
