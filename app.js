@@ -296,6 +296,19 @@ document.addEventListener('DOMContentLoaded', () => {
         svgCanvas.addEventListener('touchstart', handleDragStart, { passive: false });
         svgCanvas.addEventListener('touchmove', handleDragMove, { passive: false });
         window.addEventListener('touchend', handleDragEnd);
+
+        // Check of er een ?add=beadId query-parameter is meegegeven
+        const urlParams = new URLSearchParams(window.location.search);
+        const addBeadId = urlParams.get('add');
+        if (addBeadId) {
+            if (typeof addBeadToGlasses === 'function') {
+                addBeadToGlasses(addBeadId);
+                console.log(`Automatisch geplaatste bead via URL parameter: ${addBeadId}`);
+            }
+            // Wis de query-parameter uit de adresbalk zonder de pagina te herladen
+            const cleanUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
     }
 
     // Start catalogus-synchronisatie met Shopify Storefront API
