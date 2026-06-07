@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -124,13 +124,14 @@
                             <label class="group-label">Montuur Kleur</label>
                             <div class="color-selector">
                                 <button type="button" class="color-dot active" style="background-color: #1a1a1a;" data-color="dark" onclick="setFrameColor('dark')" title="Mat Zwart"></button>
+                                <button type="button" class="color-dot" style="background: radial-gradient(circle, #fff 15%, transparent 20%), #0077b6; background-size: 8px 8px;" data-color="dots" onclick="setFrameColor('dots')" title="Blauw met stipjes"></button>
                                 <button type="button" class="color-dot" style="background-color: #8ecae6;" data-color="teal" onclick="setFrameColor('teal')" title="Transparant Teal"></button>
                                 <button type="button" class="color-dot" style="background-color: #ffb703;" data-color="yellow" onclick="setFrameColor('yellow')" title="Vrolijk Geel"></button>
                                 <button type="button" class="color-dot" style="background-color: #ffb5a7;" data-color="pink" onclick="setFrameColor('pink')" title="Poeder Roze"></button>
                                 <button type="button" class="color-dot" style="background-color: #e5e5e5; border: 1px solid #ccc;" data-color="crystal" onclick="setFrameColor('crystal')" title="Kristal Helder"></button>
                             </div>
                         </div>
-
+                        
                         <!-- Control: Bead Tray -->
                         <div class="config-group">
                             <label class="group-label">Kies je Beads (klik om toe te voegen)</label>
@@ -204,6 +205,12 @@
                                         <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
                                         <stop offset="100%" stop-color="rgba(230,235,240,0.4)" />
                                     </linearGradient>
+                                    <!-- Blue Polka Dot Frame Pattern -->
+                                    <pattern id="frame-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                                        <rect width="16" height="16" fill="#0077b6" />
+                                        <circle cx="4" cy="4" r="1.5" fill="#ffffff" />
+                                        <circle cx="12" cy="12" r="1.5" fill="#ffffff" />
+                                    </pattern>
                                 </defs>
 
                                 <!-- Grid Background Pattern for Tech Look -->
@@ -321,7 +328,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.62</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.63</span></p>
         </div>
     </footer>
 
