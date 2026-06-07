@@ -290,13 +290,18 @@
 
                         <!-- Customizer Summary Card -->
                         <div class="customizer-summary-card">
-                            <div class="summary-details">
+                            <div class="summary-details" style="display: flex; flex-direction: column; gap: 0.2rem; flex-shrink: 0; margin-right: 1.5rem;">
                                 <span class="summary-count" id="summary-count-beads">0 Beads</span>
-                                <span class="summary-price" id="summary-price-total">&euro; 0,00</span>
+                                <span class="summary-price" id="summary-price-total" style="white-space: nowrap;">&euro; 0,00</span>
                             </div>
-                            <button type="button" class="btn btn-accent btn-md btn-bounce" id="btn-save-design" onclick="saveDesign()">
-                                Concept Opslaan <i class="fa-solid fa-floppy-disk"></i>
-                            </button>
+                            <div class="summary-actions" style="display: flex; gap: 0.6rem; justify-content: flex-end; align-items: center; flex-shrink: 0; flex-wrap: nowrap;">
+                                <button type="button" class="btn btn-secondary btn-sm" id="btn-save-design" onclick="saveDesign()" style="min-width: 100px; background: #fff; border: var(--thin-border); box-shadow: var(--comic-shadow-sm); padding: 0.5rem 0.9rem; font-size: 0.85rem; height: 38px;">
+                                    Opslaan <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm btn-bounce" id="btn-direct-order" onclick="orderDirect()" style="min-width: 125px; background: var(--pink); color: #fff; box-shadow: var(--comic-shadow); padding: 0.5rem 0.9rem; font-size: 0.85rem; height: 38px;">
+                                    Nu Bestellen <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -328,11 +333,55 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.64</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.65</span></p>
         </div>
     </footer>
 
     <!-- Custom JavaScript -->
     <script src="app.js"></script>
+    <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
+    <script src="shopify.js"></script>
+    <script>
+        async function orderDirect() {
+            const savedState = localStorage.getItem('bril_beads_customizer_state');
+            if (!savedState) {
+                alert("Voeg eerst wat beads toe aan je bril!");
+                return;
+            }
+            const state = JSON.parse(savedState);
+            if (state.placedBeads.length === 0) {
+                alert("Voeg eerst wat beads toe aan je bril!");
+                return;
+            }
+            
+            playSound('save');
+            
+            // Start het afrekenproces
+            await checkoutCart(state, () => {
+                // Success-callback bij simulatiemodus: sla de bestelling lokaal op en stuur door naar success op bestellen.html
+                const subtotal = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
+                const shipping = subtotal >= 20 ? 0 : 2.95;
+                const total = subtotal + shipping;
+                const orderId = 'BB-' + Math.floor(Math.random() * 9000 + 1000);
+                
+                const orderRecord = {
+                    id: orderId,
+                    date: new Date().toLocaleDateString('nl-NL'),
+                    total: total
+                };
+                
+                // Voeg toe aan bestelgeschiedenis
+                const savedOrders = JSON.parse(localStorage.getItem('bril_beads_orders') || '[]');
+                savedOrders.push(orderRecord);
+                localStorage.setItem('bril_beads_orders', JSON.stringify(savedOrders));
+                
+                // Clear winkelwagen
+                localStorage.removeItem('bril_beads_customizer_state');
+                
+                // Stuur door naar bestellen.html met direct_success=true query param
+                window.location.href = `bestellen.html?direct_success=true&orderId=${orderId}`;
+            });
+        }
+    </script>
 </body>
 </html>
