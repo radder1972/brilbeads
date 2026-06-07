@@ -107,6 +107,112 @@
             background: #fff;
             color: var(--text-dark);
         }
+        
+        /* Carousel styling */
+        .carousel-visual {
+            position: relative;
+            overflow: hidden;
+            height: 190px;
+            width: 100%;
+        }
+        
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .carousel-slide img {
+            max-height: 80%;
+            max-width: 80%;
+            object-fit: contain;
+            transform: rotate(-2deg);
+            filter: drop-shadow(4px 4px 0px rgba(58,38,28,0.1));
+            transition: transform 0.3s ease;
+        }
+        
+        /* Playful cartoon arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-cream);
+            border: var(--thin-border);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            box-shadow: 2px 2px 0px var(--border-dark);
+            transition: var(--transition);
+            z-index: 10;
+        }
+        
+        .carousel-arrow:hover {
+            background: var(--pink);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 3px 3px 0px var(--border-dark);
+        }
+        
+        .carousel-arrow:active {
+            transform: translateY(-50%) translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--border-dark);
+        }
+        
+        .carousel-arrow-prev {
+            left: 10px;
+        }
+        
+        .carousel-arrow-next {
+            right: 10px;
+        }
+        
+        /* Pagination dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 4px 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(58, 38, 28, 0.15);
+            backdrop-filter: blur(2px);
+        }
+        
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            border: 1px solid var(--border-dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .carousel-dot.active {
+            background: var(--pink);
+            transform: scale(1.25);
+        }
     </style>
 </head>
 <body>
@@ -233,14 +339,14 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.81</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.82</span></p>
         </div>
     </footer>
     
     <!-- Shopify SDK & JS Engine -->
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.81"></script>
-    <script src="app.js?v=v0.68.81"></script>
+    <script src="shopify.js?v=v0.68.82"></script>
+    <script src="app.js?v=v0.68.82"></script>
     
     <!-- Page Logic -->
     <script>
@@ -297,11 +403,44 @@
                         `;
                     }
 
+                    const hasMultipleImages = product.images && product.images.length > 1;
+                    
+                    let visualHtml = '';
+                    if (hasMultipleImages) {
+                        const slidesHtml = product.images.map((img, imgIdx) => `
+                            <div class="carousel-slide">
+                                <img src="${img.url}" alt="${img.altText}">
+                            </div>
+                        `).join('');
+                        
+                        const dotsHtml = product.images.map((_, imgIdx) => `
+                            <span class="carousel-dot ${imgIdx === 0 ? 'active' : ''}" onclick="setCarouselSlide(${idx}, ${imgIdx}, event)"></span>
+                        `).join('');
+                        
+                        visualHtml = `
+                            <div class="carousel-visual ${bgColor}" id="carousel-container-${idx}" data-active-slide="0" data-total-slides="${product.images.length}">
+                                ${soldOutBadge}
+                                <div class="carousel-track" id="carousel-track-${idx}">
+                                    ${slidesHtml}
+                                </div>
+                                <button class="carousel-arrow carousel-arrow-prev" onclick="moveCarousel(${idx}, -1, event)" aria-label="Vorige foto"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="carousel-arrow carousel-arrow-next" onclick="moveCarousel(${idx}, 1, event)" aria-label="Volgende foto"><i class="fa-solid fa-chevron-right"></i></button>
+                                <div class="carousel-dots">
+                                    ${dotsHtml}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        visualHtml = `
+                            <div class="style-preview-visual ${bgColor}" style="position: relative;">
+                                ${soldOutBadge}
+                                <img src="${product.imageUrl}" alt="${product.imageAlt}">
+                            </div>
+                        `;
+                    }
+
                     card.innerHTML = `
-                        <div class="style-preview-visual ${bgColor}" style="position: relative;">
-                            ${soldOutBadge}
-                            <img src="${product.imageUrl}" alt="${product.imageAlt}" style="max-height: 80%; max-width: 80%; object-fit: contain; transform: rotate(-2deg); filter: drop-shadow(4px 4px 0px rgba(58,38,28,0.1)); transition: transform 0.3s ease;">
-                        </div>
+                        ${visualHtml}
                         <div class="style-preview-info">
                             <h3 style="font-size: 1.35rem; margin-bottom: 0.4rem;">${product.title}</h3>
                             <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; flex-grow: 1;">${product.description}</p>
@@ -326,6 +465,51 @@
                 `;
             }
         });
+
+        // Global carousel navigation handlers
+        function setCarouselSlide(productIdx, slideIdx, event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            const container = document.getElementById(`carousel-container-${productIdx}`);
+            const track = document.getElementById(`carousel-track-${productIdx}`);
+            if (!container || !track) return;
+            
+            const totalSlides = parseInt(container.getAttribute('data-total-slides'), 10);
+            
+            // Boundary checks
+            let targetSlideIdx = slideIdx;
+            if (slideIdx < 0) targetSlideIdx = totalSlides - 1;
+            if (slideIdx >= totalSlides) targetSlideIdx = 0;
+            
+            container.setAttribute('data-active-slide', targetSlideIdx);
+            
+            // Translate track horizontally
+            track.style.transform = `translateX(-${targetSlideIdx * 100}%)`;
+            
+            // Update indicator dots
+            const dots = container.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === targetSlideIdx) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function moveCarousel(productIdx, direction, event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            const container = document.getElementById(`carousel-container-${productIdx}`);
+            if (!container) return;
+            
+            const activeSlide = parseInt(container.getAttribute('data-active-slide'), 10);
+            setCarouselSlide(productIdx, activeSlide + direction);
+        }
     </script>
 </body>
 </html>
