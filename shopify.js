@@ -363,7 +363,7 @@ async function fetchShopifyProductsForGallery() {
                 title: node.title,
                 description: description,
                 available: node.availableForSale,
-                imageUrl: imageNode ? imageNode.url : 'assets/logo.png?v=1',
+                imageUrl: imageNode ? imageNode.url : 'assets/logo.png?v=2',
                 imageAlt: imageNode && imageNode.altText ? imageNode.altText : node.title,
                 variantId: variantNode ? variantNode.id : null,
                 price: variantNode ? parseFloat(variantNode.price.amount) : 0,
