@@ -495,20 +495,55 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.87</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.88</span></p>
         </div>
     </footer>
     
     <!-- Shopify SDK & JS Engine -->
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.87"></script>
-    <script src="app.js?v=v0.68.87"></script>
+    <script src="shopify.js?v=v0.68.88"></script>
+    <script src="app.js?v=v0.68.88"></script>
     
     <!-- Page Logic -->
     <script>
         let currentLightboxProductIdx = null;
         let currentLightboxSlideIdx = 0;
         let lightboxProductsData = [];
+        let carouselIntervals = {};
+
+        function startAutoRotation(products) {
+            stopAutoRotation();
+            products.forEach((product, idx) => {
+                const hasMultipleImages = product.images && product.images.length > 1;
+                if (!hasMultipleImages) return;
+
+                const container = document.getElementById(`carousel-container-${idx}`);
+                if (!container) return;
+
+                // Rotate every 3.5 seconds
+                carouselIntervals[idx] = setInterval(() => {
+                    moveCarousel(idx, 1);
+                }, 3500);
+
+                // Pause on hover
+                container.addEventListener('mouseenter', () => {
+                    clearInterval(carouselIntervals[idx]);
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    carouselIntervals[idx] = setInterval(() => {
+                        moveCarousel(idx, 1);
+                    }, 3500);
+                });
+            });
+        }
+
+        function stopAutoRotation() {
+            for (const idx in carouselIntervals) {
+                clearInterval(carouselIntervals[idx]);
+            }
+            carouselIntervals = {};
+        }
 
         function openLightbox(productIdx, startSlideIdx = 0) {
             currentLightboxProductIdx = productIdx;
@@ -750,6 +785,10 @@
                     `;
                     grid.appendChild(card);
                 });
+                
+                // Start auto-rotation for multi-image product carousels
+                startAutoRotation(products);
+                
             } catch (error) {
                 console.error("Fout bij laden van catalogus:", error);
                 loader.style.display = 'none';
