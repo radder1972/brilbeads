@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="only light">
     <title>Mijn Account | Bril Beads</title>
-    <meta name="description" content="Jouw Bril Beads account. Bekijk je bestellingen, gespaarde loyalty points en laad je opgeslagen ontwerpen direct in de customizer.">
+    <meta name="description" content="Jouw Bril Beads account. Bekijk je bestellingen en gespaarde loyalty points.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,13 +135,7 @@
                         <span class="nav-label">Home</span>
                     </a>
                     
-                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
-                        <div class="nav-icon-img-wrapper">
-                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
-                        </div>
-                        <span class="nav-label">Ontwerpen</span>
-                    </a>
-
+                    
                     <a href="producten.html" class="playful-nav-item" title="Bekijk alle producten">
                         <div class="nav-icon-img-wrapper">
                             <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
@@ -200,22 +194,8 @@
 
                     <!-- Main Dashboard Area -->
                     <div>
-                        <!-- Saved Designs -->
-                        <div>
-                            <h2 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.6rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1rem;">
-                                <img src="assets/icon_ontwerpen.png" alt="Mijn Ontwerpen" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> Mijn Opgeslagen Ontwerpen
-                            </h2>
-                            
-                            <div class="designs-list" id="saved-designs-container">
-                                <!-- Loaded dynamically via JS -->
-                                <div class="saved-design-card" style="justify-content: center; font-style: italic; color: var(--text-muted);">
-                                    Geen opgeslagen ontwerpen gevonden.
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Mock Orders -->
-                        <div style="margin-top: 3rem;">
+                        <div>
                             <h2 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.6rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1rem;">
                                 <img src="assets/icon_winkelwagen.png" alt="Bestelgeschiedenis" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> Bestelgeschiedenis
                             </h2>
@@ -260,72 +240,13 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.88</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.89</span></p>
         </div>
     </footer>
     
-    <script src="app.js?v=v0.68.88"></script>
+    <script src="app.js?v=v0.68.89"></script>
     <script>
-        // Load saved designs from localStorage on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSavedDesigns();
-        });
-
-        function renderSavedDesigns() {
-            const container = document.getElementById('saved-designs-container');
-            const saved = JSON.parse(localStorage.getItem('bril_beads_saved_designs') || '[]');
-            
-            if (saved.length === 0) {
-                container.innerHTML = `
-                    <div class="saved-design-card" style="justify-content: center; font-style: italic; color: var(--text-muted); padding: 2rem;">
-                        Je hebt nog geen ontwerpen opgeslagen. Ga naar de ontwerper en maak je eerste meesterwerk!
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = '';
-            saved.forEach(design => {
-                const count = design.state.placedBeads.length;
-                const system = design.state.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Klik Clip';
-                const colorName = design.state.frameColor;
-                
-                const card = document.createElement('div');
-                card.className = 'saved-design-card';
-                card.innerHTML = `
-                    <div class="design-meta">
-                        <span class="design-title">Mijn Ontwerp (${design.date})</span>
-                        <span class="design-desc">${count} Beads &bull; Bevestiging: ${system} &bull; Frame: ${colorName}</span>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="loadDesignIntoCustomizer('${design.id}')">Laden <i class="fa-solid fa-wand-magic-sparkles"></i></button>
-                        <button type="button" class="btn btn-sm btn-bounce" style="background:#fecaca; color:#ef4444; border-color:var(--border-dark);" onclick="deleteSavedDesign('${design.id}')" title="Verwijderen"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function loadDesignIntoCustomizer(designId) {
-            const saved = JSON.parse(localStorage.getItem('bril_beads_saved_designs') || '[]');
-            const design = saved.find(d => d.id === designId);
-            if (!design) return;
-
-            // Save the state to active state in localStorage
-            localStorage.setItem('bril_beads_customizer_state', JSON.stringify(design.state));
-            playSound('save');
-            
-            alert('🎉 Ontwerp ingeladen! Je wordt nu doorgestuurd naar de ontwerper.');
-            window.location.href = 'ontwerpen.html';
-        }
-
-        function deleteSavedDesign(designId) {
-            let saved = JSON.parse(localStorage.getItem('bril_beads_saved_designs') || '[]');
-            saved = saved.filter(d => d.id !== designId);
-            localStorage.setItem('bril_beads_saved_designs', JSON.stringify(saved));
-            playSound('delete');
-            renderSavedDesigns();
-        }
+        // No active scripts required for order history (rendered statically)
     </script>
 </body>
 </html>
