@@ -52,6 +52,61 @@
             font-size: 1.4rem;
             color: var(--text-dark);
         }
+        
+        /* Overrides for product grid buttons to keep their distinct styles and sizes */
+        .producten-grid .style-preview-info .btn {
+            align-self: stretch;
+            margin-top: 0;
+        }
+        
+        .producten-grid .style-preview-info .btn.btn-primary {
+            background: var(--teal);
+            color: #fff;
+            box-shadow: var(--comic-shadow-sm);
+        }
+        .producten-grid .style-preview-info .btn.btn-primary:hover {
+            background: var(--teal-dark);
+            transform: translate(-2px, -2px);
+            box-shadow: var(--comic-shadow);
+        }
+        .producten-grid .style-preview-info .btn.btn-primary:active {
+            transform: translate(2px, 2px);
+            box-shadow: var(--comic-shadow-active);
+        }
+        
+        .producten-grid .style-preview-info .btn.btn-secondary {
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            box-shadow: var(--comic-shadow-sm);
+        }
+        .producten-grid .style-preview-info .btn.btn-secondary:hover {
+            background: #fff;
+            color: var(--text-dark);
+            transform: translate(-2px, -2px);
+            box-shadow: var(--comic-shadow);
+        }
+        .producten-grid .style-preview-info .btn.btn-secondary:active {
+            transform: translate(2px, 2px);
+            box-shadow: var(--comic-shadow-active);
+        }
+
+        /* Prevent parent card hover from overriding button colors to pink */
+        .producten-grid .style-preview-card:hover .style-preview-info .btn.btn-primary {
+            background: var(--teal);
+            color: #fff;
+        }
+        .producten-grid .style-preview-card:hover .style-preview-info .btn.btn-primary:hover {
+            background: var(--teal-dark);
+            color: #fff;
+        }
+        .producten-grid .style-preview-card:hover .style-preview-info .btn.btn-secondary {
+            background: var(--bg-cream);
+            color: var(--text-dark);
+        }
+        .producten-grid .style-preview-card:hover .style-preview-info .btn.btn-secondary:hover {
+            background: #fff;
+            color: var(--text-dark);
+        }
     </style>
 </head>
 <body>
@@ -137,7 +192,7 @@
                     <h1 class="section-title text-left" style="font-size: 2.5rem;">Onze Beads Collectie</h1>
                 </div>
                 <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
-                    Bekijk onze live collectie beads rechtstreeks uit onze webshop. Klik op <strong>Ontwerp Nu</strong> om de kraal direct in de 3D configurator te plaatsen, of kies voor <strong>Direct Bestellen</strong> om direct af te rekenen.
+                    Bekijk onze live collectie beads rechtstreeks uit onze webshop. Klik op <strong>Ontwerp Nu</strong> om de kraal direct in de 3D configurator te plaatsen, of kies voor <strong>Bestellen</strong> om direct af te rekenen.
                 </p>
 
                 <!-- Loading State -->
@@ -178,14 +233,14 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.80</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.81</span></p>
         </div>
     </footer>
     
     <!-- Shopify SDK & JS Engine -->
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.80"></script>
-    <script src="app.js?v=v0.68.80"></script>
+    <script src="shopify.js?v=v0.68.81"></script>
+    <script src="app.js?v=v0.68.81"></script>
     
     <!-- Page Logic -->
     <script>
@@ -233,8 +288,8 @@
                     let buttonsHtml = '';
                     if (isAvailable) {
                         buttonsHtml = `
-                            <a href="ontwerpen.html?add=${localId || ''}" class="btn btn-primary btn-bounce" style="flex: 1; text-align: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem;">Ontwerp Nu</a>
-                            <button onclick="orderProductDirect('${product.variantId}', '${product.title.replace(/'/g, "\\'")}')" class="btn btn-secondary btn-bounce" style="flex: 1; font-size: 0.9rem; padding: 0.6rem 0.8rem; background-color: var(--teal); color: white; border: var(--thin-border); box-shadow: var(--comic-shadow-sm);">Direct Bestellen</button>
+                            <a href="ontwerpen.html?add=${localId || ''}" class="btn btn-primary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Ontwerp Nu</a>
+                            <button onclick="orderProductDirect('${product.variantId}', '${product.title.replace(/'/g, "\\'")}')" class="btn btn-secondary btn-bounce" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; padding: 0.6rem 0.8rem; height: 42px; box-sizing: border-box;">Bestellen</button>
                         `;
                     } else {
                         buttonsHtml = `
