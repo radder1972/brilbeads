@@ -296,14 +296,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadStateFromLocalStorage();
     
     // Carousel logic for index.html hero image
-    const images = [
-        document.getElementById('hero-carousel-1'),
-        document.getElementById('hero-carousel-2'),
-        document.getElementById('hero-carousel-3')
-    ];
     const carouselContainer = document.getElementById('hero-carousel-container');
+    const images = carouselContainer ? Array.from(carouselContainer.querySelectorAll('.carousel-image')) : [];
     
-    if (images[0] && images[1] && images[2] && carouselContainer) {
+    if (images.length > 0 && carouselContainer) {
         let currentIndex = 0;
         let timer = null;
 
