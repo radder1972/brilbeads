@@ -900,8 +900,7 @@ function syncPlacedBeadsWithDatabase() {
     if (!customizerState.placedBeads) return;
     
     customizerState.placedBeads.forEach(bead => {
-        const beadDef = BEADS_DATABASE.kids.find(b => b.id === bead.id) || 
-                        BEADS_DATABASE.adults.find(b => b.id === bead.id);
+        const beadDef = BEADS_DATABASE.kids.find(b => b.id === bead.id);
         if (beadDef) {
             bead.price = beadDef.price;
             bead.variantId = beadDef.variantId || null;
@@ -921,38 +920,36 @@ async function syncBeadsCatalogWithShopify() {
         const shopifyBeads = await fetchShopifyBeads();
         if (!shopifyBeads || shopifyBeads.length === 0) return;
         
-        ['kids', 'adults'].forEach(category => {
-            BEADS_DATABASE[category].forEach(localBead => {
-                // Zoek match op basis van flexibele vergelijking (bijv. "Bril Bead KITTY" matcht "Hello Kitty")
-                const matchedShopifyBead = shopifyBeads.find(sb => {
-                    const sbTitle = sb.title.toLowerCase();
-                    const localId = localBead.id;
-                    const localName = localBead.name.toLowerCase();
-                    
-                    // 1. Directe match
-                    if (sbTitle === localName) return true;
-                    
-                    // 2. Specifieke ID/naam mapping
-                    if (localId === 'k-kitty' && (sbTitle.includes('kitty') || sbTitle.includes('hello'))) return true;
-                    if (localId === 'k-superman' && sbTitle.includes('superman')) return true;
-                    if (localId === 'k-bart' && (sbTitle.includes('bart') || sbTitle.includes('simpson'))) return true;
-                    
-                    // 3. Fallback: bevat de een de ander?
-                    return sbTitle.includes(localName) || localName.includes(sbTitle);
-                });
+        BEADS_DATABASE.kids.forEach(localBead => {
+            // Zoek match op basis van flexibele vergelijking (bijv. "Bril Bead KITTY" matcht "Hello Kitty")
+            const matchedShopifyBead = shopifyBeads.find(sb => {
+                const sbTitle = sb.title.toLowerCase();
+                const localId = localBead.id;
+                const localName = localBead.name.toLowerCase();
                 
-                if (matchedShopifyBead) {
-                    localBead.price = matchedShopifyBead.price;
-                    localBead.variantId = matchedShopifyBead.variantId;
-                    localBead.available = matchedShopifyBead.available;
-                    console.log(`Synced bead: ${localBead.name} -> Prijs: €${localBead.price}, Beschikbaar: ${localBead.available}`);
-                } else {
-                    // Als de bead niet is gevonden in de actieve Shopify-lijst, houden we hem beschikbaar voor demo/simulatie
-                    localBead.available = true;
-                    localBead.variantId = null;
-                    console.log(`Bead ${localBead.name} niet gevonden op Shopify. Fallback naar demo-beschikbaarheid.`);
-                }
+                // 1. Directe match
+                if (sbTitle === localName) return true;
+                
+                // 2. Specifieke ID/naam mapping
+                if (localId === 'k-kitty' && (sbTitle.includes('kitty') || sbTitle.includes('hello'))) return true;
+                if (localId === 'k-superman' && sbTitle.includes('superman')) return true;
+                if (localId === 'k-bart' && (sbTitle.includes('bart') || sbTitle.includes('simpson'))) return true;
+                
+                // 3. Fallback: bevat de een de ander?
+                return sbTitle.includes(localName) || localName.includes(sbTitle);
             });
+            
+            if (matchedShopifyBead) {
+                localBead.price = matchedShopifyBead.price;
+                localBead.variantId = matchedShopifyBead.variantId;
+                localBead.available = matchedShopifyBead.available;
+                console.log(`Synced bead: ${localBead.name} -> Prijs: €${localBead.price}, Beschikbaar: ${localBead.available}`);
+            } else {
+                // Als de bead niet is gevonden in de actieve Shopify-lijst, houden we hem beschikbaar voor demo/simulatie
+                localBead.available = true;
+                localBead.variantId = null;
+                console.log(`Bead ${localBead.name} niet gevonden op Shopify. Fallback naar demo-beschikbaarheid.`);
+            }
         });
         
         // Synchroniseer ook de reeds geplaatste beads in de winkelwagen
