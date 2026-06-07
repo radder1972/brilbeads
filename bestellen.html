@@ -130,7 +130,7 @@
                         <span class="nav-label">Ontwerpen</span>
                     </a>
                     
-                    <a href="https://b41z1g-vq.myshopify.com/collections/all" class="playful-nav-item" target="_blank" title="Bestel direct in onze Shopify winkel">
+                    <a href="bestellen.html" class="playful-nav-item active" title="Bestel je ontworpen bril">
                         <div class="nav-icon-img-wrapper">
                             <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
                         </div>
@@ -173,74 +173,23 @@
                 </div>
                 
                 <div class="checkout-layout">
-                    <!-- Checkout Left: Shipping & Payment Forms -->
-                    <div class="checkout-form-box">
-                        <form class="playful-form" id="checkout-form" onsubmit="handlePlaceOrder(event)">
-                            <h3 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.4rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-bottom: 1.5rem;">
-                                <img src="assets/icon_verzending.png" alt="Bezorgadres" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> 1. Bezorgadres
-                            </h3>
-                            
-                            <div class="form-grid-2">
-                                <div class="form-group">
-                                    <label for="checkout-firstname">Voornaam</label>
-                                    <input type="text" id="checkout-firstname" placeholder="Type je voornaam..." required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="checkout-lastname">Achternaam</label>
-                                    <input type="text" id="checkout-lastname" placeholder="Type je achternaam..." required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="checkout-email">E-mailadres</label>
-                                <input type="email" id="checkout-email" placeholder="naam@voorbeeld.nl" required>
-                            </div>
-                            
-                            <div class="form-grid-2">
-                                <div class="form-group" style="grid-column: span 1.5;">
-                                    <label for="checkout-street">Straatnaam</label>
-                                    <input type="text" id="checkout-street" placeholder="Hoofdstraat" required>
-                                </div>
-                                <div class="form-group" style="grid-column: span 0.5;">
-                                    <label for="checkout-number">Huisnummer</label>
-                                    <input type="text" id="checkout-number" placeholder="42A" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-grid-2">
-                                <div class="form-group">
-                                    <label for="checkout-city">Woonplaats</label>
-                                    <input type="text" id="checkout-city" placeholder="Amsterdam" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="checkout-zip">Postcode</label>
-                                    <input type="text" id="checkout-zip" placeholder="1234 AB" required>
-                                </div>
-                            </div>
-
-                            <h3 style="display: flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading); font-size: 1.4rem; border-bottom: 2px dashed var(--border-dark); padding-bottom: 0.5rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">
-                                <img src="assets/icon_betalen.png" alt="Betaalmethode" style="height: 2.2rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));"> 2. Betaalmethode
-                            </h3>
-                            
-                            <div class="payment-methods">
-                                <label class="payment-option active" id="pay-ideal">
-                                    <input type="radio" name="payment-method" value="ideal" checked onclick="selectPayment('ideal')">
-                                    <i class="fa-solid fa-building-columns" style="color:var(--teal); font-size:1.4rem;"></i> iDEAL (Rabobank, ING, Abn Amro)
-                                </label>
-                                <label class="payment-option" id="pay-card">
-                                    <input type="radio" name="payment-method" value="card" onclick="selectPayment('card')">
-                                    <i class="fa-solid fa-credit-card" style="color:var(--pink); font-size:1.4rem;"></i> Creditcard (Visa, Mastercard)
-                                </label>
-                                <label class="payment-option" id="pay-paypal">
-                                    <input type="radio" name="payment-method" value="paypal" onclick="selectPayment('paypal')">
-                                    <i class="fa-brands fa-paypal" style="color: #00457c; font-size:1.4rem;"></i> PayPal
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg btn-bounce" style="width: 100%; margin-top: 2.5rem;">
-                                Bestelling Plaatsen & Afrekenen <i class="fa-solid fa-circle-check"></i>
-                            </button>
-                        </form>
+                    <!-- Checkout Left: Explanation & Direct Link to Shopify -->
+                    <div class="checkout-form-box" style="text-align: center; padding: 3rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; border:var(--thin-border); background:var(--bg-pastel-pink); box-shadow:var(--comic-shadow-sm); display:flex; align-items:center; justify-content:center; font-size: 3rem; color: var(--pink-dark); animation: gentleWobble 4s ease-in-out infinite alternate;">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--text-dark);">Veilig afrekenen via Shopify</h2>
+                        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; max-width: 450px;">
+                            Je staat op het punt om jouw gepersonaliseerde bril met beads te bestellen. Klik op de knop hieronder om direct door te gaan naar onze beveiligde Shopify-omgeving.
+                        </p>
+                        <ul style="text-align: left; color: var(--text-muted); font-size: 0.95rem; margin: 0.5rem 0 1.5rem 0; display: flex; flex-direction: column; gap: 0.5rem; list-style-type: none;">
+                            <li><i class="fa-solid fa-circle-check" style="color: var(--teal); margin-right: 0.5rem;"></i> Voer eenmalig je adresgegevens in op Shopify</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: var(--teal); margin-right: 0.5rem;"></i> Veilig betalen met o.a. iDEAL, Creditcard of PayPal</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: var(--teal); margin-right: 0.5rem;"></i> Volledige orderbevestiging in je mailbox</li>
+                        </ul>
+                        <button onclick="handleRedirectToShopify()" class="btn btn-primary btn-lg btn-bounce" style="width: 100%; max-width: 400px; font-size: 1.2rem; padding: 1.2rem 2rem;">
+                            Naar Shopify & Afrekenen <i class="fa-solid fa-arrow-right-to-bracket" style="margin-left: 0.5rem;"></i>
+                        </button>
                     </div>
 
                     <div class="order-summary-box">
@@ -301,7 +250,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.70</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.71</span></p>
         </div>
     </footer>
     
@@ -397,49 +346,18 @@
             `;
         }
 
-        function selectPayment(method) {
-            // Remove active class from all options
-            document.getElementById('pay-ideal').classList.remove('active');
-            document.getElementById('pay-card').classList.remove('active');
-            document.getElementById('pay-paypal').classList.remove('active');
-            
-            // Add active class to selected option
-            document.getElementById('pay-' + method).classList.add('active');
-            playSound('click');
-        }
-
-        function handlePlaceOrder(e) {
-            e.preventDefault();
-            
+        function handleRedirectToShopify() {
             const savedState = localStorage.getItem('bril_beads_customizer_state');
             if (!savedState) return;
             const state = JSON.parse(savedState);
             
             playSound('save');
 
-            const firstName = document.getElementById('checkout-firstname').value.trim();
-            const lastName = document.getElementById('checkout-lastname').value.trim();
-            const emailAddress = document.getElementById('checkout-email').value.trim();
-            const street = document.getElementById('checkout-street').value.trim();
-            const number = document.getElementById('checkout-number').value.trim();
-            const city = document.getElementById('checkout-city').value.trim();
-            const zip = document.getElementById('checkout-zip').value.trim();
-
-            const shippingDetails = {
-                firstName: firstName,
-                lastName: lastName,
-                email: emailAddress,
-                street: street,
-                number: number,
-                city: city,
-                zip: zip
-            };
-
             const subtotal = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
             const shipping = subtotal >= 20 ? 0 : 2.95;
             const total = subtotal + shipping;
 
-            // Roep de Shopify checkout-logica aan met adresgegevens (Route B)
+            // Roep de Shopify checkout-logica aan (zonder adres, dat vullen ze op Shopify zelf in!)
             checkoutCart(state, () => {
                 // Succes-callback bij simulatiemodus: sla lokaal ordergeschiedenis op en toon succes-view
                 const orderId = 'BB-' + Math.floor(Math.random() * 9000 + 1000);
@@ -459,16 +377,16 @@
                 localStorage.removeItem('bril_beads_customizer_state');
 
                 // Render Success view
-                const mainBox = document.getElementById('checkout-container-main');
-                mainBox.innerHTML = `
+                const container = document.getElementById('checkout-container-main');
+                container.innerHTML = `
                     <div style="text-align: center; padding: 4rem 2rem;">
                         <div style="width: 100px; height: 100px; border-radius: 50%; border:var(--thick-border); background:var(--bg-pastel-pink); box-shadow:var(--comic-shadow); display:flex; align-items:center; justify-content:center; margin: 0 auto 2.5rem auto; font-size: 4rem; color: var(--pink-dark); animation: gentleWobble 4s ease-in-out infinite alternate;">
                             <i class="fa-solid fa-paper-plane"></i>
                         </div>
-                        <span class="badge badge-accent" style="font-size: 1.1rem; padding: 0.5rem 1.5rem; margin-bottom: 1.5rem;">Hoera, ${firstName}!</span>
+                        <span class="badge badge-accent" style="font-size: 1.1rem; padding: 0.5rem 1.5rem; margin-bottom: 1.5rem;">Hoera!</span>
                         <h1 class="section-title" style="font-size: 2.8rem; margin-bottom: 1.5rem; display:block;">Je bestelling is geplaatst!</h1>
                         <p style="font-size: 1.25rem; font-weight:600; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; margin-bottom: 3rem;">
-                            Je bestelnummer is <strong>${orderId}</strong>. We hebben een bevestigingsmail gestuurd naar <strong>${emailAddress}</strong>. We maken je beads zo snel mogelijk klaar voor verzending!
+                            Je bestelnummer is <strong>${orderId}</strong>. We maken je beads zo snel mogelijk klaar voor verzending!
                         </p>
                         
                         <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
@@ -477,7 +395,7 @@
                         </div>
                     </div>
                 `;
-            }, shippingDetails);
+            });
         }
     </script>
 </body>
