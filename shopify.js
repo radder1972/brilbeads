@@ -542,7 +542,7 @@ async function fetchShopifyProductsForGallery() {
             let description = node.description;
             if (!description || description.trim() === '') {
                 if (node.title.toLowerCase().includes('kitty')) {
-                    description = "De vrolijke Hello Kitty bead voor je bril. Gemaakt van zacht en duurzaam materiaal.";
+                    description = "Maak van je bril een schattige eyecatcher met de originele Bril Bead Kitty! Dit iconische en supervrolijke bedeltje brengt direct een glimlach op ieders gezicht. Gemaakt van hoogwaardig, zacht en huidvriendelijk siliconen dat comfortabel blijft zitten. Mix en match haar met je favoriete outfits!";
                 } else if (node.title.toLowerCase().includes('superman')) {
                     description = "De coole 3D Superman bead. Geef je bril superkrachten met dit coole logo bedeltje.";
                 } else if (node.title.toLowerCase().includes('bart')) {
@@ -580,7 +580,7 @@ function getMockProducts() {
         {
             id: 'mock-kitty',
             title: 'Bril Bead KITTY',
-            description: 'De vrolijke Hello Kitty bead voor je bril. Gemaakt van zacht en duurzaam materiaal.',
+            description: "Maak van je bril een schattige eyecatcher met de originele Bril Bead Kitty! Dit iconische en supervrolijke bedeltje brengt direct een glimlach op ieders gezicht. Gemaakt van hoogwaardig, zacht en huidvriendelijk siliconen dat comfortabel blijft zitten. Mix en match haar met je favoriete outfits!",
             available: true,
             images: [
                 { url: 'assets/hero_photo_pink_kitty.png', altText: 'Bril Bead Kitty Roze' },
