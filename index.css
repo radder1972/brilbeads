@@ -3,8 +3,11 @@
    ========================================================================== */
 
 /* Design Tokens & Playful Variables */
+:root, *, *::before, *::after {
+    color-scheme: only light !important;
+}
+
 :root {
-    color-scheme: only light;
     /* Main Playful Palette (Matches Logo Style) */
     --pink: #f196a6;
     --pink-dark: #d37383;
@@ -629,6 +632,20 @@ section {
     box-shadow: var(--comic-shadow);
     transform: rotate(-1deg);
     animation: gentleWobble 4s ease-in-out infinite alternate;
+}
+
+.carousel-image {
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-image.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.carousel-image.visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 @keyframes gentleWobble {
@@ -1894,6 +1911,9 @@ section {
 
     .playful-nav-container {
         gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
     }
 }
 /* Customizer moved to separate ontwerpen.html page */
