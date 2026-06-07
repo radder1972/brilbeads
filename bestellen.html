@@ -301,20 +301,45 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.64</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.65</span></p>
         </div>
     </footer>
     
     <script src="app.js"></script>
+    <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
+    <script src="shopify.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             renderCheckoutPage();
         });
 
         function renderCheckoutPage() {
-            const savedState = localStorage.getItem('bril_beads_customizer_state');
+            const urlParams = new URLSearchParams(window.location.search);
             const container = document.getElementById('checkout-container-main');
             
+            if (urlParams.get('direct_success') === 'true') {
+                const orderId = urlParams.get('orderId') || 'BB-' + Math.floor(Math.random() * 9000 + 1000);
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 4rem 2rem;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; border:var(--thick-border); background:var(--bg-pastel-pink); box-shadow:var(--comic-shadow); display:flex; align-items:center; justify-content:center; margin: 0 auto 2.5rem auto; font-size: 4rem; color: var(--pink-dark); animation: gentleWobble 4s ease-in-out infinite alternate;">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+                        <span class="badge badge-accent" style="font-size: 1.1rem; padding: 0.5rem 1.5rem; margin-bottom: 1.5rem;">Hoera!</span>
+                        <h1 class="section-title" style="font-size: 2.8rem; margin-bottom: 1.5rem; display:block;">Je bestelling is geplaatst!</h1>
+                        <p style="font-size: 1.25rem; font-weight:600; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; margin-bottom: 3rem;">
+                            Je bestelnummer is <strong>${orderId}</strong>. We maken je beads zo snel mogelijk klaar voor verzending!
+                        </p>
+                        
+                        <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
+                            <a href="index.html" class="btn btn-primary btn-lg btn-bounce">Terug naar Home</a>
+                            <a href="account.html" class="btn btn-secondary btn-lg">Naar Mijn Account</a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const savedState = localStorage.getItem('bril_beads_customizer_state');
             if (!savedState) {
                 renderEmptyCheckout(container);
                 return;
@@ -393,43 +418,50 @@
             playSound('save');
 
             const firstName = document.getElementById('checkout-firstname').value;
+            const emailAddress = document.getElementById('checkout-email').value;
             const subtotal = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
             const shipping = subtotal >= 20 ? 0 : 2.95;
             const total = subtotal + shipping;
 
-            // Generate order ID
-            const orderId = 'BB-' + Math.floor(Math.random() * 9000 + 1000);
+            // Roep de Shopify checkout-logica aan
+            checkoutCart(state, () => {
+                // Succes-callback bij simulatiemodus: sla lokaal ordergeschiedenis op en toon succes-view
+                const orderId = 'BB-' + Math.floor(Math.random() * 9000 + 1000);
 
-            // Register order history in localStorage (so it displays on account.html)
-            // (Simulate actual order processing)
-            const orderRecord = {
-                id: orderId,
-                date: new Date().toLocaleDateString('nl-NL'),
-                total: total
-            };
-            
-            // Clear cart state
-            localStorage.removeItem('bril_beads_customizer_state');
+                const orderRecord = {
+                    id: orderId,
+                    date: new Date().toLocaleDateString('nl-NL'),
+                    total: total
+                };
+                
+                // Voeg toe aan account bestellingen
+                const savedOrders = JSON.parse(localStorage.getItem('bril_beads_orders') || '[]');
+                savedOrders.push(orderRecord);
+                localStorage.setItem('bril_beads_orders', JSON.stringify(savedOrders));
 
-            // Render Success view
-            const mainBox = document.getElementById('checkout-container-main');
-            mainBox.innerHTML = `
-                <div style="text-align: center; padding: 4rem 2rem;">
-                    <div style="width: 100px; height: 100px; border-radius: 50%; border:var(--thick-border); background:var(--bg-pastel-pink); box-shadow:var(--comic-shadow); display:flex; align-items:center; justify-content:center; margin: 0 auto 2.5rem auto; font-size: 4rem; color: var(--pink-dark); animation: gentleWobble 4s ease-in-out infinite alternate;">
-                        <i class="fa-solid fa-paper-plane"></i>
+                // Clear cart state
+                localStorage.removeItem('bril_beads_customizer_state');
+
+                // Render Success view
+                const mainBox = document.getElementById('checkout-container-main');
+                mainBox.innerHTML = `
+                    <div style="text-align: center; padding: 4rem 2rem;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; border:var(--thick-border); background:var(--bg-pastel-pink); box-shadow:var(--comic-shadow); display:flex; align-items:center; justify-content:center; margin: 0 auto 2.5rem auto; font-size: 4rem; color: var(--pink-dark); animation: gentleWobble 4s ease-in-out infinite alternate;">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+                        <span class="badge badge-accent" style="font-size: 1.1rem; padding: 0.5rem 1.5rem; margin-bottom: 1.5rem;">Hoera, ${firstName}!</span>
+                        <h1 class="section-title" style="font-size: 2.8rem; margin-bottom: 1.5rem; display:block;">Je bestelling is geplaatst!</h1>
+                        <p style="font-size: 1.25rem; font-weight:600; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; margin-bottom: 3rem;">
+                            Je bestelnummer is <strong>${orderId}</strong>. We hebben een bevestigingsmail gestuurd naar <strong>${emailAddress}</strong>. We maken je beads zo snel mogelijk klaar voor verzending!
+                        </p>
+                        
+                        <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
+                            <a href="index.html" class="btn btn-primary btn-lg btn-bounce">Terug naar Home</a>
+                            <a href="account.html" class="btn btn-secondary btn-lg">Naar Mijn Account</a>
+                        </div>
                     </div>
-                    <span class="badge badge-accent" style="font-size: 1.1rem; padding: 0.5rem 1.5rem; margin-bottom: 1.5rem;">Hoera, ${firstName}!</span>
-                    <h1 class="section-title" style="font-size: 2.8rem; margin-bottom: 1.5rem; display:block;">Je bestelling is geplaatst!</h1>
-                    <p style="font-size: 1.25rem; font-weight:600; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; margin-bottom: 3rem;">
-                        Je bestelnummer is <strong>${orderId}</strong>. We hebben een bevestigingsmail gestuurd naar <strong>${document.getElementById('checkout-email').value}</strong>. We maken je beads zo snel mogelijk klaar voor verzending!
-                    </p>
-                    
-                    <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
-                        <a href="index.html" class="btn btn-primary btn-lg btn-bounce">Terug naar Home</a>
-                        <a href="account.html" class="btn btn-secondary btn-lg">Naar Mijn Account</a>
-                    </div>
-                </div>
-            `;
+                `;
+            });
         }
     </script>
 </body>
