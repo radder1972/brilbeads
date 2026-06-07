@@ -15,29 +15,54 @@
     <link rel="stylesheet" href="index.css">
     <style>
         .contact-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
         }
         .info-card {
             background: var(--bg-cream);
             border: var(--thin-border);
             border-radius: var(--radius-md);
-            padding: 1.5rem;
+            padding: 1.2rem 1.5rem;
             box-shadow: var(--comic-shadow-sm);
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.2rem;
         }
-        .info-icon {
-            font-size: 2rem;
-            color: var(--pink);
+        .info-card-icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
-        @media (max-width: 768px) {
-            .contact-info-grid {
-                grid-template-columns: 1fr;
-            }
+        .info-card-icon-wrapper img {
+            max-height: 2.8rem;
+            max-width: 3.5rem;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));
+        }
+        .info-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info-card-content h4 {
+            margin: 0 0 0.2rem 0;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+        .info-card-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.2;
         }
     </style>
 </head>
@@ -151,31 +176,38 @@
                     </div>
 
                     <div class="contact-sidebar">
-                        <div class="contact-visual" style="margin-bottom: 1.5rem;">
-                            <div class="retro-phone-circle bg-contact" style="background-color: var(--bg-pastel-pink); width: 140px; height: 140px; font-size: 3.5rem;">
-                                <img src="assets/icon_contact.png" alt="Contact">
-                            </div>
+                        <div style="margin-bottom: 1.8rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.6rem;">Direct Contact</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">
+                                Wil je direct antwoord op je vraag of persoonlijk advies? Bereik ons via onderstaande kanalen. We staan voor je klaar!
+                            </p>
                         </div>
-                        <div class="contact-info-grid" style="width: 100%; display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="contact-info-grid">
                             <div class="info-card">
-                                <img src="assets/icon_email.png" alt="E-mail" style="height: 2.8rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));">
-                                <div>
-                                    <h4 style="font-family: var(--font-heading);">E-mail ons</h4>
-                                    <p style="font-size: 0.9rem;">info@brilbeads.nl</p>
+                                <div class="info-card-icon-wrapper">
+                                    <img src="assets/icon_email.png" alt="E-mail">
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>E-mail ons</h4>
+                                    <p>info@brilbeads.nl</p>
                                 </div>
                             </div>
                             <div class="info-card">
-                                <img src="assets/icon_contact.png" alt="Telefoon" style="height: 2.8rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));">
-                                <div>
-                                    <h4 style="font-family: var(--font-heading);">Bel ons</h4>
-                                    <p style="font-size: 0.9rem;">+31 (0)20 123 4567</p>
+                                <div class="info-card-icon-wrapper">
+                                    <img src="assets/icon_contact.png" alt="Telefoon">
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Bel ons</h4>
+                                    <p>+31 (0)20 123 4567</p>
                                 </div>
                             </div>
                             <div class="info-card">
-                                <img src="assets/icon_location.png" alt="Locatie" style="height: 2.8rem; width: auto; filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));">
-                                <div>
-                                    <h4 style="font-family: var(--font-heading);">Kantoor</h4>
-                                    <p style="font-size: 0.9rem;">Keizersgracht 420, Amsterdam</p>
+                                <div class="info-card-icon-wrapper">
+                                    <img src="assets/icon_location.png" alt="Locatie">
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Kantoor</h4>
+                                    <p>Keizersgracht 420, Amsterdam</p>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +241,7 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.58</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.59</span></p>
         </div>
     </footer>
     
