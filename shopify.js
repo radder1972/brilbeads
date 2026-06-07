@@ -97,7 +97,7 @@ async function fetchShopifyBeads() {
 
     const query = `
         query getBeads {
-          products(first: 50, query: "tag:bead OR product_type:Bead") {
+          products(first: 50) {
             edges {
               node {
                 id
