@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="only light">
+    <title>Contact met Bril Beads | DIY Modieuze Accessoires</title>
+    <meta name="description" content="Neem contact op met Bril Beads. Heb je vragen over je bestelling, suggesties of wil je een eigen ontwerp insturen? Stuur ons een bericht.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .contact-info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        .info-card {
+            background: var(--bg-cream);
+            border: var(--thin-border);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            box-shadow: var(--comic-shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .info-card-icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .info-card-icon-wrapper img {
+            max-height: 2.8rem;
+            max-width: 3.5rem;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(2px 2px 0px rgba(58, 38, 28, 0.15));
+        }
+        .info-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info-card-content h4 {
+            margin: 0 0 0.2rem 0;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+        .info-card-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <!-- Top-Right Utilities (Winkelwagen & Account) -->
+        <div class="header-utilities">
+            <a href="winkelwagen.html" class="utility-nav-item" title="Bekijk je winkelwagen">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_winkelwagen.png" alt="Winkelwagen" class="utility-icon-img">
+                </div>
+            </a>
+            <a href="account.html" class="utility-nav-item" title="Mijn Account">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_account.png" alt="Account" class="utility-icon-img">
+                </div>
+            </a>
+                        <a href="garantie.html" class="utility-nav-item" title="1 jaar 100% tevredenheidsgarantie">
+                <div class="utility-icon-wrapper">
+                    <img src="assets/icon_garantie.png" alt="Garantie" class="utility-icon-img">
+                </div>
+            </a>
+        </div>
+
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo" id="header-logo-link">
+                <img src="assets/logo.png?v=1" alt="Bril Beads Logo" class="logo-img">
+            </a>
+            
+            <nav class="playful-nav" id="main-navigation">
+                <div class="playful-nav-container">
+                    <a href="index.html" class="playful-nav-item" title="Terug naar Home">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_home.png" alt="Home" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    
+                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Ontwerpen</span>
+                    </a>
+
+                    <a href="producten.html" class="playful-nav-item" title="Bekijk alle producten">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Bestellen</span>
+                    </a>
+                    
+                    <a href="faq.html" class="playful-nav-item" title="Veelgestelde Vragen">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_faq.png" alt="Veelgestelde Vragen" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Veelgestelde Vragen</span>
+                    </a>
+                    
+                    <a href="contact.html" class="playful-nav-item active" title="Neem contact met ons op">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_contact.png" alt="Contact" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Contact</span>
+                    </a>
+                    
+                    <a href="verzending.html" class="playful-nav-item" title="Gratis verzending vanaf &euro;20">
+                        <div class="nav-icon-img-wrapper">
+                            <img src="assets/icon_verzending.png" alt="Verzending" class="nav-icon-img">
+                        </div>
+                        <span class="nav-label">Verzending</span>
+                    </a>
+                    
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 4rem 0;">
+        <div class="container">
+            <div class="contact-card glass" style="margin-bottom: 2rem;">
+                <div class="page-title-group" style="margin-bottom: 1rem;">
+                    <span class="badge badge-accent">Vragen?</span>
+                    <h1 class="section-title text-left" style="font-size: 2.5rem;">Contact met Bril Beads</h1>
+                </div>
+                <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem;">
+                    Heb je een vraag over onze beads of wil je een eigen ontwerp insturen? Stuur ons een vrolijk berichtje!
+                </p>
+
+                <div class="contact-body-grid">
+                    <div class="contact-form-wrapper">
+                        <form class="playful-form" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="contact-name">Jouw Naam</label>
+                                <input type="text" id="contact-name" placeholder="Type je naam..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">E-mailadres</label>
+                                <input type="email" id="contact-email" placeholder="naam@voorbeeld.nl" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Jouw Bericht</label>
+                                <textarea id="contact-message" placeholder="Wat wil je ons vertellen?..." rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-bounce">
+                                Bericht Verzenden <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="contact-sidebar">
+                        <div style="margin-bottom: 1.8rem;">
+                            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.6rem;">Direct Contact</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">
+                                Wil je direct antwoord op je vraag of persoonlijk advies? Bereik ons via onderstaande kanalen. We staan voor je klaar!
+                            </p>
+                        </div>
+                        <div class="contact-info-grid">
+                            <div class="info-card">
+                                <div class="info-card-icon-wrapper">
+                                    <img src="assets/icon_email.png" alt="E-mail">
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>E-mail ons</h4>
+                                    <p>info@brilbeads.nl</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon-wrapper">
+                                    <img src="assets/icon_contact.png" alt="Telefoon">
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Bel ons</h4>
+                                    <p>+31 (0)20 123 4567</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon-wrapper">
+                                    <img src="assets/icon_location.png" alt="Locatie">
+                                </div>
+                                <div class="info-card-content">
+                                    <h4>Kantoor</h4>
+                                    <p>Keizersgracht 420, Amsterdam</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <div class="footer-logo-col">
+                <a href="index.html" class="brand-logo">
+                    <img src="assets/logo.png?v=1" alt="Bril Beads Logo" class="logo-img">
+                    <span class="brand-text"><span class="bril-text">BRIL</span> <span class="accent-text">BEADS</span></span>
+                </a>
+            </div>
+            <div class="footer-text-col">
+                <p class="footer-desc">
+                    Vrolijke, speelse en chique DIY-accessoires om je bril een uniek karakter te geven.
+                </p>
+            </div>
+            <div class="footer-social-col">
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.79</span></p>
+        </div>
+    </footer>
+    
+    <script src="app.js?v=v0.68.79"></script>
+</body>
+</html>
