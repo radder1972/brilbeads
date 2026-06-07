@@ -311,7 +311,7 @@ async function fetchShopifyProductsForGallery() {
                 title
                 description
                 availableForSale
-                images(first: 1) {
+                images(first: 5) {
                   edges {
                     node {
                       url
@@ -342,7 +342,19 @@ async function fetchShopifyProductsForGallery() {
         const products = data.products.edges.map(edge => {
             const node = edge.node;
             const variantNode = node.variants.edges[0]?.node;
-            const imageNode = node.images.edges[0]?.node;
+            
+            const imageEdges = node.images.edges;
+            const images = imageEdges.map(e => ({
+                url: e.node.url,
+                altText: e.node.altText || node.title
+            }));
+            
+            if (images.length === 0) {
+                images.push({
+                    url: 'assets/logo.png?v=2',
+                    altText: node.title
+                });
+            }
             
             // Fallback beschrijvingen voor betere uitstraling
             let description = node.description;
@@ -363,8 +375,9 @@ async function fetchShopifyProductsForGallery() {
                 title: node.title,
                 description: description,
                 available: node.availableForSale,
-                imageUrl: imageNode ? imageNode.url : 'assets/logo.png?v=2',
-                imageAlt: imageNode && imageNode.altText ? imageNode.altText : node.title,
+                images: images,
+                imageUrl: images[0].url,
+                imageAlt: images[0].altText,
                 variantId: variantNode ? variantNode.id : null,
                 price: variantNode ? parseFloat(variantNode.price.amount) : 0,
                 currency: variantNode ? variantNode.price.currencyCode : 'EUR'
@@ -385,6 +398,11 @@ function getMockProducts() {
             title: 'Bril Bead KITTY',
             description: 'De vrolijke Hello Kitty bead voor je bril. Gemaakt van zacht en duurzaam materiaal.',
             available: true,
+            images: [
+                { url: 'assets/hero_photo_pink_kitty.png', altText: 'Bril Bead Kitty Roze' },
+                { url: 'assets/hero_photo_blue_kitty.png', altText: 'Bril Bead Kitty Blauw' },
+                { url: 'assets/logo.png?v=2', altText: 'Bril Beads Logo' }
+            ],
             imageUrl: 'assets/hero_photo_pink_kitty.png',
             imageAlt: 'Bril Bead Kitty',
             variantId: 'gid://shopify/ProductVariant/53980035481937',
@@ -396,6 +414,11 @@ function getMockProducts() {
             title: 'Bril Bead SUPERMAN 3D',
             description: 'De stoere 3D Superman bead. Geef je bril superkrachten met dit coole logo bedeltje.',
             available: true,
+            images: [
+                { url: 'assets/hero_photo_boy_superman_close.png', altText: 'Bril Bead Superman 3D Detail' },
+                { url: 'assets/hero_photo_boy_superman.png', altText: 'Bril Bead Superman 3D' },
+                { url: 'assets/logo.png?v=2', altText: 'Bril Beads Logo' }
+            ],
             imageUrl: 'assets/hero_photo_boy_superman_close.png',
             imageAlt: 'Bril Bead Superman 3D',
             variantId: 'gid://shopify/ProductVariant/53980223504721',
@@ -407,6 +430,10 @@ function getMockProducts() {
             title: 'Bril Bead BART',
             description: 'De grappige spikkel-bedel van Bart Simpson. Perfect voor een speelse en opvallende look.',
             available: true,
+            images: [
+                { url: 'assets/hero_photo_green_bart.png', altText: 'Bril Bead Bart Simpson' },
+                { url: 'assets/logo.png?v=2', altText: 'Bril Beads Logo' }
+            ],
             imageUrl: 'assets/hero_photo_green_bart.png',
             imageAlt: 'Bril Bead Bart',
             variantId: 'gid://shopify/ProductVariant/53981153231185',
