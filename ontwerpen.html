@@ -333,14 +333,14 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.83</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.84</span></p>
         </div>
     </footer>
 
     <!-- Custom JavaScript -->
-    <script src="app.js?v=v0.68.83"></script>
+    <script src="app.js?v=v0.68.84"></script>
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.83"></script>
+    <script src="shopify.js?v=v0.68.84"></script>
     <script>
         async function orderDirect() {
             const savedState = localStorage.getItem('bril_beads_customizer_state');
@@ -354,32 +354,15 @@
                 return;
             }
             
-            playSound('save');
+            const totalBeadPrice = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
             
-            // Start het afrekenproces
-            await checkoutCart(state, () => {
-                // Success-callback bij simulatiemodus: sla de bestelling lokaal op en stuur door naar success op bestellen.html
-                const subtotal = state.placedBeads.reduce((acc, curr) => acc + curr.price, 0);
-                const shipping = subtotal >= 20 ? 0 : 2.95;
-                const total = subtotal + shipping;
-                const orderId = 'BB-' + Math.floor(Math.random() * 9000 + 1000);
-                
-                const orderRecord = {
-                    id: orderId,
-                    date: new Date().toLocaleDateString('nl-NL'),
-                    total: total
-                };
-                
-                // Voeg toe aan bestelgeschiedenis
-                const savedOrders = JSON.parse(localStorage.getItem('bril_beads_orders') || '[]');
-                savedOrders.push(orderRecord);
-                localStorage.setItem('bril_beads_orders', JSON.stringify(savedOrders));
-                
-                // Clear winkelwagen
-                localStorage.removeItem('bril_beads_customizer_state');
-                
-                // Stuur door naar bestellen.html met direct_success=true query param
-                window.location.href = `bestellen.html?direct_success=true&orderId=${orderId}`;
+            // Voeg het custom ontwerp toe aan de centrale winkelwagen
+            addToCart({
+                type: 'customizer',
+                frameColor: state.frameColor,
+                attachmentMethod: state.attachmentMethod,
+                placedBeads: state.placedBeads,
+                price: totalBeadPrice
             });
         }
     </script>
