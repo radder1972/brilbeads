@@ -123,13 +123,7 @@
                         <span class="nav-label">Home</span>
                     </a>
                     
-                    <a href="ontwerpen.html" class="playful-nav-item" title="Ontwerp je eigen bril!">
-                        <div class="nav-icon-img-wrapper">
-                            <img src="assets/icon_ontwerpen.png" alt="Ontwerpen" class="nav-icon-img">
-                        </div>
-                        <span class="nav-label">Ontwerpen</span>
-                    </a>
-
+                    
                     <a href="producten.html" class="playful-nav-item active" title="Bekijk alle producten">
                         <div class="nav-icon-img-wrapper">
                             <img src="assets/icon_bestellen.png" alt="Bestellen" class="nav-icon-img">
@@ -245,13 +239,13 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.88</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.89</span></p>
         </div>
     </footer>
     
-    <script src="app.js?v=v0.68.88"></script>
+    <script src="app.js?v=v0.68.89"></script>
     <script src="https://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
-    <script src="shopify.js?v=v0.68.88"></script>
+    <script src="shopify.js?v=v0.68.89"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             renderCheckoutPage();
@@ -283,7 +277,7 @@
                 return;
             }
 
-            const cartItems = getCartItems();
+            const cartItems = getCartItems().filter(item => item.type === 'loose_bead');
             if (!cartItems || cartItems.length === 0) {
                 renderEmptyCheckout(container);
                 return;
@@ -298,23 +292,7 @@
             cartItems.forEach(item => {
                 const itemDiv = document.createElement('div');
                 
-                if (item.type === 'customizer') {
-                    subtotal += item.price;
-                    const beadsText = item.placedBeads.map(b => b.name).join(', ') || 'Geen beads';
-                    const systemText = item.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Klik Clip';
-                    
-                    itemDiv.innerHTML = `
-                        <div style="background:#ffffff; border:var(--thin-border); border-radius:12px; padding:1rem; box-shadow:var(--comic-shadow-sm); display:flex; flex-direction:column; gap:0.5rem;">
-                            <span style="font-family:var(--font-heading); font-size:1.05rem; display:block; color:var(--text-dark);">Gepersonaliseerde Bril (Kids)</span>
-                            <span style="font-size:0.8rem; color:var(--text-muted); display:block;">Montuur: ${item.frameColor.charAt(0).toUpperCase() + item.frameColor.slice(1)} | Bevestiging: ${systemText}</span>
-                            <span style="font-size:0.8rem; color:var(--text-dark); display:block;">Beads: ${beadsText}</span>
-                            <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.95rem; margin-top:0.3rem; border-top:1px dashed #eee; padding-top:0.3rem;">
-                                <span>1x</span>
-                                <span>&euro; ${item.price.toFixed(2).replace('.', ',')}</span>
-                            </div>
-                        </div>
-                    `;
-                } else if (item.type === 'loose_bead') {
+                if (item.type === 'loose_bead') {
                     const itemCost = item.price * item.quantity;
                     subtotal += itemCost;
                     
@@ -349,26 +327,24 @@
                 </div>
                 <div style="text-align: center; padding: 4rem 2rem;">
                     <img src="assets/icon_betalen.png" alt="Geld" style="height: 5rem; width: auto; opacity: 0.3; margin-bottom: 2rem; display: inline-block;">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem;">Geen ontwerpen of beads om te bestellen</h2>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1rem;">Geen beads om te bestellen</h2>
                     <p style="margin-bottom: 2.5rem; color: var(--text-muted); max-width: 500px; margin-left: auto; margin-right: auto;">
-                        Je hebt nog geen ontwerpen of beads in je winkelwagen staan. Ontwerp eerst een bril met beads of kies beads uit de winkel!
+                        Je hebt nog geen beads in je winkelwagen staan. Kies eerst beads uit de winkel!
                     </p>
-                    <a href="ontwerpen.html" class="btn btn-primary btn-lg btn-bounce">Start Nu Met Ontwerpen</a>
+                    <a href="producten.html" class="btn btn-primary btn-lg btn-bounce">Kies Beads</a>
                 </div>
             `;
         }
 
         function handleRedirectToShopify() {
-            const cartItems = getCartItems();
+            const cartItems = getCartItems().filter(item => item.type === 'loose_bead');
             if (!cartItems || cartItems.length === 0) return;
             
             playSound('save');
 
             let subtotal = 0;
             cartItems.forEach(item => {
-                if (item.type === 'customizer') {
-                    subtotal += item.price;
-                } else if (item.type === 'loose_bead') {
+                if (item.type === 'loose_bead') {
                     subtotal += item.price * item.quantity;
                 }
             });
