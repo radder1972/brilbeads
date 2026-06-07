@@ -295,6 +295,185 @@ async function checkoutCart(customizerState, onSuccessCallback, shippingDetails 
     }
 }
 
+async function checkoutUnifiedCart(cartItems, onSuccessCallback, shippingDetails = null) {
+    if (!cartItems || cartItems.length === 0) {
+        alert("Je winkelwagen is leeg!");
+        return;
+    }
+
+    const lines = [];
+
+    // Bouw de lines op voor elk item in de winkelwagen
+    cartItems.forEach(item => {
+        if (item.type === 'customizer') {
+            const properties = generateLineItemProperties({
+                targetAudience: 'kids',
+                frameColor: item.frameColor,
+                attachmentMethod: item.attachmentMethod,
+                placedBeads: item.placedBeads
+            });
+
+            const customAttributes = Object.entries(properties).map(([key, value]) => ({
+                key,
+                value: String(value)
+            }));
+
+            let mainVariantId = SHOPIFY_CONFIG.customGlassesVariantId;
+            const firstBeadWithVariant = item.placedBeads.find(b => b.variantId);
+            if (firstBeadWithVariant) {
+                mainVariantId = firstBeadWithVariant.variantId;
+            }
+
+            lines.push({
+                quantity: 1,
+                merchandiseId: mainVariantId,
+                attributes: customAttributes
+            });
+
+            // Tel overige beads
+            const beadCounts = {};
+            item.placedBeads.forEach(bead => {
+                if (bead.variantId) {
+                    beadCounts[bead.variantId] = (beadCounts[bead.variantId] || 0) + 1;
+                }
+            });
+
+            if (beadCounts[mainVariantId]) {
+                beadCounts[mainVariantId]--;
+            }
+
+            for (const [variantId, quantity] of Object.entries(beadCounts)) {
+                if (quantity > 0) {
+                    lines.push({
+                        quantity: quantity,
+                        merchandiseId: variantId
+                    });
+                }
+            }
+        } else if (item.type === 'loose_bead') {
+            if (item.variantId) {
+                lines.push({
+                    quantity: item.quantity || 1,
+                    merchandiseId: item.variantId
+                });
+            }
+        }
+    });
+
+    if (lines.length === 0) {
+        alert("Geen geldige Shopify Product varianten gevonden in de winkelwagen.");
+        return;
+    }
+
+    // --- ECHTE SHOPIFY CHECKOUT VIA CART API ---
+    if (isShopifyConfigured) {
+        try {
+            console.log("Creating Unified Shopify Cart via Cart API...", lines);
+
+            const cartInput = { lines };
+
+            // Voeg optioneel de koperinformatie toe (Route B)
+            if (shippingDetails && shippingDetails.email) {
+                const trimmedEmail = shippingDetails.email.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (emailRegex.test(trimmedEmail)) {
+                    cartInput.buyerIdentity = {
+                        email: trimmedEmail,
+                        countryCode: 'NL',
+                        deliveryAddressPreferences: [
+                            {
+                                deliveryAddress: {
+                                    firstName: shippingDetails.firstName ? shippingDetails.firstName.trim() : '',
+                                    lastName: shippingDetails.lastName ? shippingDetails.lastName.trim() : '',
+                                    address1: `${shippingDetails.street} ${shippingDetails.number}`.trim(),
+                                    city: shippingDetails.city ? shippingDetails.city.trim() : '',
+                                    zip: shippingDetails.zip ? shippingDetails.zip.trim() : '',
+                                    country: 'Netherlands'
+                                }
+                            }
+                        ]
+                    };
+                }
+            }
+
+            const mutation = `
+                mutation cartCreate($input: CartInput!) {
+                  cartCreate(input: $input) {
+                    cart {
+                      id
+                      checkoutUrl
+                    }
+                    userErrors {
+                      field
+                      message
+                    }
+                  }
+                }
+            `;
+
+            const data = await executeGraphQL(mutation, { input: cartInput });
+
+            if (data.cartCreate.userErrors && data.cartCreate.userErrors.length > 0) {
+                const errors = data.cartCreate.userErrors.map(e => `${e.field}: ${e.message}`).join(', ');
+                throw new Error(`Shopify UserErrors: ${errors}`);
+            }
+
+            const checkoutUrl = data.cartCreate.cart.checkoutUrl;
+            console.log("Unified Shopify Checkout URL verkregen. Omleiden naar: ", checkoutUrl);
+            window.location.href = checkoutUrl;
+
+        } catch (error) {
+            console.error("Fout tijdens het aanmaken van Unified Shopify Cart:", error);
+            const useFallback = confirm(
+                "❌ Shopify Verbindingsfout.\n\n" +
+                "Er is een fout opgetreden bij het verbinden met Shopify.\n\n" +
+                "Wil je de bestelling in SIMULATIE-modus afronden?"
+            );
+            if (useFallback && onSuccessCallback) {
+                onSuccessCallback();
+            }
+        }
+    } 
+    // --- SIMULATIE MODUS ---
+    else {
+        console.log("=== SHOPIFY UNIFIED SIMULATION CHECKOUT ===");
+        console.log("Shopify Domain:", SHOPIFY_CONFIG.shopDomain);
+        console.log("Winkelwagen Items:", cartItems);
+        console.log("Gegenereerde lines voor Shopify:", lines);
+        console.log("===========================================");
+
+        // Bouw een duidelijke weergave van de bestelling voor de simulatie-alert
+        let simulationText = '';
+        let itemIdx = 1;
+        cartItems.forEach(item => {
+            if (item.type === 'customizer') {
+                simulationText += `📦 Item ${itemIdx++}: Gepersonaliseerde Bril (Montuur: ${item.frameColor}, Bevestiging: ${item.attachmentMethod === 'slide' ? 'Siliconen Ring' : 'Klik Clip'})\n`;
+                item.placedBeads.forEach((bead, bIdx) => {
+                    simulationText += `   - Bead ${bIdx + 1}: ${bead.name} (X: ${Math.round(bead.x)}, Y: ${Math.round(bead.y)}, Variant: ${bead.variantId ? 'Gekoppeld' : 'Geen Variant ID'})\n`;
+                });
+                simulationText += '\n';
+            } else if (item.type === 'loose_bead') {
+                simulationText += `📦 Item ${itemIdx++}: Losse Bead - ${item.name}\n`;
+                simulationText += `   - Aantal: ${item.quantity}\n`;
+                simulationText += `   - Prijs: € ${(item.price * item.quantity).toFixed(2).replace('.', ',')}\n`;
+                simulationText += `   - Variant: ${item.variantId ? 'Gekoppeld' : 'Geen Variant ID'}\n\n`;
+            }
+        });
+
+        alert(
+            `🎉 [Simulatie Mode] Shopify Unified Checkout Gestart!\n\n` +
+            `De volgende items worden doorgestuurd naar de Shopify Cart API:\n\n` +
+            `${simulationText}` +
+            `Vul echte credentials in shopify.js in om live te koppelen.`
+        );
+
+        if (onSuccessCallback) {
+            onSuccessCallback();
+        }
+    }
+}
+
 /**
  * Haalt alle Shopify producten op ten behoeve van een catalogus/overzichtspagina.
  * Inclusief afbeeldingen en omschrijvingen.
