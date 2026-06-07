@@ -4,6 +4,7 @@
 
 /* Design Tokens & Playful Variables */
 :root {
+    color-scheme: only light;
     /* Main Playful Palette (Matches Logo Style) */
     --pink: #f196a6;
     --pink-dark: #d37383;
