@@ -93,114 +93,6 @@ const BEADS_DATABASE = {
             `
         },
         {
-            id: 'k-star',
-            name: 'Vrolijke Ster',
-            price: 2.50,
-            color: 'var(--pink)',
-            svgContent: `
-                <!-- Silicone Ring Backing -->
-                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
-                <!-- Star shape -->
-                <path d="M 0 -15 L 4.5 -4.5 L 15 -4.5 L 6.5 2.5 L 9.5 13 L 0 6.5 L -9.5 13 L -6.5 2.5 L -15 -4.5 L -4.5 -4.5 Z" fill="var(--pink)" stroke="#fff" stroke-width="1.5" />
-                <!-- Smile detail -->
-                <circle cx="-3" cy="-1" r="1" fill="#fff" />
-                <circle cx="3" cy="-1" r="1" fill="#fff" />
-                <path d="M -2 2 Q 0 4 2 2" stroke="#fff" stroke-width="1" stroke-linecap="round" fill="none" />
-            `
-        },
-        {
-            id: 'k-panda',
-            name: 'Panda Vriend',
-            price: 2.75,
-            color: '#ffffff',
-            svgContent: `
-                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
-                <!-- Ears -->
-                <circle cx="-10" cy="-10" r="4.5" fill="#222" />
-                <circle cx="10" cy="-10" r="4.5" fill="#222" />
-                <!-- Face -->
-                <circle cx="0" cy="0" r="13" fill="#ffffff" stroke="#222" stroke-width="1.5" />
-                <!-- Eyes patches -->
-                <ellipse cx="-4.5" cy="-2" rx="3" ry="4.5" fill="#222" transform="rotate(-10, -4.5, -2)" />
-                <ellipse cx="4.5" cy="-2" rx="3" ry="4.5" fill="#222" transform="rotate(10, 4.5, -2)" />
-                <!-- Eyes pupils -->
-                <circle cx="-4" cy="-2" r="1" fill="#fff" />
-                <circle cx="4" cy="-2" r="1" fill="#fff" />
-                <!-- Snout -->
-                <ellipse cx="0" cy="4" rx="2.5" ry="1.5" fill="#222" />
-                <!-- Cheeks -->
-                <circle cx="-8" cy="4" r="1.5" fill="var(--pink)" opacity="0.6" />
-                <circle cx="8" cy="4" r="1.5" fill="var(--pink)" opacity="0.6" />
-            `
-        },
-        {
-            id: 'k-dino',
-            name: 'Dino Groen',
-            price: 2.50,
-            color: '#4caf50',
-            svgContent: `
-                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
-                <!-- Dino body -->
-                <path d="M -12 8 C -12 8, -12 -12, 0 -12 C 10 -12, 12 -5, 12 0 C 12 5, 8 12, -2 12 C -8 12, -12 8, -12 8 Z" fill="#4caf50" stroke="#2e7d32" stroke-width="1.5" />
-                <!-- Dino Spikes -->
-                <path d="M -10 -8 L -14 -6 L -10 -4 M -6 -12 L -8 -16 L -2 -12 M 2 -12 L 4 -16 L 8 -10" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" fill="none" />
-                <!-- Dino Eye -->
-                <circle cx="4" cy="-5" r="1.5" fill="#fff" />
-                <circle cx="4.5" cy="-5" r="0.7" fill="#000" />
-                <!-- Cheek -->
-                <circle cx="1" cy="-2" r="1.5" fill="#ff7043" opacity="0.7" />
-            `
-        },
-        {
-            id: 'k-hero',
-            name: 'Hero Masker',
-            price: 2.95,
-            color: '#e63946',
-            svgContent: `
-                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
-                <!-- Mask shape -->
-                <path d="M -15 -8 Q -10 -15 0 -8 Q 10 -15 15 -8 Q 17 0 10 10 Q 0 14 -10 10 Q -17 0 -15 -8 Z" fill="#e63946" stroke="#b70918" stroke-width="1.5" />
-                <!-- Eyes holes -->
-                <path d="M -9 -2 Q -5 -8 -1 -3 Q -4 1 -9 -2 Z" fill="#fff" />
-                <path d="M 9 -2 Q 5 -8 1 -3 Q 4 1 9 -2 Z" fill="#fff" />
-            `
-        },
-        {
-            id: 'k-smile',
-            name: 'Smile Blij',
-            price: 2.25,
-            color: '#ffb703',
-            svgContent: `
-                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
-                <circle cx="0" cy="0" r="13" fill="#ffb703" stroke="#e09f00" stroke-width="1.5" />
-                <!-- Smile Eyes -->
-                <circle cx="-4" cy="-3" r="1.8" fill="#333" />
-                <circle cx="4" cy="-3" r="1.8" fill="#333" />
-                <!-- Smile mouth -->
-                <path d="M -6 2 Q 0 8 6 2" stroke="#333" stroke-width="1.8" stroke-linecap="round" fill="none" />
-            `
-        },
-        {
-            id: 'k-flower',
-            name: 'Madeliefje',
-            price: 2.50,
-            color: '#ffffff',
-            svgContent: `
-                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
-                <!-- Petals -->
-                <g fill="#ffffff" stroke="#e2e8f0" stroke-width="1">
-                    <circle cx="0" cy="-9" r="5" />
-                    <circle cx="8" cy="-5" r="5" />
-                    <circle cx="8" cy="5" r="5" />
-                    <circle cx="0" cy="9" r="5" />
-                    <circle cx="-8" cy="5" r="5" />
-                    <circle cx="-8" cy="-5" r="5" />
-                </g>
-                <!-- Center -->
-                <circle cx="0" cy="0" r="5.5" fill="#ffd166" stroke="#f4a261" stroke-width="1" />
-            `
-        },
-        {
             id: 'k-superman',
             name: 'Superman',
             price: 3.50,
@@ -244,6 +136,41 @@ const BEADS_DATABASE = {
                 <polygon points="0,-5.5 2.5,-3.5 1.8,0 0,1.5 -1.8,0 -2.5,-3.5" fill="#ffb703" stroke="#d90429" stroke-width="0.5" />
                 <!-- S shape inside shield -->
                 <path d="M -1 -3 C -0.8 -3.5, 0.8 -3.5, 1 -2.8 C 0.8 -2.2, -0.8 -2.4, -1 -1.8 C -1.2 -0.8, 1 -0.8, 0.8 0.2 C 0.6 0.7, -0.8 0.7, -1 0.2" fill="none" stroke="#d90429" stroke-width="0.5" stroke-linecap="round" />
+            `
+        },
+        {
+            id: 'k-bart',
+            name: 'Bart Simpson',
+            price: 3.25,
+            color: '#ffd000',
+            svgContent: `
+                <!-- Silicone Ring Backing -->
+                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
+                <!-- Orange shirt (torso) -->
+                <path d="M -6 6 L 6 6 L 5 15 L -5 15 Z" fill="#ff4500" stroke="#3a261c" stroke-width="1.2" />
+                <!-- Blue pants (shorts) -->
+                <path d="M -5 15 L -2 15 L -2 20 L -5 20 Z" fill="#0077b6" stroke="#3a261c" stroke-width="1" />
+                <path d="M 2 15 L 5 15 L 5 20 L 2 20 Z" fill="#0077b6" stroke="#3a261c" stroke-width="1" />
+                <!-- Yellow legs -->
+                <rect x="-4" y="20" width="1.5" height="4" fill="#ffb703" />
+                <rect x="2.5" y="20" width="1.5" height="4" fill="#ffb703" />
+                <!-- Blue/white shoes -->
+                <path d="M -5 24 H -1.5 V 26 H -6 Z" fill="#0077b6" stroke="#3a261c" stroke-width="0.8" />
+                <path d="M 1.5 24 H 5 V 26 H 1 Z" fill="#0077b6" stroke="#3a261c" stroke-width="0.8" />
+                <!-- Neck -->
+                <rect x="-2" y="-1" width="4" height="8" fill="#ffd000" stroke="#3a261c" stroke-width="1" />
+                <!-- Spiky Head & Hair (Bart's iconic shape) -->
+                <path d="M -5 -2 L -5 -16 L -3.5 -18 L -2 -16 L -0.5 -18 L 1 -16 L 2.5 -18 L 4 -16 L 5 -18 L 5 -2 Z" fill="#ffd000" stroke="#3a261c" stroke-width="1.2" stroke-linejoin="round" />
+                <!-- Eyes (large white circles with black dots) -->
+                <circle cx="-2.2" cy="-9" r="2.8" fill="#fff" stroke="#3a261c" stroke-width="1" />
+                <circle cx="2.2" cy="-9" r="2.8" fill="#fff" stroke="#3a261c" stroke-width="1" />
+                <circle cx="-2.2" cy="-9" r="0.8" fill="#000" />
+                <circle cx="2.2" cy="-9" r="0.8" fill="#000" />
+                <!-- Nose -->
+                <path d="M 0 -7 Q 3 -7 2 -6 Q 0 -5 0 -6" fill="#ffd000" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
+                <!-- Mouth/Muzzle & Smile -->
+                <path d="M -4 -4 Q -1 -5 3 -4 Q 5 -3 4 -2 Q 0 -1 -4 -3" fill="#ffd000" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
+                <path d="M -2.5 -3.5 Q 0 -2.5 2 -3.5" fill="none" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
             `
         }
     ]
@@ -831,8 +758,8 @@ function loadTemplate(templateName) {
             customizerState.attachmentMethod = 'slide';
             
             const b1 = BEADS_DATABASE.kids.find(b => b.id === 'k-kitty');
-            const b2 = BEADS_DATABASE.kids.find(b => b.id === 'k-flower');
-            const b3 = BEADS_DATABASE.kids.find(b => b.id === 'k-smile');
+            const b2 = BEADS_DATABASE.kids.find(b => b.id === 'k-bart');
+            const b3 = BEADS_DATABASE.kids.find(b => b.id === 'k-superman');
             
             customizerState.placedBeads.push({
                 id: 'k-kitty',
@@ -843,7 +770,7 @@ function loadTemplate(templateName) {
                 y: 120
             });
             customizerState.placedBeads.push({
-                id: 'k-flower',
+                id: 'k-bart',
                 uniqueId: 2,
                 price: b2.price,
                 name: b2.name,
@@ -851,7 +778,7 @@ function loadTemplate(templateName) {
                 y: 120
             });
             customizerState.placedBeads.push({
-                id: 'k-smile',
+                id: 'k-superman',
                 uniqueId: 3,
                 price: b3.price,
                 name: b3.name,
@@ -860,12 +787,12 @@ function loadTemplate(templateName) {
             });
             beadUniqueIdCounter = 3;
         } else if (templateName === 'rainbow') {
-            customizerState.frameColor = 'pink';
+            customizerState.frameColor = 'teal';
             customizerState.attachmentMethod = 'slide';
             
             const b1 = BEADS_DATABASE.kids.find(b => b.id === 'k-kitty');
-            const b2 = BEADS_DATABASE.kids.find(b => b.id === 'k-star');
-            const b3 = BEADS_DATABASE.kids.find(b => b.id === 'k-panda');
+            const b2 = BEADS_DATABASE.kids.find(b => b.id === 'k-bart');
+            const b3 = BEADS_DATABASE.kids.find(b => b.id === 'k-superman');
             
             customizerState.placedBeads.push({
                 id: 'k-kitty',
@@ -876,7 +803,7 @@ function loadTemplate(templateName) {
                 y: 120
             });
             customizerState.placedBeads.push({
-                id: 'k-star',
+                id: 'k-bart',
                 uniqueId: 2,
                 price: b2.price,
                 name: b2.name,
@@ -884,7 +811,7 @@ function loadTemplate(templateName) {
                 y: 120
             });
             customizerState.placedBeads.push({
-                id: 'k-panda',
+                id: 'k-superman',
                 uniqueId: 3,
                 price: b3.price,
                 name: b3.name,
@@ -920,15 +847,15 @@ function loadTemplate(templateName) {
         setAttachmentMethod('slide');
         
         addBeadToGlasses('k-kitty');
-        addBeadToGlasses('k-flower');
-        addBeadToGlasses('k-smile');
+        addBeadToGlasses('k-bart');
+        addBeadToGlasses('k-superman');
     } else if (templateName === 'rainbow') {
-        setFrameColor('pink');
+        setFrameColor('teal');
         setAttachmentMethod('slide');
         
         addBeadToGlasses('k-kitty');
-        addBeadToGlasses('k-star');
-        addBeadToGlasses('k-panda');
+        addBeadToGlasses('k-bart');
+        addBeadToGlasses('k-superman');
     }
     
     renderPlacedBeads();
