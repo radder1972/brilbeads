@@ -172,6 +172,65 @@ const BEADS_DATABASE = {
                 <path d="M -4 -4 Q -1 -5 3 -4 Q 5 -3 4 -2 Q 0 -1 -4 -3" fill="#ffd000" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
                 <path d="M -2.5 -3.5 Q 0 -2.5 2 -3.5" fill="none" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
             `
+        },
+        {
+            id: 'k-dora',
+            name: 'Dora Explorer',
+            price: 3.50,
+            color: '#ff4d6d',
+            svgContent: `
+                <!-- Silicone Ring Backing -->
+                <ellipse cx="0" cy="0" rx="3" ry="8" fill="rgba(255,255,255,0.7)" stroke="#aaa" stroke-width="0.5" class="silicone-backing-ring" />
+                <!-- Purple Backpack -->
+                <rect x="-8" y="0" width="16" height="14" rx="3" fill="#9d8df2" stroke="#3a261c" stroke-width="1.2" />
+                <ellipse cx="-8" cy="4" rx="2.5" ry="5" fill="#ffd000" stroke="#3a261c" stroke-width="0.8" />
+                <ellipse cx="8" cy="4" rx="2.5" ry="5" fill="#ffd000" stroke="#3a261c" stroke-width="0.8" />
+                <!-- Torso / Pink Shirt -->
+                <path d="M -5 4 L 5 4 L 4 14 L -4 14 Z" fill="#ff4b91" stroke="#3a261c" stroke-width="1.2" />
+                <!-- Orange Shorts -->
+                <path d="M -4 14 L 4 14 L 3.5 18 L -3.5 18 Z" fill="#ff7b00" stroke="#3a261c" stroke-width="1.2" />
+                <line x1="0" y1="14" x2="0" y2="18" stroke="#3a261c" stroke-width="1" />
+                <!-- Legs -->
+                <rect x="-3" y="18" width="1.8" height="4" fill="#ffdbac" />
+                <rect x="1.2" y="18" width="1.8" height="4" fill="#ffdbac" />
+                <!-- Yellow Socks -->
+                <rect x="-3" y="22" width="1.8" height="2.5" fill="#ffd000" stroke="#3a261c" stroke-width="0.8" />
+                <rect x="1.2" y="22" width="1.8" height="2.5" fill="#ffd000" stroke="#3a261c" stroke-width="0.8" />
+                <!-- White Shoes -->
+                <path d="M -4 24.5 H -1 L -0.5 27 H -5 Z" fill="#fff" stroke="#3a261c" stroke-width="0.8" />
+                <path d="M 0.5 24.5 H 4 L 4.5 27 H 0 Z" fill="#fff" stroke="#3a261c" stroke-width="0.8" />
+                <!-- Neck -->
+                <rect x="-1.5" y="-3" width="3" height="8" fill="#ffdbac" stroke="#3a261c" stroke-width="1.2" />
+                <!-- Back Hair -->
+                <path d="M -9.5 -5 C -10.5 4, -6 7, -6 7 C -6 7, -7 -3, 0 -3 C 7 -3, 6 7, 6 7 C 6 7, 10.5 4, 9.5 -5 C 9.5 -13, -9.5 -13, -9.5 -5 Z" fill="#603813" stroke="#3a261c" stroke-width="1.2" />
+                <!-- Head / Face -->
+                <ellipse cx="0" cy="-4" rx="8" ry="7" fill="#ffdbac" stroke="#3a261c" stroke-width="1.2" />
+                <!-- Bangs / Front Hair -->
+                <path d="M -8.2 -5 C -6 -7, 6 -7, 8.2 -5 C 8.2 -5, 5 -3.5, 3 -5 C 1 -6.5, -1 -6.5, -3 -5 C -5 -3.5, -8.2 -5, -8.2 -5 Z" fill="#603813" stroke="#3a261c" stroke-width="1.2" />
+                <!-- Eyes -->
+                <ellipse cx="-3" cy="-4" rx="2" ry="2.8" fill="#fff" stroke="#3a261c" stroke-width="0.8" />
+                <ellipse cx="3" cy="-4" rx="2" ry="2.8" fill="#fff" stroke="#3a261c" stroke-width="0.8" />
+                <!-- Pupils -->
+                <ellipse cx="-2.6" cy="-4" rx="1" ry="1.5" fill="#603813" />
+                <ellipse cx="2.6" cy="-4" rx="1" ry="1.5" fill="#603813" />
+                <circle cx="-2.8" cy="-4.5" r="0.4" fill="#fff" />
+                <circle cx="2.4" cy="-4.5" r="0.4" fill="#fff" />
+                <!-- Eyebrows -->
+                <path d="M -5 -7.5 Q -3 -8.5 -1 -7.5" fill="none" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
+                <path d="M 1 -7.5 Q 3 -8.5 5 -7.5" fill="none" stroke="#3a261c" stroke-width="1" stroke-linecap="round" />
+                <!-- Laughing Mouth -->
+                <path d="M -3.5 -1.5 Q 0 2 3.5 -1.5 Z" fill="#d90429" stroke="#3a261c" stroke-width="1" />
+                <path d="M -2.5 0.5 Q 0 -0.5 2.5 0.5" fill="none" stroke="#fff" stroke-width="0.8" />
+                <!-- Nose -->
+                <path d="M -0.5 -2.5 Q 0 -1.8 0.5 -2.5" fill="none" stroke="#3a261c" stroke-width="0.8" />
+                <!-- Left arm on hip -->
+                <path d="M -4 4 Q -7 5 -6 7" fill="none" stroke="#ff4b91" stroke-width="3" stroke-linecap="round" />
+                <path d="M -6 7 Q -8 9 -6 11" fill="none" stroke="#ffdbac" stroke-width="2.5" stroke-linecap="round" />
+                <!-- Right arm waving -->
+                <path d="M 4 4 Q 7 5 6 7" fill="none" stroke="#ff4b91" stroke-width="3" stroke-linecap="round" />
+                <path d="M 6 7 Q 9 9 10 12" fill="none" stroke="#ffdbac" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="10" cy="12" r="1.5" fill="#ffdbac" />
+            `
         }
     ]
 };
@@ -947,6 +1006,7 @@ async function syncBeadsCatalogWithShopify() {
                 if (localId === 'k-kitty' && (sbTitle.includes('kitty') || sbTitle.includes('hello'))) return true;
                 if (localId === 'k-superman' && sbTitle.includes('superman')) return true;
                 if (localId === 'k-bart' && (sbTitle.includes('bart') || sbTitle.includes('simpson'))) return true;
+                if (localId === 'k-dora' && sbTitle.includes('dora')) return true;
                 
                 // 3. Fallback: bevat de een de ander?
                 return sbTitle.includes(localName) || localName.includes(sbTitle);
