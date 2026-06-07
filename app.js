@@ -393,6 +393,7 @@ function updateFrameColorInSVG() {
         case 'yellow': fillStr = 'url(#frame-yellow)'; break;
         case 'pink': fillStr = 'url(#frame-pink)'; break;
         case 'crystal': fillStr = 'url(#frame-crystal)'; break;
+        case 'dots': fillStr = 'url(#frame-dots)'; break;
     }
     
     rim.setAttribute('stroke', fillStr);
@@ -764,7 +765,7 @@ function loadTemplate(templateName) {
         customizerState.placedBeads = [];
         
         if (templateName === 'hero') {
-            customizerState.frameColor = 'teal';
+            customizerState.frameColor = 'dots';
             customizerState.attachmentMethod = 'clip';
             beadUniqueIdCounter = 1;
             customizerState.placedBeads.push({
@@ -852,7 +853,7 @@ function loadTemplate(templateName) {
     clearBeads();
     
     if (templateName === 'hero') {
-        setFrameColor('teal');
+        setFrameColor('dots');
         setAttachmentMethod('clip');
         
         beadUniqueIdCounter++;
