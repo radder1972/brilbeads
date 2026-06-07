@@ -296,22 +296,53 @@ document.addEventListener('DOMContentLoaded', () => {
     loadStateFromLocalStorage();
     
     // Carousel logic for index.html hero image
-    const img1 = document.getElementById('hero-carousel-1');
-    const img2 = document.getElementById('hero-carousel-2');
-    if (img1 && img2) {
-        setInterval(() => {
-            if (img2.classList.contains('hidden')) {
-                // Fade in girl (img2) on top of boy (img1)
-                img2.classList.remove('hidden');
-                img2.classList.add('visible');
-                img2.style.opacity = '1';
-            } else {
-                // Fade out girl (img2) to reveal boy (img1)
-                img2.classList.remove('visible');
-                img2.classList.add('hidden');
-                img2.style.opacity = '0';
-            }
-        }, 4000);
+    const images = [
+        document.getElementById('hero-carousel-1'),
+        document.getElementById('hero-carousel-2'),
+        document.getElementById('hero-carousel-3')
+    ];
+    const carouselContainer = document.getElementById('hero-carousel-container');
+    
+    if (images[0] && images[1] && images[2] && carouselContainer) {
+        let currentIndex = 0;
+        let timer = null;
+
+        function showImage(index) {
+            images.forEach((img, i) => {
+                if (i === index) {
+                    img.classList.remove('hidden');
+                    img.classList.add('visible');
+                } else {
+                    img.classList.remove('visible');
+                    img.classList.add('hidden');
+                }
+            });
+            currentIndex = index;
+        }
+
+        function nextImage() {
+            let nextIndex = (currentIndex + 1) % images.length;
+            showImage(nextIndex);
+        }
+
+        function startTimer() {
+            stopTimer();
+            timer = setInterval(nextImage, 4000);
+        }
+
+        function stopTimer() {
+            if (timer) clearInterval(timer);
+        }
+
+        carouselContainer.addEventListener('click', (e) => {
+            // Do not trigger if user clicks on floating beads decoration
+            if (e.target.closest('.floating-bead-playful')) return;
+            
+            nextImage();
+            startTimer(); // Reset auto-rotate timer
+        });
+
+        startTimer();
     }
     
     const isCustomizerPage = document.getElementById('interactive-glasses-svg') !== null;
