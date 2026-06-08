@@ -4,7 +4,7 @@
 
 // Web3Forms Access Key for contact form automation
 // Get a free key at https://web3forms.com and replace the placeholder below.
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_ACCESS_KEY = "ded41887-e883-47e6-aab4-8a729937a0eb";
 
 // --- Audio Synthesizer (Web Audio API) for Pop/Click sounds ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
