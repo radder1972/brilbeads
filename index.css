@@ -168,6 +168,22 @@ p {
     background-position: 0 0, 12px 12px;
 }
 
+.glass-panel {
+    padding: 3.5rem;
+}
+
+@media (max-width: 768px) {
+    .glass-panel {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .glass-panel {
+        padding: 1.2rem;
+    }
+}
+
 .glass:hover {
     transform: translate(-2px, -2px);
     box-shadow: var(--comic-shadow-hover);
@@ -1921,3 +1937,9 @@ section {
     }
 }
 /* Customizer removed from website */
+
+@media (max-width: 480px) {
+    .contact-card {
+        padding: 1.5rem 1.2rem !important;
+    }
+}
