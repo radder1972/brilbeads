@@ -2,6 +2,10 @@
  * BRIL BEADS - CUSTOMIZER LOGIC & STATE
  */
 
+// Web3Forms Access Key for contact form automation
+// Get a free key at https://web3forms.com and replace the placeholder below.
+const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+
 // --- Audio Synthesizer (Web Audio API) for Pop/Click sounds ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -941,12 +945,59 @@ function loadTemplate(templateName) {
 }
 
 // --- Contact Form Submission Handler ---
-function handleContactSubmit(e) {
+async function handleContactSubmit(e) {
     e.preventDefault();
     playSound('save');
+    
     const name = document.getElementById('contact-name').value;
-    alert(`🎉 Bedankt voor je bericht, ${name}!\n\nWe hebben je bericht ontvangen en nemen zo snel mogelijk contact met je op!`);
-    e.target.reset();
+    const email = document.getElementById('contact-email').value;
+    const message = document.getElementById('contact-message').value;
+    
+    // Check if the user has updated their Web3Forms key
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY") {
+        console.warn("⚠️ Web3Forms Access Key is not configured yet. Falling back to demonstration mode.");
+        alert(`🎉 Bedankt voor je bericht, ${name}!\n\n(Dit is een demonstratie) We hebben je bericht ontvangen en nemen zo snel mogelijk contact met je op!`);
+        e.target.reset();
+        return;
+    }
+    
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    
+    try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Verzenden... <i class="fa-solid fa-spinner fa-spin"></i>';
+        
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                access_key: WEB3FORMS_ACCESS_KEY,
+                name: name,
+                email: email,
+                message: message,
+                subject: "Nieuw bericht vanaf BrilBeads.nl"
+            })
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            alert(`🎉 Bedankt voor je bericht, ${name}!\n\nWe hebben je bericht ontvangen en nemen zo snel mogelijk contact met je op!`);
+            e.target.reset();
+        } else {
+            console.error("Web3Forms error response:", result);
+            alert(`❌ Oeps! Er ging iets mis bij het verzenden: ${result.message || 'Probeer het later opnieuw.'}`);
+        }
+    } catch (err) {
+        console.error("Fetch error:", err);
+        alert("❌ Er kon geen verbinding worden gemaakt om je bericht te verzenden. Controleer je internetverbinding.");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    }
 }
 
 // --- Header Navigation Click Handlers ---
