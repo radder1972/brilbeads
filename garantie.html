@@ -45,6 +45,19 @@
             flex-shrink: 0;
             box-shadow: 2px 2px 0 var(--border-dark);
         }
+        @media (max-width: 576px) {
+            .guarantee-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.2rem;
+                padding: 1.5rem 1.2rem;
+            }
+            .guarantee-badge-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -116,7 +129,7 @@
 
     <main style="padding: 4rem 0;">
         <div class="container">
-            <div class="glass" style="padding: 3.5rem;">
+            <div class="glass glass-panel">
                 <div class="page-title-group" style="margin-bottom: 1.5rem;">
                     <span class="badge badge-accent">Belofte</span>
                     <h1 class="section-title text-left" style="font-size: 2.5rem;">Garantie & Belofte</h1>
@@ -196,10 +209,10 @@
         </div>
         <div class="footer-bottom text-center">
             <p>&copy; 2026 Bril Beads. Alle rechten voorbehouden. Offici&euml;le concept-demonstratie.</p>
-            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.92</span></p>
+            <p class="footer-version-wrapper"><span class="version-label" id="site-version">v0.68.93</span></p>
         </div>
     </footer>
     
-    <script src="app.js?v=v0.68.92"></script>
+    <script src="app.js?v=v0.68.93"></script>
 </body>
 </html>
