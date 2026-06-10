@@ -340,7 +340,7 @@ p {
 }
 
 .app-header .logo-img {
-    height: 360px; /* giant logo! */
+    height: 220px; /* adjusted for cropped logo size */
     width: auto;
     object-fit: contain;
     filter: drop-shadow(4px 4px 0px rgba(58, 38, 28, 0.1));
@@ -421,7 +421,7 @@ p {
 /* Playful Navigation Circular Icons */
 .playful-nav {
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: -1.5rem; /* pull the navigation section up */
     padding-top: 1rem;
     margin-bottom: 2rem;
     position: relative;
@@ -433,7 +433,7 @@ p {
     width: 100%;
     max-width: 450px;
     aspect-ratio: 1014 / 124;
-    margin: 0.5rem auto 1.5rem auto;
+    margin: 0 auto 1.2rem auto; /* reduced margin to pull divider up */
     background-image: url('assets/menu_divider.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -1915,7 +1915,7 @@ section {
     }
 
     .app-header .logo-img {
-        height: 220px; /* Scaled down logo on mobile */
+        height: 150px; /* scaled down for cropped logo on mobile */
         margin-bottom: -1.0rem; /* overlaps the menu border line */
     }
 
