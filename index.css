@@ -1340,13 +1340,14 @@ section {
 }
 
 .briefing-container {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3.5rem;
+    display: flex;
+    justify-content: center;
     align-items: start;
 }
 
 .briefing-content {
+    max-width: 800px;
+    width: 100%;
     padding: 3rem;
     background-color: #ffffff;
     border: var(--thick-border);
@@ -1865,14 +1866,12 @@ section {
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
 @media (max-width: 1024px) {
-    .customizer-grid,
-    .briefing-container {
+    .customizer-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
     
-    .briefing-content,
-    .branding-palette-card {
+    .briefing-content {
         padding: 2rem;
     }
 }
