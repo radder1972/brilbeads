@@ -345,7 +345,7 @@ p {
     object-fit: contain;
     filter: drop-shadow(4px 4px 0px rgba(58, 38, 28, 0.1));
     transition: var(--transition);
-    margin-bottom: -1.6rem; /* overlaps the menu border line */
+    margin-bottom: 0.2rem; /* updated to prevent overlap */
 }
 
 .app-header .logo-img:hover {
@@ -421,7 +421,7 @@ p {
 /* Playful Navigation Circular Icons */
 .playful-nav {
     width: 100%;
-    margin-top: -1.5rem; /* pull the navigation section up */
+    margin-top: 0; /* reset to prevent overlap with cropped logo */
     padding-top: 1rem;
     margin-bottom: 2rem;
     position: relative;
@@ -1916,7 +1916,7 @@ section {
 
     .app-header .logo-img {
         height: 150px; /* scaled down for cropped logo on mobile */
-        margin-bottom: -1.0rem; /* overlaps the menu border line */
+        margin-bottom: 0; /* updated to prevent overlap */
     }
 
     .nav-icon-img-wrapper {
